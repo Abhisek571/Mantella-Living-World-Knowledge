@@ -1,0 +1,440 @@
+{
+ "Legate Fasendil|Altmer|08454F": {
+  "standing": "high",
+  "travel": "province"
+ },
+ "Legate Rikke|Nord|0132A1": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "civil_war"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "great_war"
+   }
+  ],
+  "education": 3,
+  "observation": 3,
+  "standing": "high"
+ },
+ "Lisette|Breton|013297": {
+  "travel": "home"
+ },
+ "Lucan Valerius|Imperial|01347A": {
+  "note": "claw stolen, thieves fled to the barrow (bio)"
+ },
+ "Lynly Star-Sung|Nord|0136BC": {
+  "profession": "bard",
+  "travel": "home"
+ },
+ "M'aiq the Liar|Khajiit|0954BF": {
+  "education": 3,
+  "home": null,
+  "observation": 4,
+  "profession": "adventurer",
+  "travel": "province"
+ },
+ "Ma'dran|Khajiit|01B1D1": {
+  "home": null,
+  "profession": "caravan",
+  "travel": "province"
+ },
+ "Ma'jhad|Khajiit|01B1D5": {
+  "home": null,
+  "profession": "caravan",
+  "travel": "province"
+ },
+ "Ma'randru-jo|Khajiit|01B1D7": {
+  "home": null,
+  "profession": "caravan",
+  "travel": "province"
+ },
+ "Madanach|Reachman|0133A7": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Cidhna Mine"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "place": "Druadach Redoubt"
+   }
+  ],
+  "education": 3,
+  "standing": "ruler",
+  "travel": "home"
+ },
+ "Madena|Breton|01361D": {
+  "origin_province": "High Rock",
+  "profession": "court_wizard",
+  "standing": "high"
+ },
+ "Malacath|Daedra|019E16": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Malborn|Bosmer|036194": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Thalmor Embassy"
+   }
+  ],
+  "home": "Thalmor Embassy",
+  "observation": 3,
+  "profession": "servant",
+  "travel": "home"
+ },
+ "Maramal|Redguard|01335B": {
+  "education": 4
+ },
+ "Marcurio|Imperial|0B9980": {
+  "profession": "mercenary",
+  "travel": "regional"
+ },
+ "Margret|Nord|09C8A8": {
+  "home": "Markarth",
+  "note": "Penitus Oculatus agent (bio)",
+  "observation": 3,
+  "origin_province": "Cyrodiil",
+  "profession": "soldier"
+ },
+ "Maul|Nord|0371D6": {
+  "observation": 3
+ },
+ "Maurice Jondrelle|Breton|01C605": {
+  "profession": "priest",
+  "travel": "province"
+ },
+ "Meeko|Beast|0D95E9": {
+  "education": 1,
+  "observation": 3,
+  "profession": "creature"
+ },
+ "Mehrunes Dagon|Daedra|0252AA": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Mephala|Daedra|05BF3D": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Mercer Frey|Breton|01B07C": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "The Ragged Flagon"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Snow Veil Sanctum"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Twilight Sepulcher"
+   }
+  ],
+  "education": 3,
+  "observation": 4
+ },
+ "Milore Ienth|Dunmer|0182A1": {
+  "origin_province": "Morrowind"
+ },
+ "Miraak|Nord|01FB98": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Apocrypha"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "thuum"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "dragons"
+   }
+  ],
+  "education": 5,
+  "home": "Apocrypha",
+  "observation": 4,
+  "standing": "ruler"
+ },
+ "Mirabelle Ervine|Breton|01C1A0": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "College of Winterhold"
+   }
+  ],
+  "education": 5,
+  "standing": "high"
+ },
+ "Mjoll the Lioness|Nord|01336B": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Mzinchaleft"
+   }
+  ],
+  "profession": "adventurer",
+  "travel": "regional"
+ },
+ "Molag Bal|Daedra|022F16": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Morven Stroud|Breton|0071F1": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Soul Cairn"
+   }
+  ],
+  "hold": null,
+  "home": "Soul Cairn",
+  "travel": "home"
+ },
+ "Mralki|Nord|0136B6": {
+  "origin_province": "Skyrim"
+ },
+ "Mulush gro-Shugurz|Orsimer|0133A9": {
+  "profession": "miner"
+ },
+ "Nana Ildene|Reachman|0133A0": {
+  "profession": "servant",
+  "travel": "home"
+ },
+ "Neloth|Dunmer|01773A": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Tel Mithryn"
+   }
+  ],
+  "education": 5,
+  "observation": 3,
+  "profession": "mage",
+  "standing": "high",
+  "travel": "province"
+ },
+ "Nepos the Nose|Reachman|0133AA": {
+  "observation": 3,
+  "profession": "thief",
+  "standing": "high"
+ },
+ "Niruin|Bosmer|01CD91": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "The Ragged Flagon"
+   }
+  ]
+ },
+ "Nirya|Altmer|01C19B": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "College of Winterhold"
+   }
+  ]
+ },
+ "Nocturnal|Daedra|01A2CF": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Nura Snow-Shod|Nord|013372": {
+  "profession": "priest",
+  "standing": "high"
+ },
+ "Odahviing|Dragon|045920": {
+  "education": 4,
+  "observation": 4,
+  "standing": "high",
+  "travel": "province"
+ },
+ "Odvan|Reachman|0133AC": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Cidhna Mine"
+   }
+  ],
+  "profession": "bandit",
+  "travel": "home"
+ },
+ "Onmund|Nord|01C194": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "College of Winterhold"
+   }
+  ]
+ },
+ "Orthjolf|Nord|003361": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Castle Volkihar"
+   }
+  ],
+  "hold": "Haafingar",
+  "home": "Castle Volkihar"
+ },
+ "Orthorn|Altmer|02A388": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Fellglow Keep"
+   }
+  ],
+  "hold": "Whiterun Hold",
+  "home": "Fellglow Keep"
+ },
+ "Orthus Endario|Imperial|01413B": {
+  "education": 3,
+  "profession": "merchant"
+ },
+ "Paarthurnax|Dragon|03C57C": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Throat of the World"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "thuum"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "dragons"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "history"
+   }
+  ],
+  "education": 5,
+  "home": "Throat of the World",
+  "observation": 4,
+  "standing": "ruler"
+ },
+ "Paratus Decimius|Imperial|034CBA": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Mzulft"
+   }
+  ],
+  "education": 5,
+  "hold": "Eastmarch",
+  "home": "Mzulft",
+  "origin_province": "Cyrodiil",
+  "profession": "scholar"
+ },
+ "Pavo Attius|Imperial|0133B1": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Kolskeggr Mine"
+   }
+  ]
+ },
+ "Phinis Gestor|Breton|01C199": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "College of Winterhold"
+   }
+  ]
+ },
+ "Quintus Navale|Imperial|01414C": {
+  "profession": "alchemist"
+ },
+ "Ralis Sedarys|Dunmer|0179C7": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Kolbjorn Barrow"
+   }
+  ],
+  "profession": "adventurer"
+ },
+ "Ralof|Nord|02BF9D": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Helgen Keep"
+   },
+   {
+    "inside": false,
+    "level": 3,
+    "topic": "civil_war"
+   }
+  ]
+ },
+ "Reburrus Quintilius|Imperial|0133B3": {
+  "profession": "court"
+ }
+}

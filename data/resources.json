@@ -1,0 +1,118 @@
+{
+ "Iron Ore": [
+  {
+   "mine": "Halted Stream Camp",
+   "hold": "Whiterun Hold"
+  },
+  {
+   "mine": "Iron-Breaker Mine",
+   "hold": "The Pale"
+  },
+  {
+   "mine": "Knifepoint Mine",
+   "hold": "Falkreath Hold"
+  },
+  {
+   "mine": "Knifepoint Ridge",
+   "hold": "Falkreath Hold"
+  },
+  {
+   "mine": "Left Hand Mine",
+   "hold": "The Reach"
+  },
+  {
+   "mine": "Whistling Mine",
+   "hold": "Winterhold"
+  }
+ ],
+ "Corundum Ore": [
+  {
+   "mine": "Goldenrock Mine",
+   "hold": "Eastmarch"
+  },
+  {
+   "mine": "Knifepoint Mine",
+   "hold": "Falkreath Hold"
+  },
+  {
+   "mine": "Northwind Mine",
+   "hold": "The Rift"
+  }
+ ],
+ "Ebony Ore": [
+  {
+   "mine": "Gloombound Mine",
+   "hold": "Eastmarch"
+  },
+  {
+   "mine": "Redbelly Mine",
+   "hold": "The Rift"
+  }
+ ],
+ "Gold Ore": [
+  {
+   "mine": "Halted Stream Camp",
+   "hold": "Whiterun Hold"
+  },
+  {
+   "mine": "Lost Prospect Mine",
+   "hold": "The Rift"
+  },
+  {
+   "mine": "Whistling Mine",
+   "hold": "Winterhold"
+  }
+ ],
+ "Malachite Ore": [
+  {
+   "mine": "Steamscorch Mine",
+   "hold": "Eastmarch"
+  }
+ ],
+ "Orichalcum Ore": [
+  {
+   "mine": "Bilegulch Mine",
+   "hold": "Falkreath Hold"
+  },
+  {
+   "mine": "Dushnikh Mine",
+   "hold": "The Reach"
+  },
+  {
+   "mine": "Mor Khazgur Mine",
+   "hold": "The Reach"
+  },
+  {
+   "mine": "Northwind Mine",
+   "hold": "The Rift"
+  }
+ ],
+ "Quicksilver Ore": [
+  {
+   "mine": "Iron-Breaker Mine",
+   "hold": "The Pale"
+  },
+  {
+   "mine": "Quicksilver Mine",
+   "hold": "The Pale"
+  }
+ ],
+ "Silver Ore": [
+  {
+   "mine": "Fenn's Gulch Mine",
+   "hold": "The Reach"
+  },
+  {
+   "mine": "Goldenrock Mine",
+   "hold": "Eastmarch"
+  },
+  {
+   "mine": "Sanuarach Mine",
+   "hold": "The Reach"
+  },
+  {
+   "mine": "Whistling Mine",
+   "hold": "Winterhold"
+  }
+ ]
+}

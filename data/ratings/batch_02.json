@@ -1,0 +1,450 @@
+{
+ "Aspect of Hircine|Daedra|090CE8": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Festus Krex|Imperial|01BDB2": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Dark Brotherhood Sanctuary"
+   }
+  ],
+  "education": 4,
+  "hold": "Falkreath Hold",
+  "home": "Falkreath"
+ },
+ "Fijeh|Redguard|821": {
+  "profession": "mercenary",
+  "travel": "regional"
+ },
+ "Florentius Baenius|Imperial|00336D": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Fort Dawnguard"
+   }
+  ],
+  "hold": "The Rift",
+  "home": "Fort Dawnguard",
+  "profession": "priest"
+ },
+ "Frea|Nord|017934": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "place": "Skaal Village"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "all_maker"
+   }
+  ]
+ },
+ "Frida|Elder|013614": {
+  "education": 3
+ },
+ "Froki Whetted-Blade|Nord|0185F6": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Froki's Shack"
+   }
+  ],
+  "hold": "Falkreath Hold",
+  "home": "Froki's Shack",
+  "observation": 4
+ },
+ "Frorkmar Banner-Torn|Nord|084553": {
+  "profession": "court",
+  "standing": "high"
+ },
+ "Fultheim the Fearless|Nord|02E3E8": {
+  "profession": "adventurer",
+  "travel": "regional"
+ },
+ "Gabriella|Dunmer|01BDB8": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Dark Brotherhood Sanctuary"
+   }
+  ],
+  "hold": "Falkreath Hold",
+  "home": "Falkreath"
+ },
+ "Galmar Stone-Fist|Nord|014128": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Palace of the Kings"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "civil_war"
+   }
+  ],
+  "education": 3,
+  "standing": "high"
+ },
+ "Garan Marethi|Dunmer|003364": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Castle Volkihar"
+   }
+  ],
+  "hold": "Haafingar",
+  "home": "Castle Volkihar"
+ },
+ "Garyn Ienth|Dunmer|01829F": {
+  "profession": "farmer"
+ },
+ "Gat gro-Shargakh|Orsimer|0199B7": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Kolskeggr Mine"
+   }
+  ],
+  "profession": "miner"
+ },
+ "General Tullius|Imperial|01327E": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "civil_war"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "great_war"
+   }
+  ],
+  "education": 4,
+  "observation": 3,
+  "standing": "high",
+  "travel": "province"
+ },
+ "Giraud Gemane|Breton|013281": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "history"
+   }
+  ],
+  "education": 5,
+  "profession": "scholar",
+  "travel": "home"
+ },
+ "Gjalund Salt-Sage|Nord|0182AE": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "sea"
+   }
+  ],
+  "profession": "sailor",
+  "travel": "province"
+ },
+ "Gonnar Oath-Giver|Nord|08455B": {
+  "profession": "court",
+  "standing": "high"
+ },
+ "Gormlaith Golden-Hilt|Nord|044236": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Sovngarde"
+   }
+  ],
+  "education": 3,
+  "hold": null,
+  "home": "Sovngarde",
+  "profession": "soldier"
+ },
+ "Gorm|Nord|0135EA": {
+  "profession": "court"
+ },
+ "Gulum-Ei|Argonian|013284": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "East Empire Company Warehouse"
+   }
+  ],
+  "observation": 3
+ },
+ "Gunmar|Nord|00336C": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Fort Dawnguard"
+   },
+   {
+    "inside": false,
+    "level": 3,
+    "topic": "vampires"
+   }
+  ],
+  "hold": "The Rift",
+  "home": "Fort Dawnguard",
+  "travel": "regional"
+ },
+ "Hadvar|Nord|02BF9F": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Helgen Keep"
+   },
+   {
+    "inside": false,
+    "level": 3,
+    "topic": "civil_war"
+   }
+  ]
+ },
+ "Haelga|Nord|01335F": {
+  "profession": "innkeeper"
+ },
+ "Hakon One-Eye|Nord|044238": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Sovngarde"
+   }
+  ],
+  "education": 3,
+  "hold": null,
+  "home": "Sovngarde",
+  "profession": "soldier"
+ },
+ "Heimskr|Nord|013BAC": {
+  "education": 2
+ },
+ "Hemming Black-Briar|Nord|013362": {
+  "standing": "high"
+ },
+ "Hermaeus Mora|Daedric|01FF3A": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Hestla|Nord|003365": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Castle Volkihar"
+   }
+  ],
+  "hold": "Haafingar",
+  "home": "Castle Volkihar"
+ },
+ "Hilund|Nord|01A515": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Thirsk Mead Hall"
+   }
+  ],
+  "profession": "mercenary"
+ },
+ "Hircine|Daedra|01BB96": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Horik Halfhand|Nord|01A6B9": {
+  "profession": "soldier",
+  "travel": "home"
+ },
+ "Hulda|Nord|013BA3": {
+  "origin_province": "Skyrim"
+ },
+ "Idgrod Ravencrone|Nord|0135EB": {
+  "observation": 4
+ },
+ "Idgrod the Younger|Nord|0135EC": {
+  "observation": 3,
+  "profession": "noble"
+ },
+ "Idolaf Battle-Born|Nord|013BB2": {
+  "standing": "high"
+ },
+ "Indaryn|Dunmer|013370": {
+  "profession": "laborer"
+ },
+ "Inge Six Fingers|Nord|01328A": {
+  "education": 4,
+  "travel": "home"
+ },
+ "Ingun Black-Briar|Nord|013364": {
+  "profession": "alchemist",
+  "standing": "high"
+ },
+ "Isran|Redguard|00336A": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Fort Dawnguard"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "vampires"
+   }
+  ],
+  "home": "Fort Dawnguard",
+  "observation": 3,
+  "standing": "high"
+ },
+ "Jod|Nord|013618": {
+  "profession": "court"
+ },
+ "Jon Battle-Born|Nord|013BB1": {
+  "standing": "high"
+ },
+ "Jorleif|Nord|014135": {
+  "profession": "court",
+  "standing": "high",
+  "travel": "home"
+ },
+ "Jouane Manette|Breton|0136B3": {
+  "education": 4,
+  "profession": "mage"
+ },
+ "Karliah|Dunmer|01B07F": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Twilight Sepulcher"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Nightingale Hall"
+   }
+  ],
+  "home": null,
+  "observation": 4,
+  "travel": "regional"
+ },
+ "Katria|Nord|004D0C": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Arkngthamz"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "dwemer"
+   }
+  ],
+  "education": 4,
+  "hold": "The Reach",
+  "home": "Arkngthamz",
+  "profession": "adventurer"
+ },
+ "Kharjo|Khajiit|01B1D2": {
+  "home": null
+ },
+ "Khayla|Khajiit|01B1D9": {
+  "home": null
+ },
+ "Kjeld|Nord|013663": {
+  "profession": "miner",
+  "standing": "high"
+ },
+ "Klimmek|Nord|0136C2": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "place": "High Hrothgar"
+   }
+  ],
+  "profession": "sailor",
+  "travel": "regional"
+ },
+ "Kodlak Whitemane|Nord|01A68E": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Jorrvaskr"
+   }
+  ],
+  "education": 3,
+  "standing": "high",
+  "travel": "home"
+ },
+ "Korir|Nord|01C188": {
+  "standing": "ruler"
+ },
+ "Kraldar|Nord|01C180": {
+  "profession": "noble",
+  "standing": "high"
+ },
+ "Laila Law-Giver|Nord|013366": {
+  "standing": "ruler"
+ },
+ "Legate Emmanuel Admand|Breton|0844D0": {
+  "education": 3,
+  "standing": "high"
+ },
+ "Lord Harkon|Nord|003BA7": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Castle Volkihar"
+   }
+  ],
+  "education": 5,
+  "hold": "Haafingar",
+  "home": "Castle Volkihar",
+  "observation": 4,
+  "profession": "vampire",
+  "standing": "ruler"
+ }
+}

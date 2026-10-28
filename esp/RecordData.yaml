@@ -1,0 +1,10 @@
+ModKey: Mantella Living World - Knowledge.esp
+GameRelease: SkyrimSE
+ModHeader:
+  Flags:
+  - Small
+  Author: itsPigeon2000
+  Description: Mantella Living World - Knowledge. NPCs mark places they know on your map.
+  MasterReferences:
+  - Master: Skyrim.esm
+    FileSize: 0

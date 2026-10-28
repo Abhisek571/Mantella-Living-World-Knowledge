@@ -1,0 +1,24 @@
+FormKey: 000800:Mantella Living World - Knowledge.esp
+EditorID: MLWK_QuestMap
+VirtualMachineAdapter:
+  Scripts:
+  - Name: MLWK_Map
+  FileName: ''
+  Aliases:
+  - Property:
+      Name: ''
+      Object: 000800:Mantella Living World - Knowledge.esp
+      Alias: 0
+    Scripts:
+    - Name: MLWK_PlayerAlias
+Name:
+  TargetLanguage: English
+  Value: Mantella Living World - Knowledge map
+Flags:
+- StartGameEnabled
+NextAliasID: 1
+Aliases:
+- Name: PlayerAlias
+  Flags: []
+  ForcedReference: 000014:Skyrim.esm
+  VoiceTypes: Null

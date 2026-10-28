@@ -1,0 +1,527 @@
+{
+ "Adril Arano|Dunmer|018280": {
+  "education": 4,
+  "profession": "court",
+  "standing": "high"
+ },
+ "Aela the Huntress|Nord|01A696": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Jorrvaskr"
+   }
+  ],
+  "observation": 3
+ },
+ "Ahkari|Khajiit|01B1D6": {
+  "hold": "The Pale",
+  "home": null,
+  "profession": "caravan",
+  "travel": "province"
+ },
+ "Alduin|Dragon|08E4F1": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Skuldafn"
+   }
+  ],
+  "education": 5,
+  "observation": 4,
+  "standing": "ruler",
+  "travel": "province"
+ },
+ "Alva|Nord|0135E6": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Movarth's Lair"
+   }
+  ],
+  "observation": 3
+ },
+ "Ancarion|Altmer|01CAF3": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Northshore Landing"
+   }
+  ],
+  "education": 4,
+  "home": null,
+  "travel": "regional"
+ },
+ "Aranea Ienith|Dunmer|028AD0": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Shrine of Azura"
+   }
+  ],
+  "education": 4,
+  "home": null,
+  "profession": "priest"
+ },
+ "Arngeir|Nord|02C6C7": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "High Hrothgar"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "thuum"
+   }
+  ],
+  "education": 5,
+  "observation": 4
+ },
+ "Astrid|Nord|01BDB4": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Dark Brotherhood Sanctuary"
+   }
+  ],
+  "hold": "Falkreath Hold",
+  "home": "Falkreath",
+  "observation": 3
+ },
+ "Atahbah|Khajiit|01B1DA": {
+  "hold": "Whiterun Hold",
+  "home": null,
+  "travel": "province"
+ },
+ "Avrusa Sarethi|Dunmer|019BFE": {
+  "hold": "The Rift",
+  "profession": "alchemist"
+ },
+ "Azura|Daedric|028AE9": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Babette|Breton|01D4B7": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Dark Brotherhood Sanctuary"
+   }
+  ],
+  "education": 4,
+  "hold": "Falkreath Hold",
+  "home": "Falkreath",
+  "observation": 3,
+  "profession": "thief"
+ },
+ "Bassianus Axius|Nord|0136C1": {
+  "home": "Ivarstead",
+  "travel": "home"
+ },
+ "Boethiah|Daedra|04D91B": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Bolar|Orsimer|01B076": {
+  "profession": "priest"
+ },
+ "Borkul the Beast|Orsimer|01338A": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Cidhna Mine"
+   }
+  ],
+  "hold": "The Reach",
+  "home": "Markarth",
+  "profession": "bandit",
+  "travel": "home"
+ },
+ "Braig|Reachman|013389": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Cidhna Mine"
+   }
+  ],
+  "hold": "The Reach",
+  "home": "Markarth",
+  "profession": "bandit",
+  "travel": "home"
+ },
+ "Brand-Shei|Dunmer|0CD64C": {
+  "profession": "merchant",
+  "travel": "home"
+ },
+ "Brina Merilis|Nord|01A6B7": {
+  "origin_province": "Cyrodiil",
+  "profession": "soldier",
+  "travel": "home"
+ },
+ "Brunwulf Free-Winter|Nord|014149": {
+  "profession": "soldier",
+  "standing": "high"
+ },
+ "Brynjolf|Nord|01B07D": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Ratway"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "place": "The Ragged Flagon"
+   }
+  ],
+  "observation": 3
+ },
+ "Bujold the Intrepid|Nord|01A511": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Thirsk Mead Hall"
+   }
+  ],
+  "home": "Thirsk Mead Hall",
+  "profession": "mercenary"
+ },
+ "Bujold the Unworthy|Nord|01A511": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Thirsk Mead Hall"
+   }
+  ],
+  "home": null,
+  "profession": "mercenary"
+ },
+ "Calcelmo|Altmer|01338E": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Nchuand-Zel"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "dwemer"
+   }
+  ],
+  "education": 5,
+  "profession": "scholar"
+ },
+ "Calixto Corrium|Imperial|01414A": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Calixto's House of Curiosities"
+   }
+  ],
+  "travel": "province"
+ },
+ "Camilla Valerius|Imperial|01347B": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "place": "Bleak Falls Barrow"
+   }
+  ],
+  "note": "claw stolen, thieves fled to the barrow (bio)"
+ },
+ "Captain Aldis|Nord|041FB8": {
+  "observation": 3,
+  "profession": "guard",
+  "travel": "home"
+ },
+ "Captain Lonely-Gale|Nord|014134": {
+  "travel": "home"
+ },
+ "Captain Valmir|Altmer|07E5B6": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "place": "Forelhost"
+   }
+  ],
+  "hold": "The Rift",
+  "home": null,
+  "profession": "soldier"
+ },
+ "Captain Veleth|Dunmer|0182AC": {
+  "profession": "guard",
+  "travel": "home"
+ },
+ "Chief Burguk|Orsimer|013B79": {
+  "profession": "court",
+  "standing": "ruler"
+ },
+ "Chief Mauhulakh|Orsimer|01B075": {
+  "profession": "court",
+  "standing": "ruler"
+ },
+ "Cicero|Imperial|09BCAF": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Dark Brotherhood Sanctuary"
+   }
+  ],
+  "observation": 3,
+  "travel": "province"
+ },
+ "Clavicus Vile|Daedra|01C4E4": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Crescius Caerellius|Imperial|018278": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Raven Rock Mine"
+   }
+  ]
+ },
+ "Curate Melita|Dunmer|001153": {
+  "education": 4,
+  "profession": "priest"
+ },
+ "Delphine|Breton|013478": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Sleeping Giant Inn"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Ustengrav"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "place": "Bleak Falls Barrow"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "dragons"
+   }
+  ],
+  "education": 4,
+  "hold": "Whiterun Hold",
+  "home": "Riverwood",
+  "observation": 3,
+  "profession": "innkeeper",
+  "travel": "regional"
+ },
+ "Dervenin|Bosmer|01327C": {
+  "hold": "Haafingar",
+  "home": "Solitude"
+ },
+ "Dexion Evicus|Imperial|0058B0": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "elder_scrolls"
+   }
+  ],
+  "education": 5,
+  "hold": "The Rift",
+  "home": "Fort Dawnguard",
+  "origin_province": "Cyrodiil",
+  "profession": "scholar",
+  "travel": "province"
+ },
+ "Drovas Relvi|Dunmer|017779": {
+  "profession": "innkeeper"
+ },
+ "Duach|Reachman|013393": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Cidhna Mine"
+   }
+  ],
+  "hold": "The Reach",
+  "home": "Markarth",
+  "profession": "bandit",
+  "travel": "home"
+ },
+ "Durnehviir|Dragon|00C71A": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Soul Cairn"
+   }
+  ],
+  "education": 4,
+  "home": "Soul Cairn",
+  "observation": 3,
+  "standing": "high"
+ },
+ "Elda Early-Dawn|Nord|01412A": {
+  "profession": "innkeeper"
+ },
+ "Elder Othreloth|Dunmer|01828A": {
+  "profession": "priest"
+ },
+ "Elenwen|Altmer|013269": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Thalmor Embassy"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "thalmor"
+   }
+  ],
+  "education": 5,
+  "hold": "Haafingar",
+  "home": "Thalmor Embassy",
+  "observation": 3,
+  "standing": "high",
+  "travel": "home"
+ },
+ "Eltrys|Reachman|013394": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "The Warrens"
+   }
+  ],
+  "observation": 3
+ },
+ "Esbern|Nord|013358": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Ratway Warrens"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "place": "Sky Haven Temple"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "dragons"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "history"
+   }
+  ],
+  "education": 5,
+  "hold": "The Rift",
+  "home": "Riften",
+  "observation": 3,
+  "profession": "scholar"
+ },
+ "Faida|Nord|019A28": {
+  "profession": "innkeeper"
+ },
+ "Falion|Redguard|0135E9": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "daedra"
+   }
+  ],
+  "education": 5,
+  "travel": "province"
+ },
+ "Farengar Secret-Fire|Nord|013BBB": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "dragonstone"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "dragons"
+   }
+  ]
+ },
+ "Farkas|Nord|01A692": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Jorrvaskr"
+   }
+  ]
+ },
+ "Felldir the Old|Nord|044237": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Sovngarde"
+   }
+  ],
+  "education": 3,
+  "home": "Sovngarde",
+  "profession": "soldier"
+ },
+ "Feran Sadri|Dunmer|003366": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Castle Volkihar"
+   }
+  ]
+ }
+}

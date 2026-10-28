@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+docs/
+build/
+dist/
+# large build outputs (rebuilt by tools/build_lore.py)
+data/lore.sqlite
+data/lore.sqlite-*
+work/
+*.xml
+*.bz2
+*.7z

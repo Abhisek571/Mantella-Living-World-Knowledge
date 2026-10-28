@@ -1,0 +1,546 @@
+{
+ "Jarl Siddgeir|Nord|013653": {
+  "standing": "ruler"
+ },
+ "Jarl Ulfric Stormcloak|Nord|01414D": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "civil_war"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "great_war"
+   },
+   {
+    "inside": false,
+    "level": 3,
+    "topic": "thuum"
+   }
+  ],
+  "education": 4,
+  "observation": 3,
+  "profession": "court",
+  "standing": "ruler"
+ },
+ "Njada Stonearm|Nord|01A6D9": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Jorrvaskr"
+   }
+  ]
+ },
+ "Rhiada|Reachman|0133B4": {
+  "profession": "servant"
+ },
+ "Ri'saad|Khajiit|01B1DB": {
+  "education": 3,
+  "home": null,
+  "profession": "caravan",
+  "travel": "province"
+ },
+ "Ria|Imperial|01A6D7": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Jorrvaskr"
+   }
+  ]
+ },
+ "Rorik|Nord|0136B2": {
+  "profession": "farmer",
+  "standing": "high"
+ },
+ "Rulindil|Altmer|039F1F": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Thalmor Embassy"
+   }
+  ],
+  "education": 4,
+  "hold": "Haafingar",
+  "home": "Thalmor Embassy",
+  "observation": 3,
+  "travel": "home"
+ },
+ "Rune|Imperial|0D4FDE": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "The Ragged Flagon"
+   }
+  ]
+ },
+ "Runil|Altmer|01364D": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "great_war"
+   }
+  ],
+  "education": 4,
+  "travel": "home"
+ },
+ "Saadia|Redguard|013BA2": {
+  "note": "noble from Taneth in hiding (bio)",
+  "observation": 3,
+  "origin_province": "Hammerfell",
+  "profession": "innkeeper"
+ },
+ "Saerlund|Nord|013379": {
+  "profession": "noble"
+ },
+ "Sanguine|Daedra|02E1F2": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Sapphire|Nord|0C19A3": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "The Ragged Flagon"
+   }
+  ]
+ },
+ "Savos Aren|Dunmer|01C19F": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "College of Winterhold"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Labyrinthian"
+   }
+  ],
+  "education": 5,
+  "observation": 3,
+  "standing": "high"
+ },
+ "Selveni Nethri|Dunmer|03A745": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Southfringe Sanctum"
+   }
+  ],
+  "hold": "Falkreath Hold",
+  "home": "Southfringe Sanctum"
+ },
+ "Serana|Nord|002B6C": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Castle Volkihar"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Dimhollow Crypt"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "vampires"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "elder_scrolls"
+   }
+  ],
+  "education": 4,
+  "hold": "Haafingar",
+  "home": "Castle Volkihar",
+  "observation": 3,
+  "standing": "high"
+ },
+ "Sergius Turrianus|Imperial|01C23E": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "College of Winterhold"
+   }
+  ]
+ },
+ "Sheogorath|Breton|02AC69": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Sibbi Black-Briar|Nord|01337B": {
+  "standing": "high"
+ },
+ "Sild the Warlock|Nord|05198C": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Rannveig's Fast"
+   }
+  ],
+  "hold": "Whiterun Hold",
+  "home": "Rannveig's Fast"
+ },
+ "Skaggi Scar-Face|Nord|0133B8": {
+  "profession": "miner"
+ },
+ "Skjor|Nord|01A690": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Jorrvaskr"
+   }
+  ],
+  "observation": 3
+ },
+ "Skulvar Sable-Hilt|Nord|013BB7": {
+  "profession": "laborer"
+ },
+ "Sorex Vinius|Imperial|0132A7": {
+  "profession": "innkeeper"
+ },
+ "Sorine Jurard|Breton|00336B": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Fort Dawnguard"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "dwemer"
+   }
+  ],
+  "education": 4,
+  "home": "Fort Dawnguard",
+  "profession": "scholar",
+  "travel": "regional"
+ },
+ "Spectral Assassin|Imperial|0A0E49": {
+  "era": "ancient",
+  "home": null,
+  "observation": 3,
+  "profession": "thief"
+ },
+ "Storn Crag-Strider|Nord|017935": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "all_maker"
+   }
+  ],
+  "education": 4,
+  "observation": 4,
+  "profession": "priest",
+  "travel": "home"
+ },
+ "Sulla Trebatius|Imperial|03B0E2": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Alftand"
+   }
+  ],
+  "hold": "Winterhold",
+  "home": "Alftand",
+  "profession": "adventurer",
+  "travel": "regional"
+ },
+ "Sven|Nord|01347F": {
+  "origin_province": "Skyrim",
+  "travel": "home"
+ },
+ "Sven|Nord|1FC35C": {
+  "origin_province": "Skyrim",
+  "travel": "home"
+ },
+ "Sybille Stentor|Breton|0132AA": {
+  "education": 5,
+  "note": "secretly a vampire (bio)",
+  "observation": 3,
+  "profession": "court_wizard",
+  "standing": "high"
+ },
+ "Taron Dreth|Dunmer|014BFB": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "dwemer"
+   }
+  ],
+  "education": 5,
+  "travel": "regional"
+ },
+ "Tekla|Nord|013656": {
+  "profession": "servant",
+  "standing": "common"
+ },
+ "Temba Wide-Arm|Nord|0658D2": {
+  "profession": "laborer"
+ },
+ "Thaena|Nord|01C189": {
+  "standing": "high"
+ },
+ "Thonar Silver-Blood|Nord|0133BA": {
+  "observation": 3,
+  "profession": "noble",
+  "standing": "high"
+ },
+ "Thongvor Silver-Blood|Nord|0133BB": {
+  "profession": "noble",
+  "standing": "high"
+ },
+ "Thonjolf|Nord|01C181": {
+  "profession": "servant"
+ },
+ "Thorald Gray-Mane|Nord|01C241": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Northwatch Keep"
+   }
+  ],
+  "hold": "Whiterun Hold",
+  "home": "Whiterun",
+  "profession": "soldier"
+ },
+ "Thrynn|Nord|0D4FDB": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "The Ragged Flagon"
+   }
+  ]
+ },
+ "Tolfdir|Nord|01C19E": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "College of Winterhold"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Saarthal"
+   }
+  ],
+  "education": 5
+ },
+ "Tonilia|Redguard|0B8827": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "The Ragged Flagon"
+   }
+  ],
+  "profession": "thief"
+ },
+ "Torbjorn Shatter-Shield|Nord|01413F": {
+  "profession": "merchant",
+  "standing": "high"
+ },
+ "Torsten Cruel-Sea|Nord|014136": {
+  "standing": "high"
+ },
+ "Torvar|Nord|01A6DB": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Jorrvaskr"
+   }
+  ]
+ },
+ "Umana|Redguard|03B0E3": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Alftand"
+   }
+  ],
+  "hold": "Winterhold",
+  "home": "Alftand",
+  "profession": "adventurer",
+  "travel": "regional"
+ },
+ "Uraccen|Reachman|0133BD": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Cidhna Mine"
+   }
+  ],
+  "profession": "bandit",
+  "travel": "home"
+ },
+ "Uthgerd the Unbroken|Nord|0918E2": {
+  "profession": "mercenary",
+  "travel": "regional"
+ },
+ "Vaermina|Daedra|0E16CD": {
+  "education": 5,
+  "hold": null,
+  "home": null,
+  "observation": 4,
+  "profession": "creature",
+  "standing": "ruler",
+  "ties": [],
+  "travel": "province"
+ },
+ "Valerica|Nord|003B8B": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Soul Cairn"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Castle Volkihar"
+   },
+   {
+    "inside": true,
+    "level": 5,
+    "topic": "vampires"
+   },
+   {
+    "inside": false,
+    "level": 4,
+    "topic": "necromancy"
+   }
+  ],
+  "education": 5,
+  "home": "Soul Cairn",
+  "observation": 3,
+  "profession": "vampire",
+  "standing": "high"
+ },
+ "Veezara|Argonian|01C3AA": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Dark Brotherhood Sanctuary"
+   }
+  ],
+  "hold": "Falkreath Hold",
+  "home": "Falkreath"
+ },
+ "Vendil Severin|Dunmer|018284": {
+  "standing": "high"
+ },
+ "Vex|Imperial|01CD90": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "The Ragged Flagon"
+   }
+  ],
+  "observation": 3
+ },
+ "Vigilant Tolan|Nord|00352D": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 3,
+    "topic": "vampires"
+   }
+  ],
+  "profession": "priest"
+ },
+ "Vigilant Tyranus|Imperial|0A733B": {
+  "add_ties": [
+   {
+    "inside": false,
+    "level": 3,
+    "topic": "daedra"
+   }
+  ],
+  "profession": "priest"
+ },
+ "Vignar Gray-Mane|Nord|013BB5": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Jorrvaskr"
+   }
+  ],
+  "standing": "high",
+  "travel": "home"
+ },
+ "Vilkas|Nord|01A694": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Jorrvaskr"
+   }
+  ],
+  "education": 3
+ },
+ "Vingalmo|Altmer|003360": {
+  "add_ties": [
+   {
+    "inside": true,
+    "level": 5,
+    "place": "Castle Volkihar"
+   }
+  ],
+  "hold": "Haafingar",
+  "home": "Castle Volkihar"
+ },
+ "Vittoria Vici|Imperial|01327A": {
+  "education": 4,
+  "standing": "high"
+ },
+ "Wylandriah|Bosmer|019DEF": {
+  "standing": "high"
+ },
+ "Yatul|Orsimer|01B077": {
+  "profession": "priest"
+ },
+ "Ysolda|Nord|013BAB": {
+  "profession": "merchant"
+ }
+}

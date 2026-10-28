@@ -1,0 +1,4038 @@
+{
+"A Bandit's Book": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"A Bloody Trail": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Abandoned House": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Markarth"
+},
+"Abandoned House (Markarth)": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Abandoned Prison": {
+"hold": "Eastmarch",
+"kind": "tower"
+},
+"Abandoned Shack": {
+"hold": "Hjaalmarch",
+"kind": "shack"
+},
+"Addvar's House": {
+"kind": "house",
+"town": "Solitude"
+},
+"Adventurer's Campsite": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Aeri's House": {
+"hold": "The Pale",
+"kind": "house"
+},
+"Aerin's House": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Aetherium Forge": {
+"hold": "The Rift",
+"kind": "dungeon"
+},
+"Alchemist's Camp: Evergreen Woods": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Alchemist's Shack": {
+"hold": "The Rift",
+"kind": "shack"
+},
+"Alchemy Laboratory": {
+"kind": "landmark"
+},
+"Alftand": {
+"hold": "Winterhold",
+"kind": "dungeon"
+},
+"Altar in the Woods": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Altar of Xrib": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Alva's House": {
+"hold": "Hjaalmarch",
+"kind": "house",
+"town": "Morthal"
+},
+"Alvor and Sigrid's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Riverwood"
+},
+"Ambushed Caravan": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Amren's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Whiterun"
+},
+"An Abandoned Rowboat": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Ancestor Glade": {
+"hold": "Falkreath Hold",
+"kind": "grove"
+},
+"Ancient King": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Ancient's Ascent": {
+"hold": "Falkreath Hold",
+"kind": "nest"
+},
+"Anga's Mill": {
+"hold": "The Pale",
+"kind": "farm"
+},
+"Anga's Mill Common House": {
+"hold": "The Pale",
+"kind": "house"
+},
+"Angarvunde": {
+"hold": "The Rift",
+"kind": "dungeon"
+},
+"Angeline's Aromatics": {
+"hold": "Haafingar",
+"kind": "store",
+"town": "Solitude"
+},
+"Angi's Camp": {
+"hold": "Falkreath Hold",
+"kind": "shack"
+},
+"Anise's Cabin": {
+"hold": "Falkreath Hold",
+"kind": "shack"
+},
+"Ansilvund": {
+"hold": "Eastmarch",
+"kind": "dungeon"
+},
+"Arcadia's Cauldron": {
+"hold": "Whiterun Hold",
+"kind": "store",
+"town": "Whiterun"
+},
+"Arch-Mage's Quarters": {
+"hold": "Winterhold",
+"kind": "house"
+},
+"Arcwind Point": {
+"hold": "The Rift",
+"kind": "dungeon"
+},
+"Aretino Residence": {
+"hold": "Eastmarch",
+"kind": "house"
+},
+"Argonian Assemblage": {
+"hold": "Eastmarch",
+"kind": "house"
+},
+"Arkngthamz": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Armory": {
+"kind": "landmark"
+},
+"Arnleif and Sons Trading Company": {
+"hold": "The Reach",
+"kind": "store"
+},
+"Ashfall's Tear": {
+"hold": "Solstheim",
+"kind": "cave"
+},
+"Atheron Residence": {
+"hold": "Eastmarch",
+"kind": "house",
+"town": "Windhelm"
+},
+"Autumnshade Clearing": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Autumnwatch Tower": {
+"hold": "The Rift",
+"kind": "nest"
+},
+"Avanchnzel": {
+"hold": "The Rift",
+"kind": "dungeon"
+},
+"Avoidance Exterior": {
+"kind": "landmark"
+},
+"Azura Voice Cell": {
+"kind": "landmark"
+},
+"Azura's Star": {
+"kind": "landmark"
+},
+"Azura's Star Interior": {
+"kind": "region"
+},
+"Bandit Bridge: Pinewatch": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Bandit Camp (Dawnstar)": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Bandit Camp: Helgen Cliffs": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Bandit Camp: Ilinalta Foothills": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Bandit Camp: Pinewatch Heights": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Bandit Camp: Skybound Underhang": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Bandit's Hovel": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Bannermist Tower": {
+"hold": "Falkreath Hold",
+"kind": "tower"
+},
+"Bard's Leap Summit": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Bards College": {
+"hold": "Haafingar",
+"kind": "guild",
+"town": "Solitude"
+},
+"Barnacle Boat": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Battle-Born Farm": {
+"hold": "Whiterun Hold",
+"kind": "farm"
+},
+"Bear Cave: Halldir's Cairn": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Bear Hunter's Camp": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Bedrooms": {
+"kind": "landmark"
+},
+"Beggar's Row": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Beitild's House": {
+"hold": "The Pale",
+"kind": "house",
+"town": "Dawnstar"
+},
+"Belethor's General Goods": {
+"hold": "Whiterun Hold",
+"kind": "store",
+"town": "Whiterun"
+},
+"Belyn Hlaalu's House": {
+"hold": "Eastmarch",
+"kind": "house",
+"town": "Windhelm"
+},
+"Bilegulch Mine": {
+"hold": "Falkreath Hold",
+"kind": "mine"
+},
+"Birna's Oddments": {
+"hold": "Winterhold",
+"kind": "store",
+"town": "Winterhold"
+},
+"Bits and Pieces": {
+"hold": "Haafingar",
+"kind": "store",
+"town": "Solitude"
+},
+"Black Arts Burial Ground": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Black-Briar Lodge": {
+"hold": "The Rift",
+"kind": "settlement"
+},
+"Black-Briar Manor": {
+"hold": "The Rift",
+"kind": "house",
+"town": "Riften"
+},
+"Black-Briar Meadery": {
+"hold": "The Rift",
+"kind": "store",
+"town": "Riften"
+},
+"Blackreach": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Blacksmith Quarters": {
+"hold": "Eastmarch",
+"kind": "store",
+"town": "Windhelm"
+},
+"Bleak Falls Barrow": {
+"hold": "Falkreath Hold",
+"kind": "dungeon"
+},
+"Bleakcoast Cave": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Bleakwind Basin": {
+"hold": "Whiterun Hold",
+"kind": "giant_camp"
+},
+"Bleakwind Bluff": {
+"hold": "The Reach",
+"kind": "tower"
+},
+"Blind Cliff Cave": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Blizzard Rest": {
+"hold": "The Pale",
+"kind": "giant_camp"
+},
+"Bloated Man's Grotto": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Bloodchill Cavern": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Bloodied Box": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Bloodlet Throne": {
+"hold": "Falkreath Hold",
+"kind": "fort"
+},
+"Blue Palace": {
+"hold": "Haafingar",
+"kind": "palace",
+"town": "Solitude"
+},
+"Bolli's House": {
+"hold": "The Rift",
+"kind": "house",
+"town": "Riften"
+},
+"Bonechill Passage": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Bonestrewn Crest": {
+"hold": "Eastmarch",
+"kind": "nest"
+},
+"Boulderfall Cave": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Braidwood Inn": {
+"hold": "Eastmarch",
+"kind": "inn",
+"town": "Kynesgrove"
+},
+"Brandy-Mug Farm": {
+"hold": "Eastmarch",
+"kind": "farm"
+},
+"Breezehome": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Whiterun"
+},
+"Brina's House": {
+"hold": "The Pale",
+"kind": "house"
+},
+"Brinewater Grotto": {
+"hold": "Haafingar",
+"kind": "cave"
+},
+"Brittleshin Pass": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Broken Fang Cave": {
+"hold": "Whiterun Hold",
+"kind": "cave"
+},
+"Broken Helm Hollow": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Broken Limb Camp": {
+"hold": "Eastmarch",
+"kind": "giant_camp"
+},
+"Broken Oar Grotto": {
+"hold": "Haafingar",
+"kind": "cave"
+},
+"Broken Tower Redoubt": {
+"hold": "The Reach",
+"kind": "fort"
+},
+"Bromjunaar Sanctuary": {
+"hold": "Hjaalmarch",
+"kind": "dungeon"
+},
+"Bronze Water Cave": {
+"hold": "The Pale",
+"kind": "cave"
+},
+"Brood Cavern": {
+"hold": "Hjaalmarch",
+"kind": "cave"
+},
+"Bruca's Leap Redoubt": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Brunwulf Free-Winter's House": {
+"hold": "Eastmarch",
+"kind": "house",
+"town": "Windhelm"
+},
+"Bryling's House": {
+"hold": "Haafingar",
+"kind": "house",
+"town": "Solitude"
+},
+"Bthardamz": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Bugling Elk": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Burguk's Longhouse": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Burning Caravan: Evergreen Grove": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"CWTestHold": {
+"kind": "landmark"
+},
+"Calcelmo's Laboratory": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Calcelmo's Tower": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Calixto's House of Curiosities": {
+"hold": "Eastmarch",
+"kind": "house",
+"town": "Windhelm"
+},
+"Candlehearth Hall": {
+"hold": "Eastmarch",
+"kind": "inn",
+"town": "Windhelm"
+},
+"Carlotta Valentia's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Whiterun"
+},
+"Castle Dour": {
+"hold": "Haafingar",
+"kind": "palace",
+"town": "Solitude"
+},
+"Castle Volkihar": {
+"hold": "Haafingar",
+"kind": "fort"
+},
+"Champion's Rest": {
+"hold": "The Rift",
+"kind": "dungeon"
+},
+"Chillfurrow Farm": {
+"hold": "Whiterun Hold",
+"kind": "farm"
+},
+"Chillwind Depths": {
+"hold": "Hjaalmarch",
+"kind": "cave"
+},
+"Cidhna Mine": {
+"hold": "The Reach",
+"kind": "military",
+"town": "Markarth"
+},
+"Clam Digger's Camp": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Clan Shatter-Shield Office": {
+"hold": "Eastmarch",
+"kind": "store",
+"town": "Windhelm"
+},
+"Clearpine Pond": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Clearspring Cave": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Clearspring Tarn": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Cliffside Retreat": {
+"hold": "The Reach",
+"kind": "shack"
+},
+"Cold Rock Pass": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Collapsed Burial Ground": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"College of Winterhold": {
+"hold": "Winterhold",
+"kind": "guild",
+"town": "Winterhold"
+},
+"Corpselight Farm": {
+"hold": "Falkreath Hold",
+"kind": "farm"
+},
+"Couldn't Be Bothered Cave": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Cowflop Farm": {
+"hold": "Whiterun Hold",
+"kind": "farm"
+},
+"Cowflop Farmhouse": {
+"hold": "Whiterun Hold",
+"kind": "farm",
+"town": "Rorikstead"
+},
+"Crabber's Shanty": {
+"hold": "Whiterun Hold",
+"kind": "shack"
+},
+"Cracked Tusk Keep": {
+"hold": "Falkreath Hold",
+"kind": "fort"
+},
+"Cradle Stone Crag": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Cradle Stone Tower": {
+"hold": "The Reach",
+"kind": "tower"
+},
+"Cradlecrush Rock": {
+"hold": "Eastmarch",
+"kind": "giant_camp"
+},
+"Cragslane Cavern": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Cragwallow Slope": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Cronvangr Cave": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Cronvangr Summoning Altar": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Crystaldrift Cave": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"DLC1 Item Holding Cell": {
+"kind": "landmark"
+},
+"DLC1LD Holding Cell": {
+"kind": "landmark"
+},
+"DLC1LD Quest Holding Cell": {
+"kind": "landmark"
+},
+"Daighre's House": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Markarth"
+},
+"Dainty Sload": {
+"hold": "Haafingar",
+"kind": "shipwreck"
+},
+"Dark Brotherhood Sanctuary": {
+"hold": "Falkreath Hold",
+"kind": "guild"
+},
+"Dark Chasm": {
+"kind": "landmark"
+},
+"Dark Elf's Grave": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Darkfall Cave": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Darkfall Grotto": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Darkfall Passage": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Darklight Tower": {
+"hold": "The Rift",
+"kind": "fort"
+},
+"Darkshade": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Darkwater Crossing": {
+"hold": "Eastmarch",
+"kind": "settlement"
+},
+"Darkwater Pass": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Darkwater River": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Darkwater Stash": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Dawnstar": {
+"hold": "The Pale",
+"kind": "city"
+},
+"Dawnstar Barracks": {
+"hold": "The Pale",
+"kind": "house",
+"town": "Dawnstar"
+},
+"Dawnstar Frost Troll Den": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Dawnstar Sanctuary": {
+"hold": "The Pale",
+"kind": "settlement"
+},
+"Dayspring Canyon": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Dead Body Cleanup Cell": {
+"kind": "landmark"
+},
+"Dead Crone Rock": {
+"hold": "The Reach",
+"kind": "tower"
+},
+"Dead Drop Falls": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Dead Khajiit Merchant": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Dead Lovers Camp": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Dead Mammoth": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Dead Man's Drink": {
+"hold": "Falkreath Hold",
+"kind": "inn",
+"town": "Falkreath"
+},
+"Dead Man's Treasure": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Dead Men's Respite": {
+"hold": "Hjaalmarch",
+"kind": "dungeon"
+},
+"Dead Redguard": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Deadlands (Skyrim Creation Club)": {
+"kind": "landmark"
+},
+"Deadman's Camp": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Deadwood Lumber Mill": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Debate Hall": {
+"kind": "dungeon"
+},
+"Deep Folk Crossing": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Deepwood Redoubt": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Delphine's Secret Room": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Dengeir's House": {
+"kind": "house",
+"town": "Falkreath"
+},
+"Derelict Pumphouse": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Dimhollow Crypt": {
+"hold": "The Pale",
+"kind": "cave"
+},
+"Do Not Delete - Not A Test Cell": {
+"kind": "landmark"
+},
+"Dragon Bridge": {
+"hold": "Haafingar",
+"kind": "town"
+},
+"Dragon Bridge Lumber Camp": {
+"hold": "Haafingar",
+"kind": "farm",
+"town": "Dragon Bridge"
+},
+"Dragon Bridge Overlook": {
+"hold": "The Reach",
+"kind": "camp"
+},
+"Dragon Mound: Autumnshade Woods": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Dragon Mound: Autumnwatch Woods": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Dragon Mound: Bilegulch Ridge": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Dragon Mound: Bloodlet Peaks": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Dragon Mound: Bonestrewn Flats": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Dragon Mound: Evergreen Woods": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Dragon Mound: Karthspire Bluffs": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Dragon Mound: Kynesgrove Resurrection": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Dragon Mound: Lone Mountain": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Dragon Mound: Lost Tongue Pass": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Dragon Mound: Mzulft Foothills": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Dragon Mound: Reachwater Pass": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Dragon Mound: Robber's Gorge Bluffs": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Dragon Mound: Temple Foothills": {
+"kind": "landmark"
+},
+"Dragon Mound: Witchmist Slope": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Dragonsreach": {
+"hold": "Whiterun Hold",
+"kind": "palace"
+},
+"Dragonsreach Dungeon": {
+"hold": "Whiterun Hold",
+"kind": "palace"
+},
+"Dragonsreach Jarl's Quarters": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Dragontooth Crater": {
+"hold": "The Reach",
+"kind": "nest"
+},
+"Draugr Burial Mound": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Drelas' Cottage": {
+"hold": "Whiterun Hold",
+"kind": "shack"
+},
+"Dremora Holding Cell": {
+"kind": "landmark"
+},
+"Driftshade Refuge": {
+"hold": "Winterhold",
+"kind": "fort"
+},
+"Druadach Mountains": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Druadach Redoubt": {
+"hold": "The Reach",
+"kind": "camp"
+},
+"Dunmeth Pass": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Dushnikh Mine": {
+"hold": "The Reach",
+"kind": "mine"
+},
+"Dushnikh Yal": {
+"hold": "The Reach",
+"kind": "settlement"
+},
+"Duskglow Crevice": {
+"hold": "The Pale",
+"kind": "cave"
+},
+"Dustman's Cairn": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Dwarven Arch: Harmugstal Falls": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Dwarven Rubble: Salvius Farm Trail": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Dwarven Ruins: Lair of the Wispmother": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Dwarven Storeroom": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Dwemer Museum": {
+"kind": "landmark"
+},
+"Dwemer Ruins: Druadach": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Dwemer Ruins: Karth River Confluence": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"East Empire Company": {
+"kind": "house",
+"town": "Windhelm"
+},
+"East Empire Company Office": {
+"kind": "landmark"
+},
+"East Empire Company Warehouse": {
+"hold": "Haafingar",
+"kind": "dock"
+},
+"Eastmarch": {
+"hold": "Eastmarch",
+"kind": "hold"
+},
+"Eastmarch Imperial Camp": {
+"hold": "Eastmarch",
+"kind": "camp_military"
+},
+"Editor Smoke Test Cell": {
+"kind": "landmark"
+},
+"Elder's Cairn": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Eldergleam Sanctuary": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Eldergleam Sanctuary Treasure Crate": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Eldergleam Tree": {
+"kind": "landmark"
+},
+"Eldersblood Peak": {
+"hold": "Hjaalmarch",
+"kind": "nest"
+},
+"Elgrim's Elixirs": {
+"hold": "The Rift",
+"kind": "store",
+"town": "Riften"
+},
+"Elsweyr (Room)": {
+"kind": "landmark"
+},
+"Embershard Mine": {
+"hold": "Falkreath Hold",
+"kind": "mine"
+},
+"Enchanter's Tower": {
+"kind": "landmark"
+},
+"Endon's House": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Enmon's House": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Karthwasten"
+},
+"Erikur's House": {
+"hold": "Haafingar",
+"kind": "house",
+"town": "Solitude"
+},
+"Evergreen Grove": {
+"hold": "Falkreath Hold",
+"kind": "grove"
+},
+"Evette San's House": {
+"hold": "Haafingar",
+"kind": "house",
+"town": "Solitude"
+},
+"Faendal's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Riverwood"
+},
+"Faldar's Tooth": {
+"hold": "The Rift",
+"kind": "fort"
+},
+"Falion's House": {
+"hold": "Hjaalmarch",
+"kind": "store",
+"town": "Morthal"
+},
+"Falkreath": {
+"hold": "Falkreath Hold",
+"kind": "city"
+},
+"Falkreath Barracks": {
+"hold": "Falkreath Hold",
+"kind": "military",
+"town": "Falkreath"
+},
+"Falkreath Graveyard": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Falkreath Hold": {
+"hold": "Falkreath Hold",
+"kind": "hold"
+},
+"Falkreath Imperial Camp": {
+"hold": "Falkreath Hold",
+"kind": "camp_military"
+},
+"Falkreath Jail": {
+"hold": "Falkreath Hold",
+"kind": "military"
+},
+"Falkreath Stormcloak Camp": {
+"hold": "Falkreath Hold",
+"kind": "camp_military"
+},
+"Falkreath Watchtower": {
+"hold": "Falkreath Hold",
+"kind": "tower"
+},
+"Fallen Tree Bridge": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Fallowstone Cave": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Farm Overseer's House": {
+"kind": "dungeon"
+},
+"Fellglow Keep": {
+"hold": "Whiterun Hold",
+"kind": "fort"
+},
+"Fellstar Farm": {
+"hold": "The Rift",
+"kind": "farm",
+"town": "Ivarstead"
+},
+"Fenn's Gulch Mine": {
+"hold": "The Reach",
+"kind": "mine",
+"town": "Karthwasten"
+},
+"Fetid Pond": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Filnjar's House": {
+"hold": "The Rift",
+"kind": "house",
+"town": "Shor's Stone"
+},
+"Fisherman's Camp: Lake Ilinalta": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Fisherman's Camp: Slaughterfish Bay": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Fisherman's Island: Lake Ilinalta": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Fletcher": {
+"hold": "Haafingar",
+"kind": "store",
+"town": "Solitude"
+},
+"Folgunthur": {
+"hold": "Hjaalmarch",
+"kind": "dungeon"
+},
+"Fool's Gold Island": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Forebears' Holdout": {
+"hold": "Hjaalmarch",
+"kind": "cave"
+},
+"Forelhost": {
+"hold": "The Rift",
+"kind": "dungeon"
+},
+"Forest Stash": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Forgotten Vale": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Forgotten Vale Cave": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Forgotten Vale Forest": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Forgotten Vale Overlook": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Forsaken Cave": {
+"hold": "The Pale",
+"kind": "cave"
+},
+"Forsworn Ambush Camp": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Forsworn Camp: Bthardamz Outskirts": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Forsworn Camp: Gloomreach": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Forsworn Camp: Reachwater River": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Fort Amol": {
+"hold": "Eastmarch",
+"kind": "fort"
+},
+"Fort Dawnguard": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Fort Dunstad": {
+"hold": "The Pale",
+"kind": "fort"
+},
+"Fort Fellhammer": {
+"hold": "Winterhold",
+"kind": "fort"
+},
+"Fort Greenwall": {
+"hold": "The Rift",
+"kind": "fort"
+},
+"Fort Greymoor": {
+"hold": "Whiterun Hold",
+"kind": "fort"
+},
+"Fort Hraggstad": {
+"hold": "Haafingar",
+"kind": "fort"
+},
+"Fort Kastav": {
+"hold": "Winterhold",
+"kind": "fort"
+},
+"Fort Neugrad": {
+"hold": "Falkreath Hold",
+"kind": "fort"
+},
+"Fort Snowhawk": {
+"hold": "Hjaalmarch",
+"kind": "fort"
+},
+"Fort Sungard": {
+"hold": "The Reach",
+"kind": "fort"
+},
+"Fossilized Giant Mudcrab": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Four Shields Tavern": {
+"hold": "Haafingar",
+"kind": "inn",
+"town": "Dragon Bridge"
+},
+"Four Skull Lookout": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Friends Forever": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Froki's Shack": {
+"hold": "The Rift",
+"kind": "shack"
+},
+"Frost Troll Den: Jerall Mountain Ridge": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Frost Troll Den: Uttering Hills": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Frostflow Abyss": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Frostflow Lighthouse": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Frostfruit Inn": {
+"hold": "Whiterun Hold",
+"kind": "inn",
+"town": "Rorikstead"
+},
+"Frostmere Crypt": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Frostroot Cave": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Frozen Mammoth": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Fruki's House": {
+"hold": "The Pale",
+"kind": "house"
+},
+"Gallows Rock": {
+"hold": "Eastmarch",
+"kind": "fort"
+},
+"Geirmund's Hall": {
+"hold": "The Rift",
+"kind": "dungeon"
+},
+"Ghost Barrow": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Giant Nirnroot Island": {
+"kind": "landmark"
+},
+"Giant's Grove": {
+"hold": "The Rift",
+"kind": "grove"
+},
+"Gilfre's House": {
+"kind": "house"
+},
+"Gjukar's Monument": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Glacial Crevice": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Glenmoril Coven": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Gloombound Mine": {
+"hold": "Eastmarch",
+"kind": "mine"
+},
+"Gloomreach": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Goldenglow Estate": {
+"hold": "The Rift",
+"kind": "settlement"
+},
+"Goldenrock Mine": {
+"hold": "Eastmarch",
+"kind": "mine"
+},
+"Grave Concoctions": {
+"hold": "Falkreath Hold",
+"kind": "store",
+"town": "Falkreath"
+},
+"Gray Pine Goods": {
+"hold": "Falkreath Hold",
+"kind": "store",
+"town": "Falkreath"
+},
+"Gray Quarter": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Graywinter Watch": {
+"hold": "Whiterun Hold",
+"kind": "cave"
+},
+"Great Henge Resurrection": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Great Lift at Alftand": {
+"hold": "Winterhold",
+"kind": "dungeon"
+},
+"Great Lift at Mzinchaleft": {
+"hold": "Hjaalmarch",
+"kind": "dungeon"
+},
+"Great Lift at Raldbthar": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Greenhouse": {
+"kind": "landmark"
+},
+"Greenspring Hollow": {
+"hold": "Whiterun Hold",
+"kind": "grove"
+},
+"Greenwall Cave": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Greywater Grotto": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Gromm's Pass": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Guard Barracks": {
+"hold": "Whiterun Hold",
+"kind": "military"
+},
+"Guard Barracks (Gate)": {
+"hold": "Whiterun Hold",
+"kind": "military"
+},
+"Guard Tower": {
+"hold": "The Reach",
+"kind": "military",
+"town": "Markarth"
+},
+"Guardhouse": {
+"hold": "Hjaalmarch",
+"kind": "military",
+"town": "Morthal"
+},
+"Guardhouse (Morthal)": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Guardian Stones": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Guldun Rock": {
+"hold": "Whiterun Hold",
+"kind": "giant_camp"
+},
+"Guldun Rock Cave": {
+"hold": "Whiterun Hold",
+"kind": "cave"
+},
+"Haafingar": {
+"kind": "hold"
+},
+"Haafingar Nordic Burial Ruins": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Haafingar Sabre Cat Lair": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Haafingar Stormcloak Camp": {
+"hold": "Haafingar",
+"kind": "camp_military"
+},
+"Haelga's Bunkhouse": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Haemar's Shame": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Hag Rock Redoubt": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Hag's End": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Hagraven Nest": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Half-Moon Mill": {
+"hold": "Falkreath Hold",
+"kind": "farm"
+},
+"Hall of Attainment": {
+"hold": "Winterhold",
+"kind": "guild"
+},
+"Hall of Countenance": {
+"hold": "Winterhold",
+"kind": "guild"
+},
+"Hall of Rumination": {
+"kind": "dungeon"
+},
+"Hall of Valor": {
+"kind": "building"
+},
+"Hall of the Dead": {
+"kind": "landmark"
+},
+"Hall of the Dead (Falkreath)": {
+"hold": "Falkreath Hold",
+"kind": "landmark",
+"town": "Falkreath"
+},
+"Hall of the Dead (Markarth)": {
+"hold": "The Reach",
+"kind": "landmark",
+"town": "Markarth"
+},
+"Hall of the Dead (Riften)": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Hall of the Dead (Solitude)": {
+"hold": "Haafingar",
+"kind": "landmark",
+"town": "Solitude"
+},
+"Hall of the Dead (Whiterun)": {
+"hold": "Whiterun Hold",
+"kind": "landmark",
+"town": "Whiterun"
+},
+"Hall of the Dead (Windhelm)": {
+"hold": "Eastmarch",
+"kind": "landmark",
+"town": "Windhelm"
+},
+"Hall of the Elements": {
+"hold": "Winterhold",
+"kind": "guild"
+},
+"Hall of the Vigilant": {
+"hold": "The Pale",
+"kind": "shack"
+},
+"Halldir's Cairn": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Halted Stream Camp": {
+"hold": "Whiterun Hold",
+"kind": "camp"
+},
+"Hamvir's Rest": {
+"hold": "Whiterun Hold",
+"kind": "house"
+},
+"Hamvir's Summit Hunter's Camp": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Harmugstahl": {
+"hold": "The Reach",
+"kind": "fort"
+},
+"Haul of the Horkers": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Heartwood Mill": {
+"hold": "The Rift",
+"kind": "farm"
+},
+"Heimskr's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Whiterun"
+},
+"Hela's Folly": {
+"hold": "Winterhold",
+"kind": "shipwreck"
+},
+"Helgen": {
+"hold": "Falkreath Hold",
+"kind": "town"
+},
+"Helgen Homestead": {
+"kind": "landmark"
+},
+"Helgen Keep": {
+"hold": "Falkreath Hold",
+"kind": "settlement",
+"town": "Helgen"
+},
+"Heljarchen Hall": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Hendraheim (Skyrim Creation Club Location)": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"High Gate Ruins": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"High Hrothgar": {
+"hold": "Whiterun Hold",
+"kind": "fort"
+},
+"Highmoon Hall": {
+"hold": "Hjaalmarch",
+"kind": "palace",
+"town": "Morthal"
+},
+"Hillgrund's Tomb": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Hjaal River": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Hjaalmarch": {
+"hold": "Hjaalmarch",
+"kind": "hold"
+},
+"Hjaalmarch Hills": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Hjaalmarch Imperial Camp": {
+"hold": "Hjaalmarch",
+"kind": "camp_military"
+},
+"Hjaalmarch Stormcloak Camp": {
+"hold": "Hjaalmarch",
+"kind": "camp_military"
+},
+"Hjerim": {
+"hold": "Eastmarch",
+"kind": "house",
+"town": "Windhelm"
+},
+"Hlaalu Farm": {
+"hold": "Eastmarch",
+"kind": "farm"
+},
+"Hob's Fall Cave": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Hod and Gerdur's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Riverwood"
+},
+"Holding cell": {
+"kind": "landmark"
+},
+"Hollyfrost Farm": {
+"hold": "Eastmarch",
+"kind": "farm"
+},
+"Honeyside": {
+"hold": "The Rift",
+"kind": "house",
+"town": "Riften"
+},
+"Honeystrand Cave": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Honningbrew Meadery": {
+"hold": "Whiterun Hold",
+"kind": "settlement"
+},
+"Honorhall Orphanage": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Horgeir's House": {
+"hold": "Haafingar",
+"kind": "house"
+},
+"Horker Hunter's Camp": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Horker Hunter's Last Stand": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Horker Island": {
+"kind": "landmark"
+},
+"Horker Standing Stones": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"House Gray-Mane": {
+"hold": "Whiterun Hold",
+"kind": "house"
+},
+"House of Clan Battle-Born": {
+"hold": "Whiterun Hold",
+"kind": "house"
+},
+"House of Clan Cruel-Sea": {
+"hold": "Eastmarch",
+"kind": "house"
+},
+"House of Clan Shatter-Shield": {
+"hold": "Eastmarch",
+"kind": "house",
+"town": "Windhelm"
+},
+"Howling Wolf's Folly": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Hroggar's House": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Hunter and Hunted": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Hunter's Camp: Autumnshade Hills": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Hunter's Camp: Dunmeth Pass": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Hunter's Camp: Sulfur Soaking Pools": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Hunter's Camp: Sunderstone Gorge": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Hunter's Camp: The Guardian Stones": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Hunter's Camp: Upper Pinewatch Ridge": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Hunter's Camp: Windhelm Plateau": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Hunter's Overlook: Fellhammer Wastes": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Hunter's Rest": {
+"hold": "Falkreath Hold",
+"kind": "shack"
+},
+"Hunters' Camp: Slopes of Kagrenzel": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Hunters' Camp: Steamcrag Slopes": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Ice Shard Wild Animal Den": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Icewater Jetty": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Ilinalta's Deep": {
+"hold": "Falkreath Hold",
+"kind": "fort"
+},
+"Ill-Gotten Gains": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Imperial Caravan": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Inner Sanctum": {
+"hold": "The Reach",
+"kind": "temple"
+},
+"Irgnir's House": {
+"hold": "The Pale",
+"kind": "house"
+},
+"Irkngthand": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Iron-Breaker Mine": {
+"hold": "The Pale",
+"kind": "mine",
+"town": "Dawnstar"
+},
+"Ironback Hideout": {
+"hold": "Haafingar",
+"kind": "shack"
+},
+"Ironbind Barrow": {
+"hold": "Winterhold",
+"kind": "dungeon"
+},
+"Its baaaaaack": {
+"kind": "landmark"
+},
+"Ivarstead": {
+"hold": "The Rift",
+"kind": "town"
+},
+"Jala's House": {
+"hold": "Haafingar",
+"kind": "house",
+"town": "Solitude"
+},
+"Japhet's Folly": {
+"hold": "Winterhold",
+"kind": "settlement"
+},
+"Jarl's Longhouse (Falkreath)": {
+"hold": "Falkreath Hold",
+"kind": "palace",
+"town": "Falkreath"
+},
+"Jarl's Longhouse (Winterhold)": {
+"hold": "Winterhold",
+"kind": "palace",
+"town": "Winterhold"
+},
+"Jerall Mountains": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Jorgen and Lami's House": {
+"hold": "Hjaalmarch",
+"kind": "house",
+"town": "Morthal"
+},
+"Jorrvaskr": {
+"hold": "Whiterun Hold",
+"kind": "guild",
+"town": "Whiterun"
+},
+"Journeyman's Nook": {
+"hold": "Winterhold",
+"kind": "house"
+},
+"Julianos' Fallen": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Juniper Tree Ruins": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Kagrenzel": {
+"hold": "Eastmarch",
+"kind": "dungeon"
+},
+"Karth River": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Karth River Forest": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Karth River Henge": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Karthspire": {
+"hold": "The Reach",
+"kind": "camp"
+},
+"Karthspire Camp": {
+"hold": "The Reach",
+"kind": "camp"
+},
+"Karthwasten": {
+"hold": "The Reach",
+"kind": "town"
+},
+"Karthwasten Hall": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Karthwasten"
+},
+"Karthwasten Miner's Barracks": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Karthwasten"
+},
+"Katla's Farm": {
+"hold": "Haafingar",
+"kind": "farm"
+},
+"Khajiit Caravan Massacre": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Kilkreath Ruins": {
+"hold": "Haafingar",
+"kind": "dungeon"
+},
+"Kitchen": {
+"kind": "landmark"
+},
+"Kjenstag Ruins": {
+"hold": "Hjaalmarch",
+"kind": "house"
+},
+"Klimmek's House": {
+"hold": "The Rift",
+"kind": "house",
+"town": "Ivarstead"
+},
+"Knifepoint Mine": {
+"hold": "Falkreath Hold",
+"kind": "mine"
+},
+"Knifepoint Ridge": {
+"hold": "Falkreath Hold",
+"kind": "camp"
+},
+"Kolskeggr Mine": {
+"hold": "The Reach",
+"kind": "mine"
+},
+"Korvanjund": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Kraldar's House": {
+"hold": "Winterhold",
+"kind": "house",
+"town": "Winterhold"
+},
+"Kynesgrove": {
+"hold": "Eastmarch",
+"kind": "settlement"
+},
+"Labyrinthian": {
+"hold": "Hjaalmarch",
+"kind": "dungeon"
+},
+"Labyrinthian Peaks": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Lady of the Lake": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Lake Fjalding": {
+"kind": "landmark"
+},
+"Lake Geir": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Lake Honrich": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Lake Ilinalta": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Lake Yorgrim": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Lakeview Manor": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Larak's Longhouse": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Largashbur": {
+"hold": "The Rift",
+"kind": "settlement"
+},
+"Largashbur Cellar": {
+"hold": "The Rift",
+"kind": "building"
+},
+"Largashbur Longhouse": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Last Vigil": {
+"hold": "The Rift",
+"kind": "camp"
+},
+"Left Hand Mine": {
+"hold": "The Reach",
+"kind": "mine"
+},
+"Left Hand Miner's Barracks": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Markarth"
+},
+"Leigelf's House": {
+"hold": "The Pale",
+"kind": "house"
+},
+"Lemkil's Farm": {
+"hold": "Whiterun Hold",
+"kind": "farm"
+},
+"Lemkil's Farmhouse": {
+"hold": "Whiterun Hold",
+"kind": "farm",
+"town": "Rorikstead"
+},
+"Liar's Retreat": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Library": {
+"kind": "landmark"
+},
+"Lod's House": {
+"hold": "Falkreath Hold",
+"kind": "house",
+"town": "Falkreath"
+},
+"Loreius Farm": {
+"hold": "The Pale",
+"kind": "farm"
+},
+"Lost Echo Cave": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Lost Knife Cave": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Lost Knife Hideout": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Lost Prospect Mine": {
+"hold": "The Rift",
+"kind": "mine"
+},
+"Lost Tongue Overlook": {
+"hold": "The Rift",
+"kind": "nest"
+},
+"Lost Treasure: Purewater Run": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Lost Valkygg": {
+"hold": "Hjaalmarch",
+"kind": "house"
+},
+"Lost Valley Redoubt": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Lover's Tent": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Lucky Lorenz's Shack": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Lund's Hut": {
+"hold": "Whiterun Hold",
+"kind": "shack"
+},
+"Lylvieve Family's House": {
+"hold": "Haafingar",
+"kind": "farm"
+},
+"Magic Visuals Test Hall": {
+"kind": "landmark"
+},
+"Main Hall": {
+"kind": "landmark"
+},
+"Malacath's Shrine": {
+"hold": "The Rift",
+"kind": "shrine"
+},
+"Mammoth Graveyard": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Mara's Eye Den": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Mara's Eye Pond": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Mara's Eye Stones": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Marise Aravel's House": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Markarth": {
+"hold": "The Reach",
+"kind": "city"
+},
+"Markarth Guard Tower": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Markarth Lumber Mill and Forge": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Markarth Marketplace": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Markarth Stables": {
+"hold": "The Reach",
+"kind": "building",
+"town": "Markarth"
+},
+"Markarth Wizard's Balcony": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Marker Storage Unit": {
+"kind": "landmark"
+},
+"Mauhulakh's Longhouse": {
+"hold": "Eastmarch",
+"kind": "house"
+},
+"Medresi's Camp: Angarvunde": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Meeko's Shack": {
+"hold": "Hjaalmarch",
+"kind": "shack"
+},
+"Mehrunes Dagon Voice Cell": {
+"kind": "landmark"
+},
+"Merryfair Farm": {
+"hold": "The Rift",
+"kind": "farm"
+},
+"Miner's Barracks": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Miner's House": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Mistveil Keep": {
+"hold": "The Rift",
+"kind": "palace",
+"town": "Riften"
+},
+"Mistwatch": {
+"hold": "Eastmarch",
+"kind": "fort"
+},
+"Mistwatch Folly": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Misty Grove": {
+"kind": "region"
+},
+"Mixwater Mill": {
+"hold": "Eastmarch",
+"kind": "farm"
+},
+"Moesring Pass": {
+"kind": "landmark"
+},
+"Moldering Ruins": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Money Tree": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Moorside Inn": {
+"hold": "Hjaalmarch",
+"kind": "inn",
+"town": "Morthal"
+},
+"Mor Khazgur": {
+"hold": "The Reach",
+"kind": "settlement"
+},
+"Mor Khazgur Cellar": {
+"hold": "The Reach",
+"kind": "building"
+},
+"Mor Khazgur Mine": {
+"hold": "The Reach",
+"kind": "mine"
+},
+"Morthal": {
+"hold": "Hjaalmarch",
+"kind": "city"
+},
+"Morthal Cemetery": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Morvunskar": {
+"hold": "Eastmarch",
+"kind": "fort"
+},
+"Moss Mother Cavern": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Mossy Glen Cave": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Mount Anthor": {
+"hold": "Winterhold",
+"kind": "nest"
+},
+"Mount Anthor Summit": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Mount Kilkreath": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Movarth's Lair": {
+"hold": "Hjaalmarch",
+"kind": "cave"
+},
+"Myrwatch (Skyrim Creation Club Location)": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Mzinchaleft": {
+"hold": "Hjaalmarch",
+"kind": "dungeon"
+},
+"Mzinchaleft Gatehouse": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Mzulft": {
+"hold": "Eastmarch",
+"kind": "dungeon"
+},
+"Narzulbur": {
+"hold": "Eastmarch",
+"kind": "settlement"
+},
+"Nchuand-Zel": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Nchuand-Zel Excavation Site": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Necromancer's Bluff": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Nepos' House": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Nepos's House": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Markarth"
+},
+"New Gnisis Cornerclub": {
+"hold": "Eastmarch",
+"kind": "inn",
+"town": "Windhelm"
+},
+"Nightcaller Temple": {
+"hold": "The Pale",
+"kind": "fort"
+},
+"Nightgate Inn": {
+"hold": "The Pale",
+"kind": "inn"
+},
+"Nightingale Hall": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Nilheim": {
+"hold": "The Rift",
+"kind": "tower"
+},
+"Niranye's House": {
+"hold": "Eastmarch",
+"kind": "house"
+},
+"Nordic Burial Grove": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"North Brittleshin Pass": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"North Shriekwind Bastion": {
+"hold": "Falkreath Hold",
+"kind": "dungeon"
+},
+"North Skybound Watch": {
+"kind": "landmark"
+},
+"Northwatch Keep": {
+"hold": "Haafingar",
+"kind": "fort"
+},
+"Northwind Mine": {
+"hold": "The Rift",
+"kind": "mine"
+},
+"Northwind Summit": {
+"hold": "The Rift",
+"kind": "nest"
+},
+"Obscured Passage": {
+"kind": "landmark"
+},
+"Odfel's House": {
+"hold": "The Rift",
+"kind": "house",
+"town": "Shor's Stone"
+},
+"Ogmund's House": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Olava the Feeble's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Whiterun"
+},
+"Old Hroldan Inn": {
+"hold": "The Reach",
+"kind": "inn"
+},
+"Orotheim": {
+"hold": "Hjaalmarch",
+"kind": "cave"
+},
+"Orphan Rock": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Orphan's Tear": {
+"hold": "Haafingar",
+"kind": "shipwreck"
+},
+"Palace of the Kings": {
+"hold": "Eastmarch",
+"kind": "palace",
+"town": "Windhelm"
+},
+"Pale Imperial Camp": {
+"hold": "The Pale",
+"kind": "camp_military"
+},
+"Pale Stormcloak Camp": {
+"hold": "The Pale",
+"kind": "camp_military"
+},
+"Paragon Platform": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Pavo's House": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Pawned Prawn": {
+"hold": "The Rift",
+"kind": "store",
+"town": "Riften"
+},
+"Peak's Shade Tower": {
+"hold": "Falkreath Hold",
+"kind": "tower"
+},
+"Peddler's Misfortune": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Pelagia Farm": {
+"hold": "Whiterun Hold",
+"kind": "farm"
+},
+"Pelagius Wing": {
+"kind": "landmark"
+},
+"Penitus Oculatus Outpost": {
+"hold": "Haafingar",
+"kind": "settlement",
+"town": "Dragon Bridge"
+},
+"Pilgrim's Trench": {
+"hold": "Winterhold",
+"kind": "shipwreck"
+},
+"Pincushion Peter": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Pine Forest": {
+"kind": "landmark"
+},
+"Pinefrost Tower": {
+"hold": "Haafingar",
+"kind": "tower"
+},
+"Pinemoon Bear Lair": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Pinemoon Cave": {
+"hold": "Haafingar",
+"kind": "cave"
+},
+"Pinepeak Cavern": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Pinewatch": {
+"hold": "Falkreath Hold",
+"kind": "shack"
+},
+"Potema's Catacombs": {
+"hold": "Haafingar",
+"kind": "dungeon"
+},
+"Potema's Refuge": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Prospector's Shack": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Proudspire Manor": {
+"hold": "Haafingar",
+"kind": "house",
+"town": "Solitude"
+},
+"Pumping Station": {
+"kind": "dungeon"
+},
+"Pumping Station (Silent City)": {
+"kind": "landmark"
+},
+"Purewater Run": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Puzzling Pillar Ruins": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Quick Test Cell": {
+"kind": "landmark"
+},
+"Quicksilver Mine": {
+"hold": "The Pale",
+"kind": "mine",
+"town": "Dawnstar"
+},
+"Radiant Raiment": {
+"hold": "Haafingar",
+"kind": "store",
+"town": "Solitude"
+},
+"Ragnvald": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Ragnvald Vale": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Raldbthar": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Rannveig's Fast": {
+"hold": "Whiterun Hold",
+"kind": "dungeon"
+},
+"Raven Rock Holding Cell": {
+"kind": "landmark"
+},
+"Raven Rock Mine": {
+"kind": "mine"
+},
+"Ravenscar Hollow": {
+"hold": "Haafingar",
+"kind": "cave"
+},
+"Reach Imperial Camp": {
+"hold": "The Reach",
+"kind": "camp_military"
+},
+"Reach Stormcloak Camp": {
+"hold": "The Reach",
+"kind": "camp_military"
+},
+"Reachcliff Cave": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Reachman's Altar: Red Eagle Redoubt": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Reachwater River": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Reachwater Rock": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Reachwind Burial Mound": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Reachwind Eyrie": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Rebel's Cairn": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Red Eagle Redoubt": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Red Road Pass": {
+"hold": "The Pale",
+"kind": "giant_camp"
+},
+"Red Scar Cavern": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Red Wave": {
+"hold": "Haafingar",
+"kind": "shipwreck"
+},
+"Redbelly Mine": {
+"hold": "The Rift",
+"kind": "mine",
+"town": "Shor's Stone"
+},
+"Redoran's Retreat": {
+"hold": "Whiterun Hold",
+"kind": "cave"
+},
+"Redwater Den": {
+"hold": "The Rift",
+"kind": "shack"
+},
+"Reeking Cave": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Reeking Tower": {
+"kind": "dungeon"
+},
+"Refugees' Rest": {
+"hold": "Eastmarch",
+"kind": "tower"
+},
+"Rielle (Skyrim Creation Club)": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Rift Imperial Camp": {
+"hold": "The Rift",
+"kind": "camp_military"
+},
+"Rift Stormcloak Camp": {
+"hold": "The Rift",
+"kind": "camp_military"
+},
+"Rift Watchtower": {
+"hold": "The Rift",
+"kind": "tower"
+},
+"Riften": {
+"hold": "The Rift",
+"kind": "city"
+},
+"Riften Docks": {
+"hold": "The Rift",
+"kind": "dock"
+},
+"Riften Fishery": {
+"hold": "The Rift",
+"kind": "store",
+"town": "Riften"
+},
+"Riften Jail": {
+"hold": "The Rift",
+"kind": "military",
+"town": "Riften"
+},
+"Riften Marketplace": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Riften Stables": {
+"hold": "The Rift",
+"kind": "building",
+"town": "Riften"
+},
+"Riften Warehouse": {
+"hold": "The Rift",
+"kind": "store",
+"town": "Riften"
+},
+"Riftweald Manor": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Rimerock Burrow": {
+"hold": "Haafingar",
+"kind": "cave"
+},
+"River Hjaal": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"River Rapids Treasure Chest": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"River Yorgrim": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Riverside Bandit Camp": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Riverside Shack": {
+"hold": "Eastmarch",
+"kind": "shack"
+},
+"Riverwood": {
+"hold": "Whiterun Hold",
+"kind": "town"
+},
+"Riverwood Folly": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Riverwood Trader": {
+"hold": "Whiterun Hold",
+"kind": "store",
+"town": "Riverwood"
+},
+"Roadside Ruins": {
+"hold": "Falkreath Hold",
+"kind": "house"
+},
+"Robber's Gorge": {
+"hold": "Hjaalmarch",
+"kind": "camp"
+},
+"Robbers' Cove": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Rockwallow Mine": {
+"hold": "Hjaalmarch",
+"kind": "mine",
+"town": "Stonehills"
+},
+"Romlyn Dreth's House": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Rorik's Manor": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Rorikstead"
+},
+"Rorikstead": {
+"hold": "Whiterun Hold",
+"kind": "town"
+},
+"Rorikstead Resurrection": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Ruined Toll and Wispmother's Well": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Ruins of Bthalft": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Ruins of Rkund": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Rundi's Altar": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Runoff Caverns": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Rustleif's House": {
+"hold": "The Pale",
+"kind": "store",
+"town": "Dawnstar"
+},
+"Ruunvald Excavation": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Saarthal": {
+"hold": "Winterhold",
+"kind": "dungeon"
+},
+"Sabre Cat Ravine": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Sabre Cat Rock": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Sacellum of Boethiah": {
+"hold": "Eastmarch",
+"kind": "shrine"
+},
+"Sacrificial Altar: Evergreen Woods": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Sadri's Used Wares": {
+"hold": "Eastmarch",
+"kind": "store",
+"town": "Windhelm"
+},
+"Salvatore's Test Cell": {
+"kind": "landmark"
+},
+"Salvius Farm": {
+"hold": "The Reach",
+"kind": "farm"
+},
+"Sanuarach Mine": {
+"hold": "The Reach",
+"kind": "mine",
+"town": "Karthwasten"
+},
+"Sarethi Farm": {
+"hold": "The Rift",
+"kind": "farm"
+},
+"Sea Cave": {
+"hold": "Winterhold",
+"kind": "settlement"
+},
+"Sea Shore Foothills": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Sea of Ghosts": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Secluded Chamber": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Secunda's Kiss": {
+"hold": "Falkreath Hold",
+"kind": "giant_camp"
+},
+"Septimus Signus' Outpost": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Septimus Signus's Outpost": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Serpent's Bluff Redoubt": {
+"hold": "Whiterun Hold",
+"kind": "camp"
+},
+"Severin Manor": {
+"kind": "landmark"
+},
+"Severio Pelagia's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Whiterun"
+},
+"Shadowgreen Cavern": {
+"hold": "Haafingar",
+"kind": "cave"
+},
+"Shalidor's Maze": {
+"hold": "Hjaalmarch",
+"kind": "region"
+},
+"Sharpslope Cave": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Shearpoint": {
+"hold": "The Pale",
+"kind": "nest"
+},
+"Shimmermist Cave": {
+"hold": "Whiterun Hold",
+"kind": "cave"
+},
+"Shimmermist Grotto": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Shimmermist Hills": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Shor's Stone": {
+"hold": "The Rift",
+"kind": "town"
+},
+"Shor's Watchtower": {
+"hold": "The Rift",
+"kind": "tower"
+},
+"Shriekwind Bastion": {
+"hold": "Falkreath Hold",
+"kind": "dungeon"
+},
+"Shrine of Akatosh (Falkreath)": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Shrine of Akatosh Rorikstead": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Shrine of Akatosh: Steamcrag Hillock": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Shrine of Arkay: Windhelm Hills": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Shrine of Azura": {
+"hold": "Winterhold",
+"kind": "shrine"
+},
+"Shrine of Dibella: Old Hroldan": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Shrine of Dibella: Watching Dawnstar": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Shrine of Kynareth: Robber's Gorge Bluffs": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Shrine of Mara: Pale Border": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Shrine of Mehrunes Dagon": {
+"hold": "The Pale",
+"kind": "shrine"
+},
+"Shrine of Nocturnal": {
+"hold": "The Rift",
+"kind": "shrine"
+},
+"Shrine of Talos": {
+"hold": "The Reach",
+"kind": "shrine",
+"town": "Markarth"
+},
+"Shrine of Talos Winterhold Glaciers": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Shrine of Talos: Cradlecrush Pond": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Shrine of Talos: Froki's Peak": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Shrine of Talos: Ilas-Tei's Last Stand": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Shrine of Talos: Ilinalta Foothills": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Shrine of Talos: Sea of Ghosts": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Shrine of Talos: Watcher of Windhelm": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Shrine of Zenithar (Riften)": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Shrine of Zenithar Crumbling Bastion": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Shrine of Zenithar Ring of Boulders": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Shrine of Zenithar: Four Skull Lookout": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Shrine to Peryite": {
+"hold": "The Reach",
+"kind": "shrine"
+},
+"Shroud Hearth Barrow": {
+"hold": "The Rift",
+"kind": "dungeon"
+},
+"Shrouded Grove": {
+"hold": "The Pale",
+"kind": "grove"
+},
+"Sightless Pit": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Silent City Catacombs": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Silent Moons Camp": {
+"hold": "Whiterun Hold",
+"kind": "dungeon"
+},
+"Silent Ruin": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Silus Vesuius's House": {
+"hold": "The Pale",
+"kind": "house"
+},
+"Silver-Blood Inn": {
+"hold": "The Reach",
+"kind": "inn"
+},
+"Silverdrift Lair": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"Sinderion's Field Laboratory": {
+"hold": "Winterhold",
+"kind": "dungeon"
+},
+"Single Hunter Camp": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Skaggi's House": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Markarth"
+},
+"Skuldafn": {
+"hold": "Eastmarch",
+"kind": "region"
+},
+"Sky Haven Temple": {
+"hold": "The Reach",
+"kind": "guild"
+},
+"Sky Tower": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Skyborn Altar": {
+"hold": "Hjaalmarch",
+"kind": "nest"
+},
+"Skybound Watch Pass": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Skyforge": {
+"hold": "Whiterun Hold",
+"kind": "building",
+"town": "Whiterun"
+},
+"Skytemple Ruins": {
+"hold": "Winterhold",
+"kind": "house"
+},
+"Sleeping Giant Inn": {
+"hold": "Whiterun Hold",
+"kind": "inn",
+"town": "Riverwood"
+},
+"Sleeping Tree Camp": {
+"hold": "Whiterun Hold",
+"kind": "giant_camp"
+},
+"Sleeping Tree Cave": {
+"hold": "Whiterun Hold",
+"kind": "cave"
+},
+"Small House": {
+"kind": "landmark"
+},
+"Smelter Overseer's House": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Smuggler's Alcove": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Smuggler's Den": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Snapleg Cave": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Snow Veil Sanctum": {
+"hold": "Winterhold",
+"kind": "dungeon"
+},
+"Snow-Shod Farm": {
+"hold": "The Rift",
+"kind": "farm"
+},
+"Snow-Shod Manor": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Snowpoint Beacon": {
+"hold": "Winterhold",
+"kind": "tower"
+},
+"Solitude": {
+"hold": "Haafingar",
+"kind": "city"
+},
+"Solitude Blacksmith": {
+"hold": "Haafingar",
+"kind": "store",
+"town": "Solitude"
+},
+"Solitude Catacombs": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Solitude Lighthouse": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Solitude Military Camp": {
+"hold": "Haafingar",
+"kind": "camp_military"
+},
+"Solitude Sawmill": {
+"hold": "Haafingar",
+"kind": "farm"
+},
+"Solitude Sewers": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Solitude Stables": {
+"hold": "Haafingar",
+"kind": "building"
+},
+"Solitude Windmill": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Soljund's Sinkhole": {
+"hold": "The Reach",
+"kind": "cave"
+},
+"Solstheim": {
+"kind": "landmark"
+},
+"Solstheim Dragon Mound": {
+"kind": "landmark"
+},
+"Sorli's House": {
+"hold": "Hjaalmarch",
+"kind": "house",
+"town": "Stonehills"
+},
+"South Brittleshin Pass": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"South Shriekwind Bastion": {
+"hold": "Falkreath Hold",
+"kind": "dungeon"
+},
+"South Skybound Watch": {
+"hold": "Falkreath Hold",
+"kind": "tower"
+},
+"Southfringe Sanctum": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Sovngarde": {
+"kind": "region"
+},
+"Squall Gate": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Statue to Meridia": {
+"hold": "Haafingar",
+"kind": "shrine"
+},
+"Steamcrag Camp": {
+"hold": "Eastmarch",
+"kind": "giant_camp"
+},
+"Steamscorch Mine": {
+"hold": "Eastmarch",
+"kind": "mine",
+"town": "Kynesgrove"
+},
+"Steepfall Burrow": {
+"hold": "Haafingar",
+"kind": "cave"
+},
+"Stendarr's Beacon": {
+"hold": "The Rift",
+"kind": "tower"
+},
+"Stillborn Cave": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Stonehill Bluff": {
+"hold": "The Pale",
+"kind": "giant_camp"
+},
+"Stonehills": {
+"hold": "Hjaalmarch",
+"kind": "settlement"
+},
+"Stony Creek Cave": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Storage Room": {
+"kind": "landmark"
+},
+"Storm Gate": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"Stormcloak Caravan": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Summoning Stones": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Sundered Hills": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Sundered Towers": {
+"hold": "The Reach",
+"kind": "tower"
+},
+"Sunderstone Gorge": {
+"hold": "Falkreath Hold",
+"kind": "cave"
+},
+"Sunken Barrow": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Sunken Fishing Boat": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Sunken Treasures": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Sven and Hilde's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Riverwood"
+},
+"Swallowed Skeleton": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Swamp Pond Massacre": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Swindler's Den": {
+"hold": "Whiterun Hold",
+"kind": "cave"
+},
+"Swindler's Den (Cave)": {
+"hold": "Whiterun Hold",
+"kind": "cave"
+},
+"Sylgja's House": {
+"hold": "The Rift",
+"kind": "house",
+"town": "Shor's Stone"
+},
+"Talking Stone Camp": {
+"hold": "Hjaalmarch",
+"kind": "giant_camp"
+},
+"Temple of Dibella": {
+"hold": "The Reach",
+"kind": "temple"
+},
+"Temple of Kynareth": {
+"hold": "Whiterun Hold",
+"kind": "temple",
+"town": "Whiterun"
+},
+"Temple of Mara": {
+"hold": "The Rift",
+"kind": "temple",
+"town": "Riften"
+},
+"Temple of Talos": {
+"hold": "Eastmarch",
+"kind": "temple"
+},
+"Temple of the Divines": {
+"hold": "Haafingar",
+"kind": "temple",
+"town": "Solitude"
+},
+"TestDLC1PlantWorld": {
+"kind": "landmark"
+},
+"TestRSears": {
+"kind": "landmark"
+},
+"Testl": {
+"kind": "landmark"
+},
+"Thalmor Embassy": {
+"hold": "Haafingar",
+"kind": "settlement"
+},
+"Thalmor Headquarters": {
+"hold": "Haafingar",
+"kind": "palace"
+},
+"Thaumaturgist's Hut": {
+"hold": "Hjaalmarch",
+"kind": "store",
+"town": "Morthal"
+},
+"The Apprentice Stone": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"The Arcanaeum": {
+"hold": "Winterhold",
+"kind": "building"
+},
+"The Atronach Stone": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"The Bannered Mare": {
+"hold": "Whiterun Hold",
+"kind": "inn"
+},
+"The Bee and Barb": {
+"hold": "The Rift",
+"kind": "inn",
+"town": "Riften"
+},
+"The Bloodied Bandit": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"The Bulwark Jail": {
+"kind": "military"
+},
+"The Burning Farmhouse": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"The Chill": {
+"hold": "Winterhold",
+"kind": "military"
+},
+"The Companions": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"The Conjurer's Altar": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The Conjurer's Caravan": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"The Dead Refugees": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"The Drunken Huntsman": {
+"hold": "Whiterun Hold",
+"kind": "store",
+"town": "Whiterun"
+},
+"The Expired Alchemist": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"The Exposed Miner": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"The Frozen Hearth": {
+"hold": "Winterhold",
+"kind": "inn",
+"town": "Winterhold"
+},
+"The Guardian Stones": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The Hag's Cure": {
+"hold": "The Reach",
+"kind": "store"
+},
+"The Headless Skeleton": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The Iceberg Explorer": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"The Incautious Bather": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"The Indigestible Emerald": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The Katariah": {
+"hold": "Haafingar",
+"kind": "shipwreck"
+},
+"The Lady Stone": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The Lord Stone": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"The Lost Conjurer": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The Lost Man's Reprieve": {
+"hold": "Falkreath Hold",
+"kind": "inn",
+"town": "Helgen"
+},
+"The Lover Stone": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"The Mage Stone": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The Mauled Refugees": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The Midden": {
+"hold": "Winterhold",
+"kind": "guild",
+"town": "Winterhold"
+},
+"The Mind of a Madman": {
+"hold": "Haafingar",
+"kind": "region"
+},
+"The Mortar and Pestle": {
+"hold": "The Pale",
+"kind": "store"
+},
+"The Mournful Giant": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"The North Wind": {
+"hold": "Eastmarch",
+"kind": "shipwreck"
+},
+"The Pale": {
+"hold": "The Pale",
+"kind": "hold"
+},
+"The Pawned Prawn": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"The Pit (Windhelm)": {
+"kind": "landmark"
+},
+"The Poultry Reanimator: Lake Geir": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"The Ragged Flagon": {
+"hold": "The Rift",
+"kind": "store",
+"town": "Riften"
+},
+"The Ragged Flagon - Cistern": {
+"hold": "The Rift",
+"kind": "guild",
+"town": "Riften"
+},
+"The Ratway": {
+"hold": "The Rift",
+"kind": "guild",
+"town": "Riften"
+},
+"The Ratway Vaults": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"The Ratway Warrens": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"The Reach": {
+"kind": "hold"
+},
+"The Retching Netch": {
+"kind": "landmark"
+},
+"The Rift": {
+"hold": "The Rift",
+"kind": "hold"
+},
+"The Ritual Stone": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"The Scorched Hammer": {
+"hold": "The Rift",
+"kind": "store",
+"town": "Riften"
+},
+"The Sea Squall": {
+"hold": "The Pale",
+"kind": "shipwreck",
+"town": "Dawnstar"
+},
+"The Serpent Stone": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"The Seven Thousand Steps": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"The Shadow Stone": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"The Silvermoon": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The Skeleton's Strong Box: Greymoor": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"The Steed Stone": {
+"hold": "Haafingar",
+"kind": "landmark"
+},
+"The Stumbling Sabrecat": {
+"hold": "The Pale",
+"kind": "inn"
+},
+"The Thief Stone": {
+"kind": "landmark"
+},
+"The Tower Stone": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"The Treasury House": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Markarth"
+},
+"The Two Pillars": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"The Underforge": {
+"hold": "Whiterun Hold",
+"kind": "guild",
+"town": "Whiterun"
+},
+"The Warrens": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Markarth"
+},
+"The Warrior Stone": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"The White Hall": {
+"hold": "The Pale",
+"kind": "palace",
+"town": "Dawnstar"
+},
+"The White Phial": {
+"hold": "Eastmarch",
+"kind": "store"
+},
+"The Winking Skeever": {
+"hold": "Haafingar",
+"kind": "inn",
+"town": "Solitude"
+},
+"There's a spider on your shoulder": {
+"kind": "landmark"
+},
+"Thieves Guild": {
+"hold": "The Rift",
+"kind": "guild",
+"town": "Riften"
+},
+"Thonnir's House": {
+"hold": "Hjaalmarch",
+"kind": "house",
+"town": "Morthal"
+},
+"Three Sentinels": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Throat of the World": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Toadstool Ring: Bilegulch Ridge": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Tolvald's Cave": {
+"hold": "The Rift",
+"kind": "cave"
+},
+"Toppled Towers": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Totem to Peryite": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Tower of Mzark": {
+"hold": "Hjaalmarch",
+"kind": "dungeon"
+},
+"Tower of Mzark Camp": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Traitor's Post": {
+"hold": "Eastmarch",
+"kind": "shack"
+},
+"Trapper's Dilemma": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Treasure Hunter's Camp": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Treasure Hunter's Island": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Treasury House": {
+"hold": "The Reach",
+"kind": "house"
+},
+"Treva River": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Treva's Watch": {
+"hold": "The Rift",
+"kind": "fort"
+},
+"Trius' Camp": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Troll Den Rkund": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Trolled Stormcloaks Darkwater Overhang": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Trophy Room": {
+"kind": "landmark"
+},
+"Tumble Arch Pass": {
+"hold": "The Pale",
+"kind": "giant_camp"
+},
+"Tumbledown Tower: Riften Outskirts": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Twilight Sepulcher": {
+"hold": "Falkreath Hold",
+"kind": "dungeon"
+},
+"Two Lost Crates": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Two Pine Ridge": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Understone Keep": {
+"hold": "The Reach",
+"kind": "palace"
+},
+"Unowned Cell": {
+"kind": "landmark"
+},
+"Ustengrav": {
+"hold": "Hjaalmarch",
+"kind": "dungeon"
+},
+"Uthgerd's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Whiterun"
+},
+"Uttering Hills Cave": {
+"hold": "Eastmarch",
+"kind": "cave"
+},
+"Valindor's House": {
+"hold": "The Rift",
+"kind": "house"
+},
+"Valtheim Towers": {
+"hold": "Whiterun Hold",
+"kind": "tower"
+},
+"Valthume": {
+"hold": "The Reach",
+"kind": "dungeon"
+},
+"Vardnknd": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Vardnknd Gallery": {
+"hold": "The Reach",
+"kind": "landmark"
+},
+"Velothi Mountains": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Verner and Annekke's House": {
+"hold": "Eastmarch",
+"kind": "house"
+},
+"Vilemyr Inn": {
+"hold": "The Rift",
+"kind": "inn",
+"town": "Ivarstead"
+},
+"Viola Giordano's House": {
+"hold": "Eastmarch",
+"kind": "house"
+},
+"Vittoria Vici's House": {
+"hold": "Haafingar",
+"kind": "house",
+"town": "Solitude"
+},
+"Vlindrel Hall": {
+"hold": "The Reach",
+"kind": "house",
+"town": "Markarth"
+},
+"Volskygge": {
+"hold": "Haafingar",
+"kind": "dungeon"
+},
+"Volunruud": {
+"hold": "The Pale",
+"kind": "dungeon"
+},
+"War Quarters": {
+"kind": "dungeon"
+},
+"Warehouse": {
+"hold": "Eastmarch",
+"kind": "dock"
+},
+"Warehouse Carry": {
+"kind": "landmark"
+},
+"Warehouse Furniture": {
+"kind": "landmark"
+},
+"Warehouse Traps": {
+"kind": "landmark"
+},
+"Warmaiden's": {
+"hold": "Whiterun Hold",
+"kind": "store",
+"town": "Whiterun"
+},
+"Water Slide Chest": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Waterfall Campsite": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Wayward Pass": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Wayward Peak Summit": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Western Watchtower": {
+"hold": "Whiterun Hold",
+"kind": "fort"
+},
+"Wet Bones": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Weynon Stones": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Whistling Mine": {
+"hold": "Winterhold",
+"kind": "mine"
+},
+"White Cap Circle": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"White River": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"White River Valley": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"White River Watch": {
+"hold": "Whiterun Hold",
+"kind": "cave"
+},
+"Whiterun": {
+"hold": "Whiterun Hold",
+"kind": "city"
+},
+"Whiterun Dead Guard": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Whiterun Hold": {
+"hold": "Whiterun Hold",
+"kind": "hold"
+},
+"Whiterun Imperial Camp": {
+"hold": "Whiterun Hold",
+"kind": "camp_military"
+},
+"Whiterun Marketplace": {
+"hold": "Whiterun Hold",
+"kind": "landmark"
+},
+"Whiterun Military Camp": {
+"hold": "Whiterun Hold",
+"kind": "camp_military"
+},
+"Whiterun Stables": {
+"hold": "Whiterun Hold",
+"kind": "building",
+"town": "Whiterun"
+},
+"Whiterun Stormcloak Camp": {
+"hold": "Whiterun Hold",
+"kind": "camp_military"
+},
+"Whitewatch Tower": {
+"hold": "Whiterun Hold",
+"kind": "tower"
+},
+"Widow's Watch Ruins": {
+"hold": "Haafingar",
+"kind": "tower"
+},
+"Wild Animal Den: Crystaldrift Cave": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Wild Animal Den: Dunmeth Pass": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Wild Animal Den: Mistwatch": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Wild Animal Den: Orphan's Tear": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Wild Animal Den: Pinewatch Outcropping": {
+"hold": "Falkreath Hold",
+"kind": "landmark"
+},
+"Wild Animal Den: Shor's Stone": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Windhelm": {
+"hold": "Eastmarch",
+"kind": "city"
+},
+"Windhelm Docks": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Windhelm Jail": {
+"hold": "Eastmarch",
+"kind": "military"
+},
+"Windhelm Marketplace": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Windhelm Military Camp": {
+"hold": "Eastmarch",
+"kind": "camp_military"
+},
+"Windhelm Stables": {
+"hold": "Eastmarch",
+"kind": "building",
+"town": "Windhelm"
+},
+"Windpeak Inn": {
+"hold": "The Pale",
+"kind": "inn",
+"town": "Dawnstar"
+},
+"Windstad Manor": {
+"hold": "Hjaalmarch",
+"kind": "landmark"
+},
+"Windward Ruins": {
+"hold": "The Pale",
+"kind": "house"
+},
+"Winterhold": {
+"kind": "city"
+},
+"Winterhold (Skyrim City)": {
+"hold": "Winterhold",
+"kind": "city"
+},
+"Winterhold (Skyrim Hold)": {
+"kind": "hold"
+},
+"Winterhold (region)": {
+"kind": "hold"
+},
+"Winterhold Glaciers": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Winterhold Imperial Camp": {
+"hold": "Winterhold",
+"kind": "camp_military"
+},
+"Winterhold Stormcloak Camp": {
+"hold": "Winterhold",
+"kind": "camp_military"
+},
+"Wispmother's Crevasse": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Witchmist Grove": {
+"hold": "Eastmarch",
+"kind": "grove"
+},
+"Witchmist Sulphur Pool": {
+"hold": "Eastmarch",
+"kind": "landmark"
+},
+"Wolf Den: Fellhammer Wastes": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Wolfskull Cave": {
+"hold": "Haafingar",
+"kind": "cave"
+},
+"Wood Cutter's Camp: Lake Geir": {
+"hold": "The Rift",
+"kind": "landmark"
+},
+"Worker's House": {
+"hold": "Eastmarch",
+"kind": "house"
+},
+"Wreck Of The Brinehammer": {
+"hold": "The Pale",
+"kind": "shipwreck"
+},
+"Wreck of The Pride of Tel Vos": {
+"hold": "Winterhold",
+"kind": "shipwreck"
+},
+"Wreck of the Icerunner": {
+"hold": "Hjaalmarch",
+"kind": "shipwreck"
+},
+"Wreck of the Winter War": {
+"hold": "Winterhold",
+"kind": "shipwreck"
+},
+"Yisra's Beachside Combustion": {
+"hold": "Winterhold",
+"kind": "landmark"
+},
+"Yngol Barrow": {
+"hold": "Winterhold",
+"kind": "dungeon"
+},
+"Yngvild": {
+"hold": "Winterhold",
+"kind": "cave"
+},
+"Yorgrim Forest Spider Trap": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Yorgrim Overlook": {
+"hold": "The Pale",
+"kind": "house"
+},
+"Yorgrim Resurrection": {
+"hold": "The Pale",
+"kind": "landmark"
+},
+"Ysgramor's Tomb": {
+"hold": "Winterhold",
+"kind": "dungeon"
+},
+"Ysolda's House": {
+"hold": "Whiterun Hold",
+"kind": "house",
+"town": "Whiterun"
+}
+}
