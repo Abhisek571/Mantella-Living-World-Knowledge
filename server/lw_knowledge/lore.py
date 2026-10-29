@@ -168,7 +168,9 @@ def place_secrets(title, name, world):
 
 
 # Game-guide wording: what a player reads in a guide, never what people in the world know.
-_GUIDE_RE = re.compile(r"\b(can be found|is found|are found|is located|located (?:in|at|near)|the dragonborn|the player|"
+_GUIDE_RE = re.compile(r"\b(can be found|is found|are found|is located|located (?:in|at|near)|the (?:last )?dragonborn|the player|"
+                       # a guide's view of the story: who the player fights in the end
+                       r"(?:main|primary|supporting) antagonist|"
                        r"you can|quest|walkthrough|tutorial|console|wears?\b|wearing|carries|equipped|spells?\b|"
                        r"\d{1,2}\s?(?:am|pm)\b|schedule|sells?\b|buy|merchant|gold\b|septims?\b|level \d|in skyrim|dragon language|initially|depending on|if you|once you|after you|"
                        # room inventories and loot: what a guide lists, not what anyone talks about
@@ -188,8 +190,9 @@ def is_guide_text(sentence):
 _HIDDEN_JOBS = {"bandit", "thief", "necromancer", "vampire", "creature", "assassin", "cultist", "forsworn", "warlock"}
 # Minor places: one what-and-where line, known in their hold.
 MINOR = {"house", "store", "inn", "farm", "mine", "shack", "building", "dock", "guild", "temple", "shrine", "palace",
-         "military", "camp_military", "grove"}
+         "military", "camp_military", "grove", "ship", "monastery"}
 _KIND_WORD = {"store": "shop", "camp_military": "army camp", "military": "military post", "guild": "guild hall"}
+MINOR_TIED_LEVEL = 4  # a tie or the own town: known from outside even in another hold (Ivarstead and High Hrothgar)
 
 
 def people_line(title, listener):
@@ -214,9 +217,9 @@ def people_line(title, listener):
     return f"{title} is {'an' if job[0] in 'aeiou' else 'a'} {job} in {where}."
 
 
-def minor_line(art, listener):
+def minor_line(art, listener, level=0):
     hold = art.get("hold") or ""
-    if not hold or hold.lower() != (listener.get("hold") or "").lower():
+    if not hold or (hold.lower() != (listener.get("hold") or "").lower() and level < MINOR_TIED_LEVEL):
         return None
     kind = _KIND_WORD.get(art.get("place_kind"), art.get("place_kind") or "place").replace("_", " ")
     where = art.get("town") or hold
@@ -253,7 +256,7 @@ def lookup(text, npc_profile, budget=150, world=None, sent=None, db_path=None):
             if art["kind"] == "npc":
                 generated[a] = people_line(art["title"], profile)
             elif art["kind"] == "place" and art["place_kind"] in MINOR:
-                generated[a] = minor_line(art, profile)
+                generated[a] = minor_line(art, profile, levels[a])
         leads = {}
         cands = []
         for fid, aid, depth, inside, secret, era, ntok, ftext, rank in db.facts(arts, words):

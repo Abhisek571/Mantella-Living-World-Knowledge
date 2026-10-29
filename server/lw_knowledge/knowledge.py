@@ -81,7 +81,7 @@ PROFESSIONS = {
     "mercenary":    {"places": (FORT_KINDS | WILD_KINDS, "near"), "topics": {"war", "bandits"}},
     "miner":        {"places": ({"mine"}, "near"), "topics": {"mining"}},
     "farmer":       {"places": ({"farm"}, "near"), "topics": {"farming"}},
-    "sailor":       {"places": ({"dock", "port", "shipwreck"}, "all"), "topics": {"sea"}},
+    "sailor":       {"places": ({"dock", "port", "ship", "shipwreck"}, "all"), "topics": {"sea"}},
     "vampire":      {"places": (set(), "hold"), "topics": {"vampires"}},
     "necromancer":  {"places": ({"ruin", "dungeon"}, "near"), "topics": {"magic", "necromancy"}},
     "cultist":      {"places": ({"shrine"}, "all"), "topics": {"daedra"}},
@@ -94,7 +94,8 @@ TOPIC_FLOORS = {("courier", "roads"): 3, ("vampire", "vampires"): 4, ("monk", "t
 PROFESSION_ALIASES = {"steward": "court", "jarl": "court", "housecarl": "court", "thane": "court",
                       "noble": "court", "trader": "merchant", "shopkeeper": "merchant",
                       "fence": "thief", "assassin": "thief", "wizard": "mage",
-                      "greybeard": "monk", "legionnaire": "soldier", "stormcloak": "soldier"}
+                      "greybeard": "monk", "legionnaire": "soldier", "stormcloak": "soldier",
+                      "carriage_driver": "courier"}  # drives the roads between every hold
 
 # Topics: base level for an ordinary Skyrim local; era "4E" = recent events.
 TOPICS = {
@@ -423,7 +424,9 @@ def profile_for(name, race="", base_id=""):
         p = table.get(profile_key(name, race, bid))
         if p is None:
             lname = (name or "").strip().lower()
-            same = [v for v in table.values() if v.get("name", "").lower() == lname]
+            # Mantella names some rulers with their title ("Jarl Ulfric Stormcloak"); people ask without it
+            same = [v for v in table.values() if v.get("name", "").lower() == lname] or \
+                [v for v in table.values() if v.get("name", "").lower() == "jarl " + lname]
             exact = [v for v in same if bid and v.get("base_id") == bid]
             p = (exact or same or [None])[0] if len(exact or same) == 1 or exact else None
         return dict(p) if p else None

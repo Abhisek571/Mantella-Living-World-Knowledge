@@ -629,7 +629,7 @@
 },
 "Dainty Sload": {
 "hold": "Haafingar",
-"kind": "shipwreck"
+"kind": "ship"
 },
 "Dark Brotherhood Sanctuary": {
 "hold": "Falkreath Hold",
@@ -1566,7 +1566,7 @@
 },
 "High Hrothgar": {
 "hold": "Whiterun Hold",
-"kind": "fort"
+"kind": "monastery"
 },
 "Highmoon Hall": {
 "hold": "Hjaalmarch",
@@ -2273,7 +2273,7 @@
 },
 "Nightcaller Temple": {
 "hold": "The Pale",
-"kind": "fort"
+"kind": "temple"
 },
 "Nightgate Inn": {
 "hold": "The Pale",
@@ -2548,7 +2548,7 @@
 },
 "Red Wave": {
 "hold": "Haafingar",
-"kind": "shipwreck"
+"kind": "ship"
 },
 "Redbelly Mine": {
 "hold": "The Rift",
@@ -3164,7 +3164,7 @@
 },
 "Stendarr's Beacon": {
 "hold": "The Rift",
-"kind": "tower"
+"kind": "temple"
 },
 "Stillborn Cave": {
 "hold": "Winterhold",
@@ -3392,7 +3392,7 @@
 },
 "The Katariah": {
 "hold": "Haafingar",
-"kind": "shipwreck"
+"kind": "ship"
 },
 "The Lady Stone": {
 "hold": "Falkreath Hold",
@@ -3442,7 +3442,7 @@
 },
 "The North Wind": {
 "hold": "Eastmarch",
-"kind": "shipwreck"
+"kind": "ship"
 },
 "The Pale": {
 "hold": "The Pale",
@@ -3503,7 +3503,7 @@
 },
 "The Sea Squall": {
 "hold": "The Pale",
-"kind": "shipwreck",
+"kind": "ship",
 "town": "Dawnstar"
 },
 "The Serpent Stone": {
@@ -3800,7 +3800,7 @@
 },
 "Western Watchtower": {
 "hold": "Whiterun Hold",
-"kind": "fort"
+"kind": "military"
 },
 "Wet Bones": {
 "hold": "Winterhold",

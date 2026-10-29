@@ -79,7 +79,7 @@ class Knows(unittest.TestCase):
 
     def test_quest_list_for_world(self):
         data = json.load(open(self.quests_file, encoding="utf-8"))
-        self.assertEqual(data, {"stringList": {"quests": ["MQ104", "MQ105", "MS13"]}})
+        self.assertEqual(data, {"stringList": {"quests": ["MQ101", "MQ102", "MQ104", "MQ105", "MS13"]}})
 
     def test_later_block_replaces_earlier_one(self):
         # long_*.json redoes NPCs whose wiki text was cut in their batch; the later file wins

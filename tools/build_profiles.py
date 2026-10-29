@@ -107,6 +107,7 @@ NAME_RULES = [
     (r"\b(prisoner)\b", "commoner"), (r"\b(greybeard)\b", "monk"),
 ]
 FACTION_RULES = [
+    ("carriage system vendors", "carriage_driver"), ("ferry system vendors", "sailor"),
     ("jobjarl", "court"), ("jobsteward", "court"), ("housecarl", "court"),
     ("jobcourtwizard", "court_wizard"), ("jobinnkeeper", "innkeeper"), ("jobinnserver", "innkeeper"),
     ("jobapothecary", "alchemist"), ("jobblacksmith", "blacksmith"), ("jobmerchant", "merchant"),
@@ -137,7 +138,10 @@ CLASS_RULES = [
 SKILLED_TRAVEL = {"courier": "province", "caravan": "province", "soldier": "regional",
                   "mercenary": "regional", "hunter": "regional", "bard": "regional",
                   "adventurer": "regional", "bandit": "regional", "merchant": "home",
-                  "sailor": "province", "thief": "home"}
+                  "sailor": "province", "thief": "home", "carriage_driver": "province"}
+# Factions that only say who someone is friendly with ("BanditFriendFaction": bandits leave carriage drivers alone),
+# never what they are.
+FRIENDLY_FACTION = re.compile(r"friend")
 EDUCATION = {"court_wizard": 5, "scholar": 5, "mage": 4, "priest": 4, "monk": 4, "court": 4,
              "noble": 4, "necromancer": 4, "alchemist": 3, "merchant": 3, "innkeeper": 3,
              "bard": 3, "vampire": 3, "courier": 3, "blacksmith": 2, "soldier": 2, "guard": 2,
@@ -165,8 +169,26 @@ LOCAL_LANDMARKS = {
     "dawnstar": ["Nightcaller Temple"],
 }
 
-VERY_INSIDE_KINDS = {"house", "store", "inn", "palace", "temple", "guild", "building",
-                     "military", "farm", "shack"}
+# A place someone is tagged with in their own hold is where they live or work (a miner's mine, a Companion's hall, a
+# crew's ship), so they have been inside it; except places people keep out of.
+OUTSIDE_KINDS = {"dungeon", "cave", "fort", "camp", "nest", "giant_camp", "shipwreck", "tower", "hold",
+                 "region"}
+
+
+MEMBER_PLACES = {"east empire company", "the companions", "thieves guild"}  # tagged = works for it, wherever it is
+
+
+def been_inside(place, info, own_hold, home):
+    if info.get("kind") in OUTSIDE_KINDS:
+        return False
+    if place.lower() in MEMBER_PLACES or (home and (info.get("town") or "").lower() == home.lower()):
+        return True
+    hold = norm_hold(info.get("hold")) or settlement_of(info.get("town"))
+    if not own_hold:
+        return True  # nothing says they live anywhere else (the East Empire Company's dockworkers)
+    if hold:
+        return hold == own_hold
+    return bool(home) and place.lower().startswith(home.lower())  # "Raven Rock Mine" for Raven Rock
 
 
 def row_key(name, race, base_id):
@@ -286,7 +308,7 @@ def rule_profile(row, uesp_rec, places, rating=None):
     p["hold"] = hold if hold in HOLDS else None
 
     # profession
-    factions = " ".join(uesp_rec["factions"]) if uesp_rec else ""
+    factions = " ".join(f for f in uesp_rec["factions"] if not FRIENDLY_FACTION.search(f)) if uesp_rec else ""
     place_tags = [t for t in tags if not re.search(r"_(quest|status|updates|rank|chosen|left)$", t)]
     species = (row.get("species") or "").lower()
     prof = (first_rule(NAME_RULES, lname)
@@ -352,14 +374,11 @@ def rule_profile(row, uesp_rec, places, rating=None):
         pl = t.replace("_", " ")
         match = next((k for k in places if k.lower() == pl), None)
         if match and match.lower() != (home or "").lower():
-            kind = places[match].get("kind")
-            inside = kind in VERY_INSIDE_KINDS and (
-                norm_hold(places[match].get("hold")) == p["hold"])
+            inside = been_inside(match, places[match], p["hold"], home)
             add_tie(match, 5 if inside else 4, inside)
     for head in re.findall(r"^([A-Z][\w' -]{2,40}?) Information\s*:", bio, re.M):
         if head in places and head.lower() != (home or "").lower():
-            kind = places[head].get("kind")
-            inside = kind in VERY_INSIDE_KINDS and norm_hold(places[head].get("hold")) == p["hold"]
+            inside = been_inside(head, places[head], p["hold"], home)
             add_tie(head, 5 if inside else 4, inside)
     for lm in LOCAL_LANDMARKS.get((home or "").lower(), []):
         add_tie(lm, 4, False)
@@ -396,6 +415,13 @@ def apply_rating(profile, rating):
     return p
 
 
+def home_tie(tie, home):
+    """A tie to the NPC's own home (Delphine and Riverwood, Frea and Skaal Village): they have been inside it."""
+    if home and isinstance(tie.get("place"), str) and tie["place"].lower() == home.lower():
+        return dict(tie, level=5, inside=True)
+    return tie
+
+
 def _same_tie(a, b):
     for k in ("place", "topic", "npc"):
         if a.get(k) and b.get(k) and a[k].lower() == b[k].lower():
@@ -421,6 +447,7 @@ def build(csv_path, uesp_path, out_path, ratings_dir):
         if rated:
             prof = apply_rating(prof, ratings[key])
             stats["rated"] += 1
+        prof["ties"] = [home_tie(t, prof.get("home")) for t in prof.get("ties", [])]
         out[key] = {"name": row["name"].strip(), "race": row["race"].strip(),
                     "base_id": row["base_id"].strip().upper(), "rated": rated, **prof}
     stats["keys"] = len(out)

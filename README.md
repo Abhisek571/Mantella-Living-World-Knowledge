@@ -25,12 +25,13 @@ Rules: own town 4, own hold 3, neighbouring hold 2, far 1; profession bonus +1 (
 
 Limits: profiles cover about 3,100 vanilla NPCs only. An NPC whose name matches more than one profile and has no matching base id gets none. Modded NPCs get no Knowledge block. In group talks the lore budget is shared between the NPCs and at most 3 named articles are used per reply. Knowledge removes lines from an NPC's bio that describe quest stages ("If...", "Once...", "After..."), so they do not contradict the knowledge block. Mantella's own files are not changed.
 
-Settings: the Hub's "Knowledge mode" is off, profiles only, or profiles and lore. The Hub's Status tab warns when the lore database is missing.
+Settings: the Hub's "Knowledge mode" is off, profiles only, or profiles and lore. Living World Main Status warns when the lore database is missing.
 
 Requires:
 - [Mantella Living World - Integration Hub](https://github.com/Abhisek571/Mantella-Living-World-Hub), [Mantella](https://www.nexusmods.com/skyrimspecialedition/mods/98631) 0.14 and [Mantella - Direct AI Connect](https://github.com/Abhisek571/Mantella-Anthropic-API).
 - SKSE and PapyrusUtil (for the map markers). SKSE_HTTP comes with Mantella.
-- Mantella must run with `SKSE/Plugins/MantellaSoftware` as its working folder. Under Mod Organizer 2 it must be started so it can see the game's `StorageUtilData/MantellaLivingWorld` files.
+- The plugin `Mantella Living World - Knowledge.esp` enabled.
+- Let the game start Mantella as usual through MO2. If you start Mantella.exe yourself, start it from MO2's executables list, or it cannot see the game's files.
 - Mantella's Advanced Actions on (Actions tab of Mantella's settings) for MarkOnMap.
 
 Optional:

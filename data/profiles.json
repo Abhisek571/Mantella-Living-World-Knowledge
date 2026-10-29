@@ -320,7 +320,7 @@
 "era": "current",
 "hold": "Eastmarch",
 "home": "Windhelm",
-"lines": "Identity: Adelaisa Vendicci is a local in Windhelm, Eastmarch, from Cyrodiil; rarely leaves Windhelm.\nAdelaisa Vendicci has never been inside East Empire Company.",
+"lines": "Identity: Adelaisa Vendicci is a local in Windhelm, Eastmarch, from Cyrodiil; rarely leaves Windhelm.",
 "name": "Adelaisa Vendicci",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -330,8 +330,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 }
 ],
@@ -560,7 +560,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Aela the Huntress is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.\nAela the Huntress has never been inside The Companions.",
+"lines": "Identity: Aela the Huntress is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.",
 "name": "Aela the Huntress",
 "observation": 3,
 "origin_province": "Skyrim",
@@ -570,8 +570,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 },
 {
@@ -1485,7 +1485,7 @@
 "origin_province": "High Rock",
 "profession": "bandit",
 "race": "Breton",
-"rated": false,
+"rated": true,
 "standing": "low",
 "ties": [],
 "travel": "regional"
@@ -2009,18 +2009,18 @@
 },
 "Alfarinn|Nord|09B7AB": {
 "base_id": "09B7AB",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "Eastmarch",
 "home": "Windhelm",
-"lines": "Identity: Alfarinn is a bandit in Windhelm, Eastmarch; travels around Eastmarch.",
+"lines": "Identity: Alfarinn is a carriage driver in Windhelm, Eastmarch; travels all over Skyrim.",
 "name": "Alfarinn",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "carriage_driver",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [
 {
 "inside": true,
@@ -2028,7 +2028,7 @@
 "place": "Windhelm Stables"
 }
 ],
-"travel": "regional"
+"travel": "province"
 },
 "Alfhild Battle-Born|Nord|013BB0": {
 "base_id": "013BB0",
@@ -2876,7 +2876,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Angvid is a miner in Skyrim.\nAngvid has never been inside Whistling Mine.",
+"lines": "Identity: Angvid is a miner in Skyrim.",
 "name": "Angvid",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -2886,8 +2886,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Whistling Mine"
 }
 ],
@@ -4559,7 +4559,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Athis is a mercenary in Whiterun, Whiterun Hold, from Morrowind; travels around Whiterun Hold.\nAthis has never been inside The Companions.",
+"lines": "Identity: Athis is a mercenary in Whiterun, Whiterun Hold, from Morrowind; travels around Whiterun Hold.",
 "name": "Athis",
 "observation": 2,
 "origin_province": "Morrowind",
@@ -4569,8 +4569,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 }
 ],
@@ -4752,7 +4752,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Aurora is a local in Whiterun, Whiterun Hold; rarely leaves Whiterun.\nAurora has never been inside The Companions.",
+"lines": "Identity: Aurora is a local in Whiterun, Whiterun Hold; rarely leaves Whiterun.",
 "name": "Aurora",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -4762,8 +4762,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 }
 ],
@@ -4849,13 +4849,13 @@
 "era": "current",
 "hold": "Eastmarch",
 "home": "Windhelm",
-"lines": "Identity: Aventus Aretino is a child in Windhelm, Eastmarch; rarely leaves Windhelm.\nAventus Aretino has never been inside Honorhall Orphanage.",
+"lines": "Identity: Aventus Aretino is a child in Windhelm, Eastmarch; rarely leaves Windhelm.",
 "name": "Aventus Aretino",
 "observation": 2,
 "origin_province": "Skyrim",
 "profession": "child",
 "race": "Nord",
-"rated": false,
+"rated": true,
 "standing": "common",
 "ties": [
 {
@@ -4864,8 +4864,8 @@
 "place": "Aretino Residence"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Honorhall Orphanage"
 }
 ],
@@ -4911,7 +4911,7 @@
 "era": "current",
 "hold": "The Rift",
 "home": null,
-"lines": "Identity: Avrusa Sarethi is an alchemist in The Rift, from Morrowind.\nAvrusa Sarethi has never been inside Sarethi Farm.",
+"lines": "Identity: Avrusa Sarethi is an alchemist in The Rift, from Morrowind.",
 "name": "Avrusa Sarethi",
 "observation": 2,
 "origin_province": "Morrowind",
@@ -4921,8 +4921,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Sarethi Farm"
 }
 ],
@@ -5162,7 +5162,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Badnir is a local in Skyrim.\nBadnir has never been inside Whistling Mine.",
+"lines": "Identity: Badnir is a local in Skyrim.",
 "name": "Badnir",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -5172,8 +5172,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Whistling Mine"
 }
 ],
@@ -7125,7 +7125,7 @@
 "era": "current",
 "hold": "The Rift",
 "home": "Ivarstead",
-"lines": "Identity: Bassianus Axius is a sailor in Ivarstead, The Rift; rarely leaves Ivarstead.\nBassianus Axius has never been inside Ivarstead.",
+"lines": "Identity: Bassianus Axius is a sailor in Ivarstead, The Rift; rarely leaves Ivarstead.",
 "name": "Bassianus Axius",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -7140,8 +7140,8 @@
 "place": "Klimmek's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Ivarstead"
 }
 ],
@@ -7425,7 +7425,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Beitild is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nBeitild has never been inside Iron-Breaker Mine, Nightcaller Temple.",
+"lines": "Identity: Beitild is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nBeitild has never been inside Nightcaller Temple.",
 "name": "Beitild",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -7440,8 +7440,8 @@
 "place": "Beitild's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Iron-Breaker Mine"
 },
 {
@@ -7538,7 +7538,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Bella is a local in Whiterun, Whiterun Hold; rarely leaves Whiterun.\nBella has never been inside The Companions.",
+"lines": "Identity: Bella is a local in Whiterun, Whiterun Hold; rarely leaves Whiterun.",
 "name": "Bella",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -7548,8 +7548,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 }
 ],
@@ -8171,18 +8171,18 @@
 },
 "Bjorlam|Nord|013669": {
 "base_id": "013669",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Bjorlam is a bandit in Whiterun, Whiterun Hold; travels around Whiterun Hold.",
+"lines": "Identity: Bjorlam is a carriage driver in Whiterun, Whiterun Hold; travels all over Skyrim.",
 "name": "Bjorlam",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "carriage_driver",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [
 {
 "inside": true,
@@ -8190,7 +8190,7 @@
 "place": "Whiterun Stables"
 }
 ],
-"travel": "regional"
+"travel": "province"
 },
 "Bjornolfr|Nord|02B236": {
 "base_id": "02B236",
@@ -8499,7 +8499,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Bodil is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nBodil has never been inside Iron-Breaker Mine, Nightcaller Temple.",
+"lines": "Identity: Bodil is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nBodil has never been inside Nightcaller Temple.",
 "name": "Bodil",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -8509,8 +8509,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Iron-Breaker Mine"
 },
 {
@@ -8738,7 +8738,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Borgny is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nBorgny has never been inside Quicksilver Mine, Nightcaller Temple.",
+"lines": "Identity: Borgny is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nBorgny has never been inside Nightcaller Temple.",
 "name": "Borgny",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -8748,8 +8748,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Quicksilver Mine"
 },
 {
@@ -9128,7 +9128,7 @@
 "era": "current",
 "hold": "Solstheim",
 "home": "Raven Rock",
-"lines": "Identity: Bralsa Drel is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.\nBralsa Drel has never been inside Raven Rock Mine.",
+"lines": "Identity: Bralsa Drel is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.",
 "name": "Bralsa Drel",
 "observation": 2,
 "origin_province": "Morrowind",
@@ -9143,8 +9143,8 @@
 "place": "Abandoned Building"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Raven Rock Mine"
 }
 ],
@@ -9361,7 +9361,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Brill is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.\nBrill has never been inside The Companions.",
+"lines": "Identity: Brill is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.",
 "name": "Brill",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -9371,8 +9371,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 }
 ],
@@ -13273,7 +13273,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Riverwood",
-"lines": "Identity: Delphine is an innkeeper in Riverwood, Whiterun Hold, from High Rock; travels around Whiterun Hold.\nDelphine has never been inside Riverwood, Bleak Falls Barrow.",
+"lines": "Identity: Delphine is an innkeeper in Riverwood, Whiterun Hold, from High Rock; travels around Whiterun Hold.\nDelphine has never been inside Bleak Falls Barrow.",
 "name": "Delphine",
 "observation": 3,
 "origin_province": "High Rock",
@@ -13283,8 +13283,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Riverwood"
 },
 {
@@ -13902,7 +13902,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: Dorian is a sailor in Solitude, Haafingar, from High Rock; travels all over Skyrim.\nDorian has never been inside Red Wave.",
+"lines": "Identity: Dorian is a sailor in Solitude, Haafingar, from High Rock; travels all over Skyrim.",
 "name": "Dorian",
 "observation": 2,
 "origin_province": "High Rock",
@@ -13912,8 +13912,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Red Wave"
 }
 ],
@@ -14078,7 +14078,7 @@
 "era": "current",
 "hold": "Eastmarch",
 "home": "Kynesgrove",
-"lines": "Identity: Dravynea the Stoneweaver is a mage in Kynesgrove, Eastmarch, from Morrowind; rarely leaves Kynesgrove.\nDravynea the Stoneweaver has never been inside Steamscorch Mine.",
+"lines": "Identity: Dravynea the Stoneweaver is a mage in Kynesgrove, Eastmarch, from Morrowind; rarely leaves Kynesgrove.",
 "name": "Dravynea the Stoneweaver",
 "observation": 3,
 "origin_province": "Morrowind",
@@ -14088,8 +14088,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Steamscorch Mine"
 },
 {
@@ -14715,7 +14715,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: East Empire Dockmaster is a local in Solitude, Haafingar, from Cyrodiil; rarely leaves Solitude.\nEast Empire Dockmaster has never been inside East Empire Company, Warehouse.",
+"lines": "Identity: East Empire Dockmaster is a local in Solitude, Haafingar, from Cyrodiil; rarely leaves Solitude.\nEast Empire Dockmaster has never been inside Warehouse.",
 "name": "East Empire Dockmaster",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -14725,8 +14725,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 },
 {
@@ -14743,7 +14743,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": null,
-"lines": "Identity: East Empire Dockworker is a sailor in Haafingar, from High Rock; travels all over Skyrim.\nEast Empire Dockworker has never been inside East Empire Company.",
+"lines": "Identity: East Empire Dockworker is a sailor in Haafingar, from High Rock; travels all over Skyrim.",
 "name": "East Empire Dockworker",
 "observation": 2,
 "origin_province": "High Rock",
@@ -14753,8 +14753,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 }
 ],
@@ -14766,7 +14766,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": null,
-"lines": "Identity: East Empire Dockworker is a sailor in Haafingar; travels all over Skyrim.\nEast Empire Dockworker has never been inside East Empire Company.",
+"lines": "Identity: East Empire Dockworker is a sailor in Haafingar; travels all over Skyrim.",
 "name": "East Empire Dockworker",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -14776,8 +14776,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 }
 ],
@@ -14812,7 +14812,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: East Empire Warden is a guard in Solitude, Haafingar; rarely leaves Solitude.\nEast Empire Warden has never been inside East Empire Company.",
+"lines": "Identity: East Empire Warden is a guard in Solitude, Haafingar; rarely leaves Solitude.",
 "name": "East Empire Warden",
 "observation": 3,
 "origin_province": "Skyrim",
@@ -14822,8 +14822,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 }
 ],
@@ -14926,7 +14926,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Edith is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nEdith has never been inside Quicksilver Mine, Nightcaller Temple.",
+"lines": "Identity: Edith is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nEdith has never been inside Nightcaller Temple.",
 "name": "Edith",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -14936,8 +14936,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Quicksilver Mine"
 },
 {
@@ -16150,20 +16150,20 @@
 },
 "Engar|Nord|00BE12": {
 "base_id": "00BE12",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "Hjaalmarch",
 "home": "Windstad Manor",
-"lines": "Identity: Engar is a bandit in Windstad Manor, Hjaalmarch; travels around Hjaalmarch.",
+"lines": "Identity: Engar is a carriage driver in Windstad Manor, Hjaalmarch; travels all over Skyrim.",
 "name": "Engar",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "carriage_driver",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [],
-"travel": "regional"
+"travel": "province"
 },
 "Enlir Ninzur|Nord|": {
 "base_id": "",
@@ -16388,7 +16388,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Eorlund Gray-Mane is a blacksmith in Whiterun, Whiterun Hold; rarely leaves Whiterun.\nEorlund Gray-Mane has never been inside The Companions.",
+"lines": "Identity: Eorlund Gray-Mane is a blacksmith in Whiterun, Whiterun Hold; rarely leaves Whiterun.",
 "name": "Eorlund Gray-Mane",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -16408,8 +16408,8 @@
 "place": "House Gray-Mane"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 }
 ],
@@ -16421,18 +16421,18 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Erandur is a priest in Dawnstar, The Pale, from Morrowind; rarely leaves Dawnstar.\nErandur has never been inside Nightcaller Temple.",
+"lines": "Identity: Erandur is a priest in Dawnstar, The Pale, from Morrowind; rarely leaves Dawnstar.",
 "name": "Erandur",
 "observation": 2,
 "origin_province": "Morrowind",
 "profession": "priest",
 "race": "Dunmer",
-"rated": false,
+"rated": true,
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Nightcaller Temple"
 }
 ],
@@ -16807,7 +16807,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: Eris is a sailor in Solitude, Haafingar; travels all over Skyrim.\nEris has never been inside Red Wave.",
+"lines": "Identity: Eris is a sailor in Solitude, Haafingar; travels all over Skyrim.",
 "name": "Eris",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -16817,8 +16817,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Red Wave"
 }
 ],
@@ -17482,7 +17482,7 @@
 "era": "current",
 "hold": "Solstheim",
 "home": "Raven Rock",
-"lines": "Identity: Evul Seloth is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.\nEvul Seloth has never been inside Raven Rock Mine.",
+"lines": "Identity: Evul Seloth is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.",
 "name": "Evul Seloth",
 "observation": 2,
 "origin_province": "Morrowind",
@@ -17492,8 +17492,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Raven Rock Mine"
 }
 ],
@@ -17999,7 +17999,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Farkas is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.\nFarkas has never been inside The Companions.",
+"lines": "Identity: Farkas is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.",
 "name": "Farkas",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -18009,8 +18009,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 },
 {
@@ -18525,7 +18525,7 @@
 "era": "current",
 "hold": "Solstheim",
 "home": "Raven Rock",
-"lines": "Identity: Fethis Alor is a merchant in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.\nFethis Alor has never been inside East Empire Company.",
+"lines": "Identity: Fethis Alor is a merchant in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.",
 "name": "Fethis Alor",
 "observation": 2,
 "origin_province": "Morrowind",
@@ -18540,8 +18540,8 @@
 "place": "Alor House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 }
 ],
@@ -18672,7 +18672,7 @@
 "era": "current",
 "hold": "The Rift",
 "home": "Shor's Stone",
-"lines": "Identity: Filnjar is a blacksmith in Shor's Stone, The Rift; rarely leaves Shor's Stone.\nFilnjar has never been inside Redbelly Mine.",
+"lines": "Identity: Filnjar is a blacksmith in Shor's Stone, The Rift; rarely leaves Shor's Stone.",
 "name": "Filnjar",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -18687,8 +18687,8 @@
 "place": "Filnjar's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Redbelly Mine"
 }
 ],
@@ -18995,7 +18995,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Fjotra is a child in Skyrim.\nFjotra has never been inside Temple of Dibella.",
+"lines": "Identity: Fjotra is a child in Skyrim.",
 "name": "Fjotra",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -19005,8 +19005,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Temple of Dibella"
 }
 ],
@@ -19461,7 +19461,7 @@
 "era": "current",
 "hold": "Solstheim",
 "home": "Skaal Village",
-"lines": "Identity: Frea is a hunter in Skaal Village, Solstheim; travels around Solstheim.\nFrea has never been inside Skaal Village.",
+"lines": "Identity: Frea is a hunter in Skaal Village, Solstheim; travels around Solstheim.",
 "name": "Frea",
 "observation": 3,
 "origin_province": "Skyrim",
@@ -19476,8 +19476,8 @@
 "place": "Shaman's Hut"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Skaal Village"
 },
 {
@@ -20050,7 +20050,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Fruki is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nFruki has never been inside Quicksilver Mine, Nightcaller Temple.",
+"lines": "Identity: Fruki is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nFruki has never been inside Nightcaller Temple.",
 "name": "Fruki",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -20065,8 +20065,8 @@
 "place": "Fruki's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Quicksilver Mine"
 },
 {
@@ -20554,7 +20554,7 @@
 "era": "current",
 "hold": "Eastmarch",
 "home": "Kynesgrove",
-"lines": "Identity: Ganna Uriel is a laborer in Kynesgrove, Eastmarch, from Cyrodiil; rarely leaves Kynesgrove.\nGanna Uriel has never been inside Steamscorch Mine.",
+"lines": "Identity: Ganna Uriel is a laborer in Kynesgrove, Eastmarch, from Cyrodiil; rarely leaves Kynesgrove.",
 "name": "Ganna Uriel",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -20564,8 +20564,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Steamscorch Mine"
 }
 ],
@@ -21056,7 +21056,7 @@
 "era": "current",
 "hold": "Eastmarch",
 "home": "Kynesgrove",
-"lines": "Identity: Gemma Uriel is a laborer in Kynesgrove, Eastmarch, from Cyrodiil; rarely leaves Kynesgrove.\nGemma Uriel has never been inside Steamscorch Mine.",
+"lines": "Identity: Gemma Uriel is a laborer in Kynesgrove, Eastmarch, from Cyrodiil; rarely leaves Kynesgrove.",
 "name": "Gemma Uriel",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -21066,8 +21066,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Steamscorch Mine"
 }
 ],
@@ -21520,7 +21520,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Gianna Petrus is a local in Dawnstar, The Pale, from Cyrodiil; rarely leaves Dawnstar.\nGianna Petrus has never been inside East Empire Company, Nightcaller Temple.",
+"lines": "Identity: Gianna Petrus is a local in Dawnstar, The Pale, from Cyrodiil; rarely leaves Dawnstar.\nGianna Petrus has never been inside Nightcaller Temple.",
 "name": "Gianna Petrus",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -21530,8 +21530,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 },
 {
@@ -21883,7 +21883,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Gjak is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nGjak has never been inside Iron-Breaker Mine, Nightcaller Temple.",
+"lines": "Identity: Gjak is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nGjak has never been inside Nightcaller Temple.",
 "name": "Gjak",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -21893,8 +21893,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Iron-Breaker Mine"
 },
 {
@@ -22231,20 +22231,20 @@
 },
 "Gort|Nord|01684F": {
 "base_id": "01684F",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "Eastmarch",
 "home": "Windhelm",
-"lines": "Identity: Gort is a bandit in Windhelm, Eastmarch; travels around Eastmarch.",
+"lines": "Identity: Gort is a sailor in Windhelm, Eastmarch; travels all over Skyrim.",
 "name": "Gort",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "sailor",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [],
-"travel": "regional"
+"travel": "province"
 },
 "Gralnach|Nord|019C01": {
 "base_id": "019C01",
@@ -22303,7 +22303,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Gregor is a member of the court in Dawnstar, The Pale; rarely leaves Dawnstar.\nGregor has never been inside Heljarchen Hall, Nightcaller Temple.",
+"lines": "Identity: Gregor is a member of the court in Dawnstar, The Pale; rarely leaves Dawnstar.\nGregor has never been inside Nightcaller Temple.",
 "name": "Gregor",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -22313,8 +22313,8 @@
 "standing": "high",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Heljarchen Hall"
 },
 {
@@ -22615,7 +22615,7 @@
 "era": "current",
 "hold": "The Rift",
 "home": "Shor's Stone",
-"lines": "Identity: Grogmar gro-Burzag is a miner in Shor's Stone, The Rift; rarely leaves Shor's Stone.\nGrogmar gro-Burzag has never been inside Redbelly Mine.",
+"lines": "Identity: Grogmar gro-Burzag is a miner in Shor's Stone, The Rift; rarely leaves Shor's Stone.",
 "name": "Grogmar gro-Burzag",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -22630,8 +22630,8 @@
 "place": "Odfel's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Redbelly Mine"
 }
 ],
@@ -22989,7 +22989,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Gunding is a miner in Skyrim.\nGunding has never been inside Whistling Mine.",
+"lines": "Identity: Gunding is a miner in Skyrim.",
 "name": "Gunding",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -22999,8 +22999,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Whistling Mine"
 }
 ],
@@ -23008,20 +23008,20 @@
 },
 "Gunjar|Nord|0032B0": {
 "base_id": "0032B0",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "Falkreath Hold",
 "home": "Lakeview Manor",
-"lines": "Identity: Gunjar is a bandit in Lakeview Manor, Falkreath Hold; travels around Falkreath Hold.",
+"lines": "Identity: Gunjar is a carriage driver in Lakeview Manor, Falkreath Hold; travels all over Skyrim.",
 "name": "Gunjar",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "carriage_driver",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [],
-"travel": "regional"
+"travel": "province"
 },
 "Gunmar|Nord|00336C": {
 "base_id": "00336C",
@@ -23794,7 +23794,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Hana is a priest in Skyrim.\nHana has never been inside Temple of Kynareth.",
+"lines": "Identity: Hana is a priest in Skyrim.",
 "name": "Hana",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -23804,8 +23804,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Temple of Kynareth"
 }
 ],
@@ -23834,7 +23834,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Harald is a local in Dawnstar, The Pale; rarely leaves Dawnstar.\nHarald has never been inside Quicksilver Mine, Nightcaller Temple.",
+"lines": "Identity: Harald is a local in Dawnstar, The Pale; rarely leaves Dawnstar.\nHarald has never been inside Nightcaller Temple.",
 "name": "Harald",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -23844,8 +23844,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Quicksilver Mine"
 },
 {
@@ -23881,18 +23881,18 @@
 },
 "Harlaug|Nord|01684E": {
 "base_id": "01684E",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Harlaug is a bandit in Dawnstar, The Pale; travels around The Pale.\nHarlaug has never been inside Nightcaller Temple.",
+"lines": "Identity: Harlaug is a sailor in Dawnstar, The Pale; travels all over Skyrim.\nHarlaug has never been inside Nightcaller Temple.",
 "name": "Harlaug",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "sailor",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [
 {
 "inside": false,
@@ -23900,7 +23900,7 @@
 "place": "Nightcaller Temple"
 }
 ],
-"travel": "regional"
+"travel": "province"
 },
 "Harrald|Nord|013361": {
 "base_id": "013361",
@@ -24191,7 +24191,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": null,
-"lines": "Identity: Heidi is an innkeeper in Whiterun Hold.\nHeidi has never been inside Honningbrew Meadery.",
+"lines": "Identity: Heidi is an innkeeper in Whiterun Hold.",
 "name": "Heidi",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -24201,8 +24201,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Honningbrew Meadery"
 }
 ],
@@ -27947,7 +27947,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Irgnir is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nIrgnir has never been inside Iron-Breaker Mine, Nightcaller Temple.",
+"lines": "Identity: Irgnir is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nIrgnir has never been inside Nightcaller Temple.",
 "name": "Irgnir",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -27962,8 +27962,8 @@
 "place": "Irgnir's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Iron-Breaker Mine"
 },
 {
@@ -29746,20 +29746,20 @@
 },
 "Jolf|Nord|01684D": {
 "base_id": "01684D",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: Jolf is a bandit in Solitude, Haafingar; travels around Haafingar.",
+"lines": "Identity: Jolf is a sailor in Solitude, Haafingar; travels all over Skyrim.",
 "name": "Jolf",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "sailor",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [],
-"travel": "regional"
+"travel": "province"
 },
 "Jollsen|Nord|158FFC": {
 "base_id": "158FFC",
@@ -30899,7 +30899,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Karl is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nKarl has never been inside Iron-Breaker Mine, Nightcaller Temple.",
+"lines": "Identity: Karl is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nKarl has never been inside Nightcaller Temple.",
 "name": "Karl",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -30909,8 +30909,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Iron-Breaker Mine"
 },
 {
@@ -31514,18 +31514,18 @@
 },
 "Kibell|Nord|03F21E": {
 "base_id": "03F21E",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "The Reach",
 "home": "Markarth",
-"lines": "Identity: Kibell is a bandit in Markarth, The Reach; travels around The Reach.",
+"lines": "Identity: Kibell is a carriage driver in Markarth, The Reach; travels all over Skyrim.",
 "name": "Kibell",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "carriage_driver",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [
 {
 "inside": true,
@@ -31533,7 +31533,7 @@
 "place": "Markarth Stables"
 }
 ],
-"travel": "regional"
+"travel": "province"
 },
 "Kilthinius Dandoril|Imperial|120328": {
 "base_id": "120328",
@@ -31723,7 +31723,7 @@
 "era": "current",
 "hold": "Eastmarch",
 "home": "Kynesgrove",
-"lines": "Identity: Kjeld is a miner in Kynesgrove, Eastmarch; rarely leaves Kynesgrove.\nKjeld has never been inside Steamscorch Mine.",
+"lines": "Identity: Kjeld is a miner in Kynesgrove, Eastmarch; rarely leaves Kynesgrove.",
 "name": "Kjeld",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -31738,8 +31738,8 @@
 "place": "Braidwood Inn"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Steamscorch Mine"
 }
 ],
@@ -31971,7 +31971,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Kodlak Whitemane is a mercenary in Whiterun, Whiterun Hold; rarely leaves Whiterun.\nKodlak Whitemane has never been inside The Companions.",
+"lines": "Identity: Kodlak Whitemane is a mercenary in Whiterun, Whiterun Hold; rarely leaves Whiterun.",
 "name": "Kodlak Whitemane",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -31981,8 +31981,8 @@
 "standing": "high",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 },
 {
@@ -32306,7 +32306,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Morthal",
-"lines": "Identity: Krissa is a local in Morthal, The Pale, from Cyrodiil; rarely leaves Morthal.\nKrissa has never been inside Moorside Inn.",
+"lines": "Identity: Krissa is a local in Morthal, The Pale, from Cyrodiil; rarely leaves Morthal.",
 "name": "Krissa",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -32316,8 +32316,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Moorside Inn"
 }
 ],
@@ -33324,7 +33324,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Leigelf is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nLeigelf has never been inside Quicksilver Mine, Nightcaller Temple.",
+"lines": "Identity: Leigelf is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nLeigelf has never been inside Nightcaller Temple.",
 "name": "Leigelf",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -33339,8 +33339,8 @@
 "place": "Leigelf's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Quicksilver Mine"
 },
 {
@@ -33767,7 +33767,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": null,
-"lines": "Identity: Lilia is a local in Whiterun Hold.\nLilia has never been inside Honningbrew Meadery.",
+"lines": "Identity: Lilia is a local in Whiterun Hold.",
 "name": "Lilia",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -33777,8 +33777,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Honningbrew Meadery"
 }
 ],
@@ -33967,7 +33967,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": null,
-"lines": "Identity: Lindyth is a bard in Whiterun Hold, from Cyrodiil.\nLindyth has never been inside Honningbrew Meadery.",
+"lines": "Identity: Lindyth is a bard in Whiterun Hold, from Cyrodiil.",
 "name": "Lindyth",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -33977,8 +33977,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Honningbrew Meadery"
 }
 ],
@@ -34468,7 +34468,7 @@
 "era": "current",
 "hold": "The Pale",
 "home": "Dawnstar",
-"lines": "Identity: Lond is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nLond has never been inside Quicksilver Mine, Nightcaller Temple.",
+"lines": "Identity: Lond is a miner in Dawnstar, The Pale; rarely leaves Dawnstar.\nLond has never been inside Nightcaller Temple.",
 "name": "Lond",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -34478,8 +34478,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Quicksilver Mine"
 },
 {
@@ -36277,7 +36277,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": null,
-"lines": "Identity: Maria is an innkeeper in Whiterun Hold.\nMaria has never been inside Honningbrew Meadery.",
+"lines": "Identity: Maria is an innkeeper in Whiterun Hold.",
 "name": "Maria",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -36287,8 +36287,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Honningbrew Meadery"
 }
 ],
@@ -36426,20 +36426,20 @@
 },
 "Markus|Nord|010FBA": {
 "base_id": "010FBA",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "The Pale",
 "home": "Heljarchen Hall",
-"lines": "Identity: Markus is a bandit in Heljarchen Hall, The Pale; travels around The Pale.",
+"lines": "Identity: Markus is a carriage driver in Heljarchen Hall, The Pale; travels all over Skyrim.",
 "name": "Markus",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "carriage_driver",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [],
-"travel": "regional"
+"travel": "province"
 },
 "Marla|Nord|8705CA": {
 "base_id": "8705CA",
@@ -36878,7 +36878,7 @@
 "era": "current",
 "hold": "Solstheim",
 "home": "Raven Rock",
-"lines": "Identity: Meden Maren is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.\nMeden Maren has never been inside Raven Rock Mine.",
+"lines": "Identity: Meden Maren is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.",
 "name": "Meden Maren",
 "observation": 2,
 "origin_province": "Morrowind",
@@ -36888,8 +36888,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Raven Rock Mine"
 }
 ],
@@ -39457,7 +39457,7 @@
 "era": "current",
 "hold": "Solstheim",
 "home": "Raven Rock",
-"lines": "Identity: Naris Mavani is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.\nNaris Mavani has never been inside Raven Rock Mine.",
+"lines": "Identity: Naris Mavani is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.",
 "name": "Naris Mavani",
 "observation": 2,
 "origin_province": "Morrowind",
@@ -39467,8 +39467,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Raven Rock Mine"
 }
 ],
@@ -40583,7 +40583,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Njada Stonearm is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.\nNjada Stonearm has never been inside The Companions.",
+"lines": "Identity: Njada Stonearm is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.",
 "name": "Njada Stonearm",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -40593,8 +40593,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 },
 {
@@ -41135,7 +41135,7 @@
 "era": "current",
 "hold": "The Rift",
 "home": "Shor's Stone",
-"lines": "Identity: Odfel is a miner in Shor's Stone, The Rift; rarely leaves Shor's Stone.\nOdfel has never been inside Redbelly Mine.",
+"lines": "Identity: Odfel is a miner in Shor's Stone, The Rift; rarely leaves Shor's Stone.",
 "name": "Odfel",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -41150,8 +41150,8 @@
 "place": "Odfel's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Redbelly Mine"
 }
 ],
@@ -42143,7 +42143,7 @@
 "era": "current",
 "hold": "Eastmarch",
 "home": "Windhelm",
-"lines": "Identity: Orthus Endario is a merchant in Windhelm, Eastmarch, from Cyrodiil; rarely leaves Windhelm.\nOrthus Endario has never been inside East Empire Company.",
+"lines": "Identity: Orthus Endario is a merchant in Windhelm, Eastmarch, from Cyrodiil; rarely leaves Windhelm.",
 "name": "Orthus Endario",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -42153,8 +42153,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 }
 ],
@@ -42454,7 +42454,7 @@
 "era": "current",
 "hold": "Solstheim",
 "home": "Raven Rock",
-"lines": "Identity: Patrizia is a miner in Raven Rock, Solstheim; rarely leaves Raven Rock.\nPatrizia has never been inside Raven Rock Mine.",
+"lines": "Identity: Patrizia is a miner in Raven Rock, Solstheim; rarely leaves Raven Rock.",
 "name": "Patrizia",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -42464,8 +42464,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Raven Rock Mine"
 }
 ],
@@ -43841,7 +43841,7 @@
 "era": "current",
 "hold": "Falkreath Hold",
 "home": "Falkreath",
-"lines": "Identity: Rayya is a member of the court in Falkreath, Falkreath Hold, from Hammerfell; rarely leaves Falkreath.\nRayya has never been inside Lakeview Manor.",
+"lines": "Identity: Rayya is a member of the court in Falkreath, Falkreath Hold, from Hammerfell; rarely leaves Falkreath.",
 "name": "Rayya",
 "observation": 2,
 "origin_province": "Hammerfell",
@@ -43851,8 +43851,8 @@
 "standing": "high",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Lakeview Manor"
 }
 ],
@@ -45066,7 +45066,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Ria is a mercenary in Whiterun, Whiterun Hold, from Cyrodiil; travels around Whiterun Hold.\nRia has never been inside The Companions.",
+"lines": "Identity: Ria is a mercenary in Whiterun, Whiterun Hold, from Cyrodiil; travels around Whiterun Hold.",
 "name": "Ria",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -45076,8 +45076,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 },
 {
@@ -45423,7 +45423,7 @@
 "era": "current",
 "hold": "Solstheim",
 "home": "Raven Rock",
-"lines": "Identity: Rirns Llervu is a beggar in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.\nRirns Llervu has never been inside Raven Rock Mine.",
+"lines": "Identity: Rirns Llervu is a beggar in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.",
 "name": "Rirns Llervu",
 "observation": 2,
 "origin_province": "Morrowind",
@@ -45433,8 +45433,8 @@
 "standing": "low",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Raven Rock Mine"
 }
 ],
@@ -45605,7 +45605,7 @@
 "era": "current",
 "hold": "Eastmarch",
 "home": "Kynesgrove",
-"lines": "Identity: Roggi Knot-Beard is a miner in Kynesgrove, Eastmarch, from Cyrodiil; rarely leaves Kynesgrove.\nRoggi Knot-Beard has never been inside Steamscorch Mine.",
+"lines": "Identity: Roggi Knot-Beard is a miner in Kynesgrove, Eastmarch, from Cyrodiil; rarely leaves Kynesgrove.",
 "name": "Roggi Knot-Beard",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -45615,8 +45615,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Steamscorch Mine"
 },
 {
@@ -46581,7 +46581,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: Sabine Nytte is a local in Solitude, Haafingar, from High Rock; rarely leaves Solitude.\nSabine Nytte has never been inside Red Wave.",
+"lines": "Identity: Sabine Nytte is a local in Solitude, Haafingar, from High Rock; rarely leaves Solitude.",
 "name": "Sabine Nytte",
 "observation": 2,
 "origin_province": "High Rock",
@@ -46591,8 +46591,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Red Wave"
 }
 ],
@@ -46804,7 +46804,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: Safia is a local in Solitude, Haafingar, from Cyrodiil; rarely leaves Solitude.\nSafia has never been inside Red Wave.",
+"lines": "Identity: Safia is a local in Solitude, Haafingar, from Cyrodiil; rarely leaves Solitude.",
 "name": "Safia",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -46814,8 +46814,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Red Wave"
 }
 ],
@@ -48618,18 +48618,18 @@
 },
 "Sigaar|Nord|09B7AA": {
 "base_id": "09B7AA",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "The Rift",
 "home": "Riften",
-"lines": "Identity: Sigaar is a bandit in Riften, The Rift; travels around The Rift.",
+"lines": "Identity: Sigaar is a carriage driver in Riften, The Rift; travels all over Skyrim.",
 "name": "Sigaar",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "carriage_driver",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [
 {
 "inside": true,
@@ -48637,7 +48637,7 @@
 "place": "Riften Stables"
 }
 ],
-"travel": "regional"
+"travel": "province"
 },
 "Sigar|Nord|0B85BE": {
 "base_id": "0B85BE",
@@ -49013,7 +49013,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": null,
-"lines": "Identity: Silvia is a soldier in Whiterun Hold.\nSilvia has never been inside Honningbrew Meadery.",
+"lines": "Identity: Silvia is a soldier in Whiterun Hold.",
 "name": "Silvia",
 "observation": 3,
 "origin_province": "Skyrim",
@@ -49023,8 +49023,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Honningbrew Meadery"
 }
 ],
@@ -49456,7 +49456,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Skjor is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.\nSkjor has never been inside The Companions.",
+"lines": "Identity: Skjor is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.",
 "name": "Skjor",
 "observation": 3,
 "origin_province": "Skyrim",
@@ -49466,8 +49466,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 },
 {
@@ -49803,7 +49803,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: Snorreid is a local in Solitude, Haafingar; rarely leaves Solitude.\nSnorreid has never been inside East Empire Company.",
+"lines": "Identity: Snorreid is a local in Solitude, Haafingar; rarely leaves Solitude.",
 "name": "Snorreid",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -49813,8 +49813,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 }
 ],
@@ -51517,7 +51517,7 @@
 "era": "current",
 "hold": "The Rift",
 "home": "Shor's Stone",
-"lines": "Identity: Sylgja is a miner in Shor's Stone, The Rift; rarely leaves Shor's Stone.\nSylgja has never been inside Redbelly Mine.",
+"lines": "Identity: Sylgja is a miner in Shor's Stone, The Rift; rarely leaves Shor's Stone.",
 "name": "Sylgja",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -51532,8 +51532,8 @@
 "place": "Sylgja's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Redbelly Mine"
 }
 ],
@@ -52586,18 +52586,18 @@
 },
 "Thaer|Nord|09B7A6": {
 "base_id": "09B7A6",
-"education": 1,
+"education": 2,
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: Thaer is a bandit in Solitude, Haafingar; travels around Haafingar.",
+"lines": "Identity: Thaer is a carriage driver in Solitude, Haafingar; travels all over Skyrim.",
 "name": "Thaer",
 "observation": 2,
 "origin_province": "Skyrim",
-"profession": "bandit",
+"profession": "carriage_driver",
 "race": "Nord",
 "rated": false,
-"standing": "low",
+"standing": "common",
 "ties": [
 {
 "inside": true,
@@ -52605,7 +52605,7 @@
 "place": "Solitude Stables"
 }
 ],
-"travel": "regional"
+"travel": "province"
 },
 "Thalmor Adjutant|Altmer|65092": {
 "base_id": "65092",
@@ -52903,7 +52903,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Thief is a thief in Skyrim, from Black Marsh.\nThief has never been inside Thieves Guild.",
+"lines": "Identity: Thief is a thief in Skyrim, from Black Marsh.",
 "name": "Thief",
 "observation": 3,
 "origin_province": "Black Marsh",
@@ -52913,8 +52913,8 @@
 "standing": "low",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Thieves Guild"
 }
 ],
@@ -52926,7 +52926,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Thief is a thief in Skyrim, from Morrowind.\nThief has never been inside Thieves Guild.",
+"lines": "Identity: Thief is a thief in Skyrim, from Morrowind.",
 "name": "Thief",
 "observation": 3,
 "origin_province": "Morrowind",
@@ -52936,8 +52936,8 @@
 "standing": "low",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Thieves Guild"
 }
 ],
@@ -52949,7 +52949,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Thief is a thief in Skyrim, from Morrowind.\nThief has never been inside Thieves Guild.",
+"lines": "Identity: Thief is a thief in Skyrim, from Morrowind.",
 "name": "Thief",
 "observation": 3,
 "origin_province": "Morrowind",
@@ -52959,8 +52959,8 @@
 "standing": "low",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Thieves Guild"
 }
 ],
@@ -52972,7 +52972,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Thief is a thief in Skyrim, from Elsweyr.\nThief has never been inside Thieves Guild.",
+"lines": "Identity: Thief is a thief in Skyrim, from Elsweyr.",
 "name": "Thief",
 "observation": 3,
 "origin_province": "Elsweyr",
@@ -52982,8 +52982,8 @@
 "standing": "low",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Thieves Guild"
 }
 ],
@@ -53195,7 +53195,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Thorgar is a miner in Skyrim.\nThorgar has never been inside Whistling Mine.",
+"lines": "Identity: Thorgar is a miner in Skyrim.",
 "name": "Thorgar",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -53205,8 +53205,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Whistling Mine"
 }
 ],
@@ -53303,7 +53303,7 @@
 "era": "current",
 "hold": "The Reach",
 "home": null,
-"lines": "Identity: Thorvar is a local in The Reach.\nThorvar has never been inside Kolskeggr Mine.",
+"lines": "Identity: Thorvar is a local in The Reach.",
 "name": "Thorvar",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -53313,8 +53313,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Kolskeggr Mine"
 }
 ],
@@ -53366,7 +53366,7 @@
 "era": "current",
 "hold": null,
 "home": null,
-"lines": "Identity: Threki the Innocent is a local in Skyrim.\nThreki the Innocent has never been inside Riften Jail.",
+"lines": "Identity: Threki the Innocent is a local in Skyrim.",
 "name": "Threki the Innocent",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -53376,8 +53376,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Riften Jail"
 }
 ],
@@ -53514,7 +53514,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Tilma the Haggard is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.\nTilma the Haggard has never been inside The Companions.",
+"lines": "Identity: Tilma the Haggard is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.",
 "name": "Tilma the Haggard",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -53524,8 +53524,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 }
 ],
@@ -53622,7 +53622,7 @@
 "era": "current",
 "hold": "Solstheim",
 "home": "Raven Rock",
-"lines": "Identity: Tolenos Omoren is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.\nTolenos Omoren has never been inside Raven Rock Mine.",
+"lines": "Identity: Tolenos Omoren is a miner in Raven Rock, Solstheim, from Morrowind; rarely leaves Raven Rock.",
 "name": "Tolenos Omoren",
 "observation": 2,
 "origin_province": "Morrowind",
@@ -53632,8 +53632,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Raven Rock Mine"
 }
 ],
@@ -53968,7 +53968,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Torvar is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.\nTorvar has never been inside The Companions.",
+"lines": "Identity: Torvar is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.",
 "name": "Torvar",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -53978,8 +53978,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 },
 {
@@ -57131,7 +57131,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Vignar Gray-Mane is a mercenary in Whiterun, Whiterun Hold; rarely leaves Whiterun.\nVignar Gray-Mane has never been inside The Companions.",
+"lines": "Identity: Vignar Gray-Mane is a mercenary in Whiterun, Whiterun Hold; rarely leaves Whiterun.",
 "name": "Vignar Gray-Mane",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -57141,8 +57141,8 @@
 "standing": "high",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 },
 {
@@ -57232,7 +57232,7 @@
 "era": "current",
 "hold": "Whiterun Hold",
 "home": "Whiterun",
-"lines": "Identity: Vilkas is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.\nVilkas has never been inside The Companions.",
+"lines": "Identity: Vilkas is a mercenary in Whiterun, Whiterun Hold; travels around Whiterun Hold.",
 "name": "Vilkas",
 "observation": 2,
 "origin_province": "Skyrim",
@@ -57242,8 +57242,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "The Companions"
 },
 {
@@ -57663,7 +57663,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: Vittoria Vici is a merchant in Solitude, Haafingar, from Cyrodiil; rarely leaves Solitude.\nVittoria Vici has never been inside East Empire Company.",
+"lines": "Identity: Vittoria Vici is a merchant in Solitude, Haafingar, from Cyrodiil; rarely leaves Solitude.",
 "name": "Vittoria Vici",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -57678,8 +57678,8 @@
 "place": "Vittoria Vici's House"
 },
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "East Empire Company"
 }
 ],
@@ -58731,7 +58731,7 @@
 "era": "current",
 "hold": "Haafingar",
 "home": "Solitude",
-"lines": "Identity: Xander is a local in Solitude, Haafingar, from Cyrodiil; rarely leaves Solitude.\nXander has never been inside Red Wave.",
+"lines": "Identity: Xander is a local in Solitude, Haafingar, from Cyrodiil; rarely leaves Solitude.",
 "name": "Xander",
 "observation": 2,
 "origin_province": "Cyrodiil",
@@ -58741,8 +58741,8 @@
 "standing": "common",
 "ties": [
 {
-"inside": false,
-"level": 4,
+"inside": true,
+"level": 5,
 "place": "Red Wave"
 }
 ],

@@ -2,7 +2,8 @@
 Skyrim has nine holds, each ruled by a Jarl: Haafingar (Solitude), Hjaalmarch (Morthal), the Pale (Dawnstar), Winterhold, the Reach (Markarth), Whiterun Hold (Whiterun), Eastmarch (Windhelm), Falkreath Hold and the Rift (Riften).
 Civil war: Ulfric Stormcloak of Windhelm killed High King Torygg; his Stormcloaks fight the Empire's Legion under General Tullius in Solitude, where Torygg's widow Elisif rules. Families and towns are split.
 Since the Great War the White-Gold Concord bans Talos worship; Thalmor Justiciars arrest worshippers, and many Nords hate them.
-Dragons are a thing of old tales; nobody alive has seen one.
+Before Helgen: Dragons are a thing of old tales; nobody alive has seen one.
+After Helgen: Dragons were a thing of old tales until one destroyed Helgen.
 The Greybeards live at High Hrothgar above Ivarstead. The Companions are warriors in Whiterun's Jorrvaskr; the College of Winterhold teaches magic and is distrusted. Thieves are said to run Riften.
 Bandits hold old forts and caves; the Forsworn raid the Reach. Old barrows hold restless dead, and sensible folk keep out of them.
 Bounties are per hold. Carriages wait outside the cities. Money is the Septim.

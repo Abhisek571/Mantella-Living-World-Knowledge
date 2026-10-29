@@ -11,7 +11,8 @@ import sqlite3
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATES = {'not_started', 'running', 'done', 'not_done'}
-ALWAYS_TRACKED = ('MQ104', 'MQ105')  # the Dragonborn stage (server/lw_knowledge/dragonborn.py)
+# the Dragonborn stage (server/lw_knowledge/dragonborn.py) and Helgen (hookup.HELGEN_QUESTS, common knowledge)
+ALWAYS_TRACKED = ('MQ101', 'MQ102', 'MQ104', 'MQ105')
 MAX_ALWAYS, MAX_WHEN, MAX_WHEN_LINES, MAX_WORDS = 6, 4, 3, 35
 # Words that mean the line is about the game, not the world
 META = re.compile(r'\b(quest|(?<!lute )(?<!flute )(?<!drum )player|NPC|the game|XP|level up)\b', re.I)  # a lute player is fine
@@ -65,6 +66,21 @@ def merge_blocks(files):
     return list(merged.values())
 
 
+def apply_fixes(blocks, fixes):
+    """Blocks with the hand corrections of tools/knows_fixes.json: a 'when' entry tied to the wrong quest stage is moved
+    to the right one. Returns the number of entries moved."""
+    moved = 0
+    for fix in fixes.get('retag', []):
+        for block in blocks:
+            if block.get('name', '').strip().lower() != fix['name'].lower():
+                continue
+            for entry in block.get('when') or []:
+                if entry.get('quest') == fix['quest'] and entry.get('state') == fix['state']:
+                    entry['quest'], entry['state'] = fix['to_quest'], fix['to_state']
+                    moved += 1
+    return moved
+
+
 def load_blocks(blocks, db_path, quest_ids):
     con = sqlite3.connect(db_path)
     con.execute("DROP TABLE IF EXISTS npc_knows")
@@ -98,7 +114,8 @@ def main():
     quest_ids = set(json.load(open(os.path.join(ROOT, 'data', 'quest_ids.json'), encoding='utf-8')).values())
     paths = sorted(glob.glob(os.path.join(ROOT, 'work', 'knows_out', '*.json')), key=lambda p: os.path.basename(p).startswith('long_'))
     blocks = merge_blocks(json.load(open(path, encoding='utf-8')) for path in paths)
-    report = load_blocks(blocks, os.path.join(ROOT, 'data', 'lore.sqlite'), quest_ids)
+    apply_fixes(blocks, json.load(open(os.path.join(ROOT, 'tools', 'knows_fixes.json'), encoding='utf-8')))
+    report =load_blocks(blocks, os.path.join(ROOT, 'data', 'lore.sqlite'), quest_ids)
     quests = write_quest_list(os.path.join(ROOT, 'data', 'lore.sqlite'),
                               os.path.join(ROOT, 'SKSE', 'Plugins', 'StorageUtilData', 'MantellaLivingWorld', 'knowledge_quests.json'))
     print(f"{report['npcs']} NPCs, {report['rows']} lines, {report['rejected']} rejected, {len(quests)} quests tracked")

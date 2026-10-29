@@ -66,14 +66,26 @@ def lore_budget() -> int:
     return value if isinstance(value, int) and not isinstance(value, bool) and value > 0 else DEFAULT_LORE_BUDGET
 
 
-def common_knowledge() -> str:
+# Lines of common_knowledge.txt that hold only before or only after the dragon attack on Helgen
+HELGEN_QUESTS = ('MQ101', 'MQ102', 'MQ104')
+_BEFORE, _AFTER = 'Before Helgen: ', 'After Helgen: '
+
+
+def before_helgen(states) -> bool:
+    """True only when World says the main quest has not reached Helgen yet. Without World it has: the game opens there."""
+    return isinstance(states, dict) and all(states.get(q) == 0 for q in HELGEN_QUESTS)
+
+
+def common_knowledge(states=None) -> str:
     if _common['text'] is None:
         try:
             with open(os.path.join(K.data_dir(), 'common_knowledge.txt'), encoding='utf-8') as f:
                 _common['text'] = f.read().strip()
         except OSError:
             _common['text'] = ''
-    return _common['text']
+    drop, keep = (_AFTER, _BEFORE) if before_helgen(states) else (_BEFORE, _AFTER)
+    lines = [l[len(keep):] if l.startswith(keep) else l for l in _common['text'].splitlines() if not l.startswith(drop)]
+    return '\n'.join(lines)
 
 
 def identity_text(p: dict) -> str:
@@ -97,7 +109,8 @@ def identity_lines(profiles: list[dict]) -> str:
         origin = p.get('origin_province')
         line = f"Identity: {name} is {job} in {where}" + (f", from {origin}" if origin and origin != 'Skyrim' else '')
         lines.append(line + (f"; {travel}." if travel else '.'))
-        never = [t['place'] for t in p.get('ties', []) if isinstance(t, dict) and t.get('place') and not t.get('inside')]
+        never = [t['place'] for t in p.get('ties', []) if isinstance(t, dict) and t.get('place') and not t.get('inside')
+                 and t['place'].lower() != (home or '').lower() and t.get('level') != 5]  # home and level 5: been there
         if never:
             lines.append(f"{name} has never been inside {', '.join(never)}.")
     return '\n'.join(lines)
@@ -191,8 +204,8 @@ def system_parts(parts: dict, ctx) -> dict:
     out = dict(parts)
     if isinstance(out.get('background'), str):
         out['background'] = fix_bios(out['background'], {p.get('name') for p in profiles})
-    out['common_knowledge'] = common_knowledge()
     states = quest_states()
+    out['common_knowledge'] = common_knowledge(states)
     player = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('string') or {}).get('player') or 'the traveller'
     secret = _read(HUB_SETTINGS).get('dragonborn_secret') is True
     lines = [identity_lines(profiles)] + list(dict.fromkeys(l for l in (DB.line(states, p, player, secret) for p in profiles) if l))

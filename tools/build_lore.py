@@ -60,7 +60,7 @@ KIND_MAP = {
     "farm": "farm", "wheat mill": "farm", "wood mill": "farm", "giant camp": "giant_camp",
     "camp": "camp", "bandit camp": "camp", "stormcloak camp": "camp_military",
     "imperial camp": "camp_military", "dragon lair": "nest", "imperial tower": "tower",
-    "nordic tower": "tower", "tower": "tower", "shipwreck": "shipwreck", "ship": "shipwreck",
+    "nordic tower": "tower", "tower": "tower", "shipwreck": "shipwreck", "ship": "ship",
     "temple": "temple", "daedric shrine": "shrine", "shrine": "shrine", "guild": "guild",
     "guild hall": "guild", "docks": "dock", "barracks": "military", "jail": "military",
     "barracks / jail": "military", "hold": "hold", "worldspace": "region", "library": "building",
@@ -70,7 +70,11 @@ KIND_MAP = {
 }
 INSIDE_KINDS = {"dungeon", "cave", "fort", "mine", "nest", "tower", "shipwreck", "camp",
                 "giant_camp", "house", "palace", "temple", "shrine", "guild", "inn", "store",
-                "building", "military", "camp_military", "shack"}
+                "building", "military", "camp_military", "shack", "ship", "monastery"}
+# The wiki's place type is wrong for these: lived-in, holy or manned places that must not get the rumour about an
+# outlaw fort or a ruined tower (High Hrothgar is typed "Military Fort", Stendarr's Beacon "Imperial Tower").
+PLACE_KIND_FIXES = {"high hrothgar": "monastery", "nightcaller temple": "temple", "western watchtower": "military",
+                    "stendarr's beacon": "temple"}
 # Lead sentences of an enterable place that describe what is inside it.
 INSIDE_HINT = re.compile(r"\b(word wall|puzzles?|traps?|pillars?|levers?|claw|chests?|treasure|boss|"
                          r"dragon priest|Dragonstone|Elder Scroll|sarcophag\w*|coffin|"
@@ -92,7 +96,10 @@ TOPIC_IDS = {
 SECRET_PATTERNS = {
     "alduin_raises_dragons": r"\bAlduin\b.{0,80}\b(resurrect|rais|revive|bring|back to life)|"
                              r"(resurrect|rais|revive)\w*\b.{0,60}\bdragons?\b.{0,40}\bAlduin|"
-                             r"\bWorld-Eater\b",
+                             r"\bWorld-Eater\b|"
+                             # who burned Helgen: the dragon has no name for anyone outside the main quest
+                             r"\bAlduin's attack\b|\b(attack\w*|destr\w+) by Alduin\b|\bHelgen\b.{0,120}\bAlduin\b|"
+                             r"\bAlduin\b.{0,120}\bHelgen\b",
     "thalmor_prolong_war": r"\bThalmor\b.{0,120}\b(prolong|drag on|weaken|asset|dossier)",
     "thalmor_hunt_blades": r"\bEsbern\b.{0,80}\bRatway|\bRatway\b.{0,80}\bEsbern",
     "delphine_is_blade": r"\bDelphine\b.{0,120}\bBlades?\b|\bBlades?\b.{0,120}\bDelphine\b",
@@ -104,9 +111,11 @@ SECRET_PATTERNS = {
     "silver_blood_forsworn": r"\bThonar\b.{0,160}\bForsworn\b|\bMadanach\b.{0,160}\bThonar\b",
     "ancano_eye_of_magnus": r"\bAncano\b.{0,160}\bEye of Magnus\b|\bEye of Magnus\b.{0,160}"
                             r"\bAncano\b",
-    "tyranny_of_the_sun": r"\bTyranny of the Sun\b|\bblot out the sun\b",
+    "tyranny_of_the_sun": r"\bTyranny of the Sun\b|\bblot out the sun\b|\bHarkon\b|\bVolkihar\b",
     "miraak_returns": r"\bMiraak\b",
 }
+# Articles that are a secret as a whole: every fact gets the secret, whatever it names.
+ARTICLE_SECRETS = {"volkihar clan": "tyranny_of_the_sun"}
 SECRET_RE = {k: re.compile(v, re.I | re.S) for k, v in SECRET_PATTERNS.items()}
 RECENT_RE = re.compile(r"\b(Stormcloaks?|Imperial Legion|civil war|Ulfric|Tullius|Helgen|"
                        r"4E 20[01]|dragons? (have|has) returned|return of the dragons|"
@@ -479,6 +488,9 @@ def collect(pages_by_src):
                     a.setdefault("extra", []).append(d["text"])
                 continue
             arts[lk] = {"title": key, "src": src, "kind": kind, "info": info, "text": d["text"]}
+    for lk, kind in PLACE_KIND_FIXES.items():
+        if arts.get(lk, {}).get("kind") == "place":
+            arts[lk]["info"]["place_kind"] = kind
     return arts
 
 
@@ -549,7 +561,8 @@ def build_db(arts, redirects, db_path, places_path=None):
                 (aid, seq, sec, a["title"] if a["kind"] == "place" else None,
                  a["title"] if a["kind"] == "npc" else None,
                  topic or (a["title"] if a["kind"] in ("topic", "creature") else None),
-                 tag_era(text, info), depth, inside, tag_secret(text), tokens(text), text))
+                 tag_era(text, info), depth, inside, ARTICLE_SECRETS.get(lk) or tag_secret(text), tokens(text),
+                 text))
             total += tokens(text)
         if a["kind"] == "place":
             places[a["title"]] = {k: v for k, v in (("hold", info.get("hold")),

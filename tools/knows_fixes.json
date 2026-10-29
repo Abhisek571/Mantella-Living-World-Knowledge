@@ -1,0 +1,13 @@
+{
+ "note": "Quest-stage corrections applied by build_knows.py to the blocks in work/knows_out: a 'when' entry of that NPC with quest+state is moved to to_quest+to_state.",
+ "retag": [
+  {
+   "name": "Tolfdir",
+   "quest": "MG07",
+   "state": "running",
+   "to_quest": "MG08",
+   "to_state": "running",
+   "why": "Savos Aren and Mirabelle Ervine die at the start of The Eye of Magnus, after The Staff of Magnus"
+  }
+ ]
+}

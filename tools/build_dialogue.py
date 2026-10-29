@@ -54,7 +54,7 @@ def dialogue_part(text):
 
 
 def article_key(title):
-    return re.sub(r'\s*\((skyrim|npc)\)$', '', title.split(':', 1)[-1].strip().lower())
+    return re.sub(r'\s*\((skyrim|npc|person|dawnguard|dragonborn)\)$', '', title.split(':', 1)[-1].strip().lower())
 
 
 def main():
@@ -63,6 +63,8 @@ def main():
     for key, p in profiles.items():
         if isinstance(p, dict) and p.get('name'):
             by_name.setdefault(p['name'].lower(), []).append(p)
+            if p['name'].lower().startswith('jarl '):  # Mantella's "Jarl Ulfric Stormcloak" is the wiki's "Ulfric Stormcloak"
+                by_name.setdefault(p['name'][5:].lower(), []).append(p)
     quest_ids, texts = {}, {}
     for src in ('uesp', 'fandom'):
         with gzip.open(os.path.join(WORK, f'{src}.jsonl.gz'), 'rt', encoding='utf-8') as f:
