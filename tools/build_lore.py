@@ -430,7 +430,13 @@ def tag_era(text, info):
     return ""
 
 
+_EXCEPTIONS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "secret_exceptions.json")
+SECRET_EXCEPTIONS = tuple(json.load(open(_EXCEPTIONS, encoding="utf-8"))["starts"]) if os.path.isfile(_EXCEPTIONS) else ()
+
+
 def tag_secret(text):
+    if text.startswith(SECRET_EXCEPTIONS):  # mentions a name the patterns match, but is not the secret
+        return ""
     for sid, rx in SECRET_RE.items():
         if rx.search(text):
             return sid

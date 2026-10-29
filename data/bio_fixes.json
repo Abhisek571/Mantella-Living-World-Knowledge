@@ -1,0 +1,74 @@
+[
+ {
+  "name": "Adrianne Avenicci",
+  "find": "Aventus Avenicci: Her father. He gave Adrianne her \"Warmaiden\" nickname due to her fondness for swords. Court steward to Jarl Balgruuf. Lives in Dragonsreach.",
+  "replace": "Proventus Avenicci: Her father. He gave Adrianne her \"Warmaiden\" nickname due to her fondness for swords. Court steward to Jarl Balgruuf. Lives in Dragonsreach.",
+  "why": "wrong_fact"
+ },
+ {
+  "name": "Esbern",
+  "find": "Esbern has now adopted the role of guide, advisor, and mentor of the Dragonborn, the chosen one ordained to fight Alduin and his servants after the release of Alduin and the dragons back into Tamriel.",
+  "replace": "",
+  "why": "narrates a later quest as already done"
+ },
+ {
+  "name": "Esbern",
+  "find": "When the player (who is the Dragonborn) first met Esbern, Esbern was hiding out in the Ratway, the underground sewer tunnels underneath Riften. The Dragonborn then escorts Esbern to Delphine at the Sleeping Giant Inn in Riverwood.",
+  "replace": "",
+  "why": "narrates a later quest as already done"
+ },
+ {
+  "name": "Jarl Siddgeir",
+  "find": "Dengeir and his brother Thadgeir (another of Dengeir's uncles) still live, but are now both elderly.",
+  "replace": "Dengeir and his brother Thadgeir (Siddgeir's other uncle) still live, but are now both elderly.",
+  "why": "wrong_fact"
+ },
+ {
+  "name": "Karliah",
+  "find": "Karliah will eventually accompany the player to attempt to clear her name with the Thieves Guild and expose Mercer's treachery.",
+  "replace": "",
+  "why": "narrates a later quest as already done"
+ },
+ {
+  "name": "Karliah",
+  "find": "Mercery must eventually be slain, and the Skeleton Key must then be returned to the Twilight Sepulcher.",
+  "replace": "",
+  "why": "narrates a later quest as already done"
+ },
+ {
+  "name": "Kodlak Whitemane",
+  "find": "However, a stranger (the player) arrived to protect him in the dream, driving back the beast.",
+  "replace": "",
+  "why": "narrates a later quest as already done"
+ },
+ {
+  "name": "Rayya",
+  "find": "Rayya is a fierce and loyal warrior who has been appointed as the housecarl of {player_name} (the player).",
+  "replace": "Rayya is a fierce and loyal warrior who serves in the jarl's longhouse in Falkreath.",
+  "why": "spoiler"
+ },
+ {
+  "name": "Valdimar",
+  "find": "Role: As a result of honorable and heroic deeds performed in service of Hjaalmarch and its people, the player has been granted the title \"Thane of Hjaalmarch\" by the jarl.",
+  "replace": "Role: Valdimar serves Jarl Idgrod Ravencrone in Highmoon Hall, Morthal.",
+  "why": "spoiler"
+ },
+ {
+  "name": "Lydia",
+  "find": "After slaying the dragon, the player unintentionally absorbed its soul.",
+  "replace": "",
+  "why": "narrates a later quest as already done"
+ },
+ {
+  "name": "Paarthurnax",
+  "find": "If Alduin escapes to Sovngarde, Paarthurnax will devise a plan to capture a dragon in Dragonsreach, in order to interrogate them and ascertain how Alduin travels between the mortal realm and Sovngarde.",
+  "replace": "",
+  "why": "narrates a later quest as already done"
+ },
+ {
+  "name": "Korir",
+  "find": "he keeps a Dark Elf named Malur Setoth as his court steward.",
+  "replace": "he keeps a Dark Elf named Malur Seloth as his court steward.",
+  "why": "wrong_fact"
+ }
+]

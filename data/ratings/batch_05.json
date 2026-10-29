@@ -1,0 +1,35 @@
+{
+ "Ancano|Altmer|01E7D7": {
+  "profession": "mage"
+ },
+ "Arngeir|Nord|02C6C7": {
+  "hold": "Whiterun Hold"
+ },
+ "Belethor|Breton|013BA1": {
+  "profession": "merchant"
+ },
+ "Emperor Titus Mede II|Imperial|01D4B9": {
+  "profession": "noble"
+ },
+ "Emperor Titus Mede II|Imperial|01D4BA": {
+  "profession": "noble"
+ },
+ "Faendal|Bosmer|013480": {
+  "origin_province": "Valenwood"
+ },
+ "Gulum-Ei|Argonian|013284": {
+  "profession": "thief"
+ },
+ "Linwe|Altmer|07D679": {
+  "profession": "thief"
+ },
+ "Maven Black-Briar|Nord|01336A": {
+  "profession": "noble"
+ },
+ "Moth gro-Bagol|Orsimer|055A5E": {
+  "standing": "common"
+ },
+ "Sibbi Black-Briar|Nord|01337B": {
+  "profession": "noble"
+ }
+}

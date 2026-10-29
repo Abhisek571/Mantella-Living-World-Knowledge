@@ -1,18 +1,17 @@
 # Mantella Living World - Knowledge
 
-Optional add-on for Mantella Living World. Each NPC knows what fits their life: home, hold, origin, profession, travel and personal ties set a knowledge level from 1 to 5 for each place and topic. Quest secrets sit above level 5 and unlock only by quest progress or by being told. A lore database built from wiki dumps answers short lookups within a token budget.
+Each NPC knows what fits their life, and no more. An optional module of [Mantella Living World - Integration Hub](https://github.com/Abhisek571/Mantella-Living-World-Hub).
 
-| Part | File |
+| Feature | What it does |
 |---|---|
-| NPC profiles (one per Mantella character row) | `data/profiles.json` |
-| Places (hold, kind, town) | `data/places.json` |
-| Secrets | `data/secrets.json` |
-| Knowledge rule | `data/prompt_rules/30_knowledge.txt` |
-| Common knowledge block | `data/common_knowledge.txt` |
-| Lore database (built locally, not shipped in the repo) | `data/lore.sqlite` |
-| Server extension (`extensions/lw_knowledge/`) | `server/lw_knowledge/` |
-
-## Levels
+| Knowledge levels | Home, hold, origin, profession, travel and personal ties set a level from 1 to 5 for each place and topic. Levels only decide which lore facts an NPC is handed |
+| What each NPC knows | Each NPC gets a short "what they know" block built from their own dialogue. Lines tied to a quest only show once that quest has reached the stage |
+| Identity line | One line per NPC: job, home, hold, province, and whether they rarely leave or travel around. It also lists places they have never been inside |
+| Secrets | Quest secrets sit above level 5. They unlock through quest progress, or because the NPC was in on it from the start. There is no way to "tell" an NPC a secret |
+| Dragonborn rumours | Who has heard the player is Dragonborn depends on the main quest and on where the NPC lives or travels. Needs the World module |
+| Common knowledge | One block everyone knows, the same for every NPC so it caches |
+| Lore lookups | Short facts from a lore database about names the player mentions, within a token budget, filtered by the NPC's levels. Room contents and loot lists are never sent. Dangerous places only get a short rumour |
+| Mark on map | The MarkOnMap action puts a place the NPC knows on the player's map when asked the way. It does not fast travel |
 
 | Level | Meaning |
 |---|---|
@@ -22,11 +21,23 @@ Optional add-on for Mantella Living World. Each NPC knows what fits their life: 
 | 4 | Knows it well (own town, a personal tie) |
 | 5 | Has been inside / knows it first hand |
 
-Rules: own town 4, own hold 3, neighbouring hold 2, far 1; profession bonus +1 (merchants on trade towns, soldiers on forts, priests on temples, hunters in the wilds, guards in their hold); origin province 3; travellers +1 on their routes; couriers 3 on every road and town; ties override; 5 only with `inside`; ancient NPCs never know recent events.
+Rules: own town 4, own hold 3, neighbouring hold 2, far 1; profession bonus +1 (merchants on trade towns, soldiers on forts, priests on temples, hunters in the wilds, guards in their hold); origin province 3; travellers +1 on their routes; couriers 3 on every road and town; ties override; 5 only with `inside`; ancient NPCs never know recent events. Hand ratings in `data/ratings/batch_*.json` override the rule values.
 
-## Build
+Limits: profiles cover about 3,100 vanilla NPCs only. An NPC whose name matches more than one profile and has no matching base id gets none. Modded NPCs get no Knowledge block. In group talks the lore budget is shared between the NPCs and at most 3 named articles are used per reply. Knowledge removes lines from an NPC's bio that describe quest stages ("If...", "Once...", "After..."), so they do not contradict the knowledge block. Mantella's own files are not changed.
 
-In game it needs the Integration Hub and [Mantella - Direct AI Connect](https://github.com/Abhisek571/Mantella-Anthropic-API) (its server part runs inside it). Building the data needs Python 3.11 (stdlib only).
+Settings: the Hub's "Knowledge mode" is off, profiles only, or profiles and lore. The Hub's Status tab warns when the lore database is missing.
+
+Requires:
+- [Mantella Living World - Integration Hub](https://github.com/Abhisek571/Mantella-Living-World-Hub), [Mantella](https://www.nexusmods.com/skyrimspecialedition/mods/98631) 0.14 and [Mantella - Direct AI Connect](https://github.com/Abhisek571/Mantella-Anthropic-API).
+- SKSE and PapyrusUtil (for the map markers). SKSE_HTTP comes with Mantella.
+- Mantella must run with `SKSE/Plugins/MantellaSoftware` as its working folder. Under Mod Organizer 2 it must be started so it can see the game's `StorageUtilData/MantellaLivingWorld` files.
+- Mantella's Advanced Actions on (Actions tab of Mantella's settings) for MarkOnMap.
+
+Optional:
+- Mantella Living World - World: needed for everything tied to a quest (quest-gated knowledge lines, quest secrets, Dragonborn rumours). Without it only untied lines, "in on it" secrets and no Dragonborn rumours.
+- Dawnguard and Dragonborn: needed for their 16 and 54 map markers.
+
+Build: the Hub's `tools/build.py --only knowledge`. The data needs Python 3.11 (stdlib only) and 7-Zip:
 
 ```
 python tools/build_lore.py --uesp uespwiki-YYYY-MM-DD-current.xml.bz2 --fandom elderscrolls_pages_current.xml.7z
@@ -34,10 +45,8 @@ python tools/build_profiles.py --csv skyrim_characters.csv
 python -m unittest discover -s tests
 ```
 
-`build_lore.py` streams both MediaWiki dumps (7-Zip is used to read the `.7z`), keeps Skyrim pages, strips markup and non-lore sections, merges duplicate titles and cuts the text into tagged facts of at most 80 tokens. Run it before `build_profiles.py`, which reads `data/places.json` and the extracted UESP pages in `work/`.
+`build_lore.py` keeps the Skyrim pages of both wiki dumps, strips markup and non-lore sections, merges duplicates and cuts the text into tagged facts of at most 80 tokens. Run it before `build_profiles.py`.
 
-Hand ratings for fields only a bio can decide live in `data/ratings/batch_*.json` and override the rule values.
+License: GNU AGPL-3.0 for the code. The lore database (`data/lore.sqlite`) is not in this repository; the released mod includes one built from [UESP](https://en.uesp.net) (CC BY-SA 2.5) and the [Elder Scrolls Fandom wiki](https://elderscrolls.fandom.com) (CC BY-SA 3.0) text, under those licences, with credit to their authors. The lore database is shared under those same licences.
 
-## Licence
-
-AGPL-3.0. Wiki text is not included; the build tool creates the database from your own copy of the dumps.
+Author: itsPigeon2000

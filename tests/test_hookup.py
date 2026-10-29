@@ -157,7 +157,26 @@ class Hookup(unittest.TestCase):
     def test_never_inside_only_for_tied_places(self):
         conversation(self.tmp.name, [("Camilla Valerius", "01347B")])
         text = H.identity_lines(H.speaker_profiles())
+        made = H.identity_text(H.speaker_profiles()[0])
+        self.assertEqual(H.identity_lines([dict(H.speaker_profiles()[0], lines=made)]), H.identity_lines([H.speaker_profiles()[0]]))
+        self.assertEqual(H.identity_lines([{'name': 'X', 'lines': 'Identity: X is ready-made.'}]), 'Identity: X is ready-made.')
         self.assertNotIn("never been inside Riverwood Trader", text)
+
+    def test_bio_fixes_for_speakers_only(self):
+        wrong = 'Aventus Avenicci: Her father.'
+        H._bio_fixes['list'] = [{'name': 'Adrianne Avenicci', 'find': wrong, 'replace': 'Proventus Avenicci: Her father.'},
+                                {'name': 'Lydia', 'find': 'the player absorbed its soul.', 'replace': ''}]
+        try:
+            self.assertEqual(H.fix_bios(wrong, {'Adrianne Avenicci'}), 'Proventus Avenicci: Her father.')
+            self.assertEqual(H.fix_bios(wrong, {'Lydia'}), wrong)
+            self.assertEqual(H.fix_bios('Then the player absorbed its soul.', {'Lydia'}), 'Then ')
+        finally:
+            H._bio_fixes['list'] = None
+
+    def test_shipped_bio_fixes_load(self):
+        H._bio_fixes['list'] = None
+        H.fix_bios('', set())
+        self.assertGreaterEqual(len(H._bio_fixes['list']), 10)
 
     def test_no_speakers_changes_nothing(self):
         parts = {"mantella": "You are someone.", "__breakpoint_after__": "mantella"}

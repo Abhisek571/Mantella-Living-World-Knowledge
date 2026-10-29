@@ -35,13 +35,15 @@ class Secrets(unittest.TestCase):
         before = {"quests": {"MQ106": 150}}
         after = {"quests": {"MQ106": 200}}
         self.assertFalse(K.knows_secret("Delphine", "alduin_raises_dragons_x", after))
-        # Delphine is in on it anyway; use the Thalmor plan, which she learns at MQ201 250.
-        self.assertFalse(K.knows_secret("Delphine", "thalmor_prolong_war", before))
-        self.assertTrue(K.knows_secret("Delphine", "thalmor_prolong_war",
-                                       {"quests": {"MQ201": 250}}))
-        self.assertFalse(K.knows_secret("Hulda", "alduin_raises_dragons", after))
-        self.assertTrue(K.knows_secret("Hulda", "alduin_raises_dragons",
-                                       {"quests": {"MQ305": 200}}))
+        # Delphine learns Alduin is behind the dragons at MQ106 200, not before.
+        self.assertFalse(K.knows_secret("Delphine", "alduin_raises_dragons", before))
+        self.assertTrue(K.knows_secret("Delphine", "alduin_raises_dragons", after))
+        # Only the Thalmor know their own plan for the war.
+        self.assertFalse(K.knows_secret("Delphine", "thalmor_prolong_war", {"quests": {"MQ201": 250}}))
+        self.assertTrue(K.knows_secret("Elenwen", "thalmor_prolong_war", {}))
+        # The end of the main quest tells those who were there, not all of Skyrim.
+        self.assertFalse(K.knows_secret("Hulda", "alduin_raises_dragons", {"quests": {"MQ305": 200}}))
+        self.assertTrue(K.knows_secret("Balgruuf the Greater", "alduin_raises_dragons", {"quests": {"MQ305": 200}}))
 
     def test_told_by_player_unlocks_for_that_npc_only(self):
         world = {"told": {"circle_werewolves": ["Ysolda"]}}

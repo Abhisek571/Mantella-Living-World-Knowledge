@@ -170,7 +170,12 @@ def place_secrets(title, name, world):
 # Game-guide wording: what a player reads in a guide, never what people in the world know.
 _GUIDE_RE = re.compile(r"\b(can be found|is found|are found|is located|located (?:in|at|near)|the dragonborn|the player|"
                        r"you can|quest|walkthrough|tutorial|console|wears?\b|wearing|carries|equipped|spells?\b|"
-                       r"\d{1,2}\s?(?:am|pm)\b|schedule|sells?\b|buy|merchant|gold\b|septims?\b|level \d|in skyrim|dragon language|initially|depending on|if you|once you|after you)", re.I)
+                       r"\d{1,2}\s?(?:am|pm)\b|schedule|sells?\b|buy|merchant|gold\b|septims?\b|level \d|in skyrim|dragon language|initially|depending on|if you|once you|after you|"
+                       # room inventories and loot: what a guide lists, not what anyone talks about
+                       r"owned (?:single |double )?beds?|common books?|loose (?:gold|coins?)|bottles? of|potions? of|dresser|end table|"
+                       r"night ?stand|wardrobe|cupboard|satchel|knapsack|leveled|randomly|random (?:items?|loot)|(?:un)?locked chest|"
+                       r"(?:novice|apprentice|adept|expert|master)-locked|skill books?|(?:reading|in) (?:his|her|their|the) (?:journal|diary|note)|"
+                       r"research notes|can be (?:picked|looted|taken)|respawn)", re.I)
 
 
 def is_guide_text(sentence):

@@ -120,12 +120,13 @@ FACTION_RULES = [
     ("guardfaction", "guard"), ("dawnguard", "soldier"), ("blades", "soldier"),
     ("necromancer", "necromancer"), ("warlock", "necromancer"), ("dlc2skaal", "hunter"),
 ]
+# Classes that say what someone does. Thief, Assassin, Nightblade and Soldier are left out: for townsfolk they are only
+# how they fight (Faendal's class is Thief, Belethor's Soldier); guilds and factions catch the real ones.
 CLASS_RULES = [
     ("pawnbroker", "merchant"), ("food vendor", "merchant"), ("apothecary", "alchemist"),
     ("blacksmith", "blacksmith"), ("farmer", "farmer"), ("miner", "miner"), ("lumberjack",
                                                                             "laborer"),
-    ("bandit", "bandit"), ("soldier", "soldier"), ("thief", "thief"), ("assassin", "thief"),
-    ("nightblade", "thief"), ("priest", "priest"), ("monk", "monk"), ("bard", "bard"),
+    ("bandit", "bandit"), ("priest", "priest"), ("monk", "monk"), ("bard", "bard"),
     ("beggar", "beggar"), ("child", "child"), ("vampire", "vampire"), ("forsworn", "bandit"),
     ("conjurer", "mage"), ("sorcerer", "mage"), ("mage", "mage"), ("witchblade", "bandit"),
     ("spell vendor", "mage"), ("tailor", "merchant"), ("fletcher", "merchant"),

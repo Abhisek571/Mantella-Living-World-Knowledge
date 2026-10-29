@@ -17,6 +17,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CHANNEL_DIR = os.path.normpath(os.path.join(os.getcwd(), '..', 'StorageUtilData', 'MantellaLivingWorld'))
 HUB_SETTINGS = os.path.join(os.path.dirname(HERE), 'living_world', 'settings.json')
 DEFAULT_LORE_BUDGET = 150
+JOB_WORDS = {'court': 'member of the court', 'court_wizard': 'court wizard', 'commoner': 'local', 'creature': 'being', 'caravan': 'caravan trader'}
 TRAVEL = {'home': 'rarely leaves {home}', 'regional': 'travels around {hold}', 'province': 'travels all over Skyrim'}
 
 _state = {'speakers': None, 'sent': set(), 'messages': 0, 'knows': ''}
@@ -75,14 +76,26 @@ def common_knowledge() -> str:
     return _common['text']
 
 
+def identity_text(p: dict) -> str:
+    """One NPC's identity line and "never been inside" line, worked out from the profile."""
+    return identity_lines([dict(p, lines=None)])
+
+
 def identity_lines(profiles: list[dict]) -> str:
+    """The identity lines for the speakers: shipped ready-made in profiles.json ("lines", tools/build_lines.py); worked
+    out here for a profile without them."""
     lines = []
     for p in profiles:
-        name, home, hold = p.get('name', '?'), p.get('home') or 'no fixed home', p.get('hold') or 'Skyrim'
-        job = p.get('profession') or 'local'
-        travel = TRAVEL.get(p.get('travel'), '').format(home=home, hold=hold)
+        if isinstance(p.get('lines'), str) and p['lines'].strip():
+            lines.append(p['lines'].strip())
+            continue
+        name, home, hold = p.get('name', '?'), p.get('home'), p.get('hold')
+        job = JOB_WORDS.get(p.get('profession'), (p.get('profession') or 'local').replace('_', ' '))
+        job = ('an ' if job[:1] in 'aeiou' else 'a ') + job
+        travel = TRAVEL.get(p.get('travel'), '').format(home=home, hold=hold or 'Skyrim') if home or p.get('travel') == 'province' else ''
+        where = ', '.join(w for w in (home, hold) if w) or 'Skyrim'
         origin = p.get('origin_province')
-        line = f"Identity: {name} is a {job} in {home}, {hold}" + (f", from {origin}" if origin and origin != 'Skyrim' else '')
+        line = f"Identity: {name} is {job} in {where}" + (f", from {origin}" if origin and origin != 'Skyrim' else '')
         lines.append(line + (f"; {travel}." if travel else '.'))
         never = [t['place'] for t in p.get('ties', []) if isinstance(t, dict) and t.get('place') and not t.get('inside')]
         if never:
@@ -150,6 +163,24 @@ def mode() -> str:
     return value if value in ('full', 'profiles', 'off') else 'full'
 
 
+_bio_fixes = {'list': None}
+
+
+def fix_bios(text: str, names) -> str:
+    """Mantella's stock bios with known mistakes fixed (data/bio_fixes.json: a wrong name, or a later quest told as
+    already done), for the NPCs talking. Their own file is never changed."""
+    if _bio_fixes['list'] is None:
+        try:
+            with open(os.path.join(K.data_dir(), 'bio_fixes.json'), encoding='utf-8') as f:
+                _bio_fixes['list'] = [x for x in json.load(f) if isinstance(x, dict) and x.get('find')]
+        except (OSError, ValueError):
+            _bio_fixes['list'] = []
+    for fix in _bio_fixes['list']:
+        if fix.get('name') in names:
+            text = text.replace(fix['find'], fix.get('replace') or '')
+    return text
+
+
 def system_parts(parts: dict, ctx) -> dict:
     if mode() == 'off':
         return parts
@@ -158,6 +189,8 @@ def system_parts(parts: dict, ctx) -> dict:
         return parts
     # Only adds parts: the Integration Hub's layout names where they go ('__order__') and the cache points.
     out = dict(parts)
+    if isinstance(out.get('background'), str):
+        out['background'] = fix_bios(out['background'], {p.get('name') for p in profiles})
     out['common_knowledge'] = common_knowledge()
     states = quest_states()
     player = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('string') or {}).get('player') or 'the traveller'
