@@ -29,8 +29,10 @@ sys.path.insert(0, os.path.join(ROOT, "server"))
 
 from lw_knowledge.knowledge import HOLDS, norm_hold  # noqa: E402
 
-DEFAULT_CSV = (r"D:\Modlists\NGVO\mods\[NoDelete] Mantella - Bring NPCs to Life with AI\SKSE"
-               r"\Plugins\MantellaSoftware\data\Skyrim\skyrim_characters.csv")
+# Mantella's character list inside your Mod Organizer 2 instance (set MLW_MO2 to its folder).
+DEFAULT_CSV = os.path.join(os.environ.get("MLW_MO2", "<Mod Organizer 2 folder>"), "mods",
+                           r"[NoDelete] Mantella - Bring NPCs to Life with AI\SKSE\Plugins\MantellaSoftware\data\Skyrim"
+                           r"\skyrim_characters.csv")
 
 PROVINCES = ("Skyrim", "Cyrodiil", "High Rock", "Hammerfell", "Morrowind", "Summerset Isles",
              "Valenwood", "Elsweyr", "Black Marsh", "Orsinium")

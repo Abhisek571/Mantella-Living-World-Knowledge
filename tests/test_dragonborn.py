@@ -14,27 +14,27 @@ TRAVELLER = dict(REACH, travel="province")
 
 class Dragonborn(unittest.TestCase):
     def test_nothing_before_dragon_rising(self):
-        self.assertEqual(D.line({"MQ104": 1}, WHITERUN, "CHAD"), "")
-        self.assertEqual(D.line(None, WHITERUN, "CHAD"), "")
+        self.assertEqual(D.line({"MQ104": 1}, WHITERUN, "Player"), "")
+        self.assertEqual(D.line(None, WHITERUN, "Player"), "")
 
     def test_after_dragon_rising_whiterun_knows_the_name(self):
-        line = D.line({"MQ104": 2}, WHITERUN, "CHAD")
-        self.assertIn("CHAD", line)
+        line = D.line({"MQ104": 2}, WHITERUN, "Player")
+        self.assertIn("Player", line)
         self.assertIn("dragon", line.lower())
 
     def test_after_dragon_rising_far_away_only_rumours(self):
-        line = D.line({"MQ104": 2}, REACH, "CHAD")
-        self.assertNotIn("CHAD", line)
+        line = D.line({"MQ104": 2}, REACH, "Player")
+        self.assertNotIn("Player", line)
         self.assertIn("Whiterun", line)
-        self.assertIn("CHAD", D.line({"MQ104": 2}, TRAVELLER, "CHAD"))
+        self.assertIn("Player", D.line({"MQ104": 2}, TRAVELLER, "Player"))
 
     def test_greybeards_summons_heard_everywhere(self):
-        line = D.line({"MQ104": 2, "MQ105": 1}, REACH, "CHAD")
+        line = D.line({"MQ104": 2, "MQ105": 1}, REACH, "Player")
         self.assertIn("Greybeards", line)
-        self.assertNotIn("CHAD", line)
+        self.assertNotIn("Player", line)
 
     def test_keep_secret(self):
-        self.assertNotIn("CHAD", D.line({"MQ104": 2, "MQ105": 2}, WHITERUN, "CHAD", keep_secret=True))
+        self.assertNotIn("Player", D.line({"MQ104": 2, "MQ105": 2}, WHITERUN, "Player", keep_secret=True))
 
     def test_quests_always_tracked(self):
         self.assertTrue({"MQ104", "MQ105"} <= set(D.QUESTS))

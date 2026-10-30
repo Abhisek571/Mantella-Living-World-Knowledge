@@ -40,7 +40,7 @@ class CommonKnowledge(unittest.TestCase):
         with open(os.path.join(self.tmp.name, "npc", "013482.json"), "w", encoding="utf-8") as f:
             json.dump({"string": {"name": "Alvor"}}, f)
         with open(os.path.join(self.tmp.name, "conversation.json"), "w", encoding="utf-8") as f:
-            json.dump({"string": {"player": "CHAD"}, "stringList": {"speakers": ["013482"]}}, f)
+            json.dump({"string": {"player": "Player"}, "stringList": {"speakers": ["013482"]}}, f)
 
     def tearDown(self):
         self.tmp.cleanup()

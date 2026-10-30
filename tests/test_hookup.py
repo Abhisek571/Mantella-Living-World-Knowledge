@@ -27,7 +27,7 @@ def conversation(tmp, speakers):
         with open(os.path.join(tmp, "npc", base + ".json"), "w", encoding="utf-8") as f:
             json.dump({"string": {"name": name, "ref_id": "00" + base}, "int": {}}, f)
     with open(os.path.join(tmp, "conversation.json"), "w", encoding="utf-8") as f:
-        json.dump({"string": {"player": "CHAD"}, "stringList": {"speakers": [b for _, b in speakers]}}, f)
+        json.dump({"string": {"player": "Player"}, "stringList": {"speakers": [b for _, b in speakers]}}, f)
 
 
 def user(text):
@@ -202,7 +202,7 @@ class Hookup(unittest.TestCase):
 
     def test_events_in_parentheses_ignored(self):
         conversation(self.tmp.name, [("Camilla Valerius", "01347B")])
-        self.assertEqual(H.extra_user_text(user("(CHAD walked past Bleak Falls Barrow.) Hello.")), "")
+        self.assertEqual(H.extra_user_text(user("(Player walked past Bleak Falls Barrow.) Hello.")), "")
 
 
 if __name__ == "__main__":
