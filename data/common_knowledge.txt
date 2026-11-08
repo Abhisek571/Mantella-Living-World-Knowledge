@@ -1,6 +1,8 @@
 # Common knowledge (what anyone in Skyrim would know)
 Skyrim has nine holds, each ruled by a Jarl: Haafingar (Solitude), Hjaalmarch (Morthal), the Pale (Dawnstar), Winterhold, the Reach (Markarth), Whiterun Hold (Whiterun), Eastmarch (Windhelm), Falkreath Hold and the Rift (Riften).
-Civil war: Ulfric Stormcloak of Windhelm killed High King Torygg; his Stormcloaks fight the Empire's Legion under General Tullius in Solitude, where Torygg's widow Elisif rules. Families and towns are split.
+War on: Civil war: Ulfric Stormcloak of Windhelm killed High King Torygg; his Stormcloaks fight the Empire's Legion under General Tullius in Solitude, where Torygg's widow Elisif rules. Families and towns are split.
+War over (Legion): The civil war is over: the Legion under General Tullius won, and Ulfric Stormcloak, who killed High King Torygg, is dead. A few Stormcloaks still hide in the hills.
+War over (Stormcloaks): The civil war is over: Ulfric Stormcloak's rebels won, General Tullius is dead and the Legion has left Skyrim. Many expect the Empire or the Thalmor to strike back.
 Since the Great War the White-Gold Concord bans Talos worship; Thalmor Justiciars arrest worshippers, and many Nords hate them.
 Before Helgen: Dragons are a thing of old tales; nobody alive has seen one.
 After Helgen: Dragons were a thing of old tales until one destroyed Helgen.

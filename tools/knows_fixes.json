@@ -1,5 +1,5 @@
 {
- "note": "Quest-stage corrections applied by build_knows.py to the blocks in work/knows_out: a 'when' entry of that NPC with quest+state is moved to to_quest+to_state.",
+ "note": "Hand corrections applied by build_knows.py to the blocks in work/knows_out: 'retag' moves a 'when' entry of that NPC with quest+state to to_quest+to_state; 'secret' ties that NPC's secret to a quest stage, so it is only used then; 'also' gives a 'when' entry a second condition (also_quest + also_state; 'war_side' = the side the player joined, Legion or Stormcloaks); 'tie' ties an untied line (the one starting with 'starts') to quest states ('secret:<state>' keeps it a secret then).",
  "retag": [
   {
    "name": "Tolfdir",
@@ -8,6 +8,234 @@
    "to_quest": "MG08",
    "to_state": "running",
    "why": "Savos Aren and Mirabelle Ervine die at the start of The Eye of Magnus, after The Staff of Magnus"
+  }
+ ],
+ "secret": [
+  {
+   "name": "Commander Maro",
+   "quest": "DB06",
+   "state": "done",
+   "why": "His son Gaius is killed in Breaching Security; before that his lines say Gaius is alive"
+  },
+  {
+   "name": "Esbern",
+   "quest": "MQ202",
+   "state": "not_done",
+   "why": "He leaves the Ratway at the end of A Cornered Rat"
+  },
+  {
+   "name": "Sinding",
+   "quest": "DA05",
+   "state": "not_done",
+   "why": "He confesses in his Falkreath cell; after Ill Met By Moonlight he is gone from it"
+  },
+  {
+   "name": "Delphine",
+   "quest": "MQ203",
+   "state": "not_done",
+   "why": "From Alduin's Wall on she leads the Blades at Sky Haven Temple, no longer an innkeeper"
+  },
+  {
+   "name": "Madanach",
+   "quest": "MS02",
+   "state": "not_done",
+   "why": "He escapes Cidhna Mine (or dies) in No One Escapes Cidhna Mine"
+  },
+  {
+   "name": "Thonar Silver-Blood",
+   "quest": "MS02",
+   "state": "not_done",
+   "why": "Madanach is no longer in Cidhna Mine after No One Escapes Cidhna Mine"
+  }
+ ],
+ "also": [
+  {
+   "name": "Agmaer",
+   "quest": "DLC1VQ08",
+   "state": "done",
+   "also_quest": "DLC1VQ03Hunter",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Dawnguard's"
+  },
+  {
+   "name": "Florentius Baenius",
+   "quest": "DLC1VQ08",
+   "state": "running",
+   "also_quest": "DLC1VQ03Hunter",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Dawnguard's"
+  },
+  {
+   "name": "Isran",
+   "quest": "DLC1VQ08",
+   "state": "done",
+   "also_quest": "DLC1VQ03Hunter",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Dawnguard's"
+  },
+  {
+   "name": "Sorine Jurard",
+   "quest": "DLC1VQ08",
+   "state": "running",
+   "also_quest": "DLC1VQ03Hunter",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Dawnguard's"
+  },
+  {
+   "name": "Fura Bloodmouth",
+   "quest": "DLC1VQ08",
+   "state": "running",
+   "also_quest": "DLC1VQ03Vampire",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Volkihar court's"
+  },
+  {
+   "name": "Fura Bloodmouth",
+   "quest": "DLC1VQ08",
+   "state": "done",
+   "also_quest": "DLC1VQ03Vampire",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Volkihar court's"
+  },
+  {
+   "name": "Garan Marethi",
+   "quest": "DLC1VQ08",
+   "state": "running",
+   "also_quest": "DLC1VQ03Vampire",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Volkihar court's"
+  },
+  {
+   "name": "Garan Marethi",
+   "quest": "DLC1VQ08",
+   "state": "done",
+   "also_quest": "DLC1VQ03Vampire",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Volkihar court's"
+  },
+  {
+   "name": "Orthjolf",
+   "quest": "DLC1VQ08",
+   "state": "running",
+   "also_quest": "DLC1VQ03Vampire",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Volkihar court's"
+  },
+  {
+   "name": "Rargal Thrallmaster",
+   "quest": "DLC1VQ08",
+   "state": "running",
+   "also_quest": "DLC1VQ03Vampire",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Volkihar court's"
+  },
+  {
+   "name": "Ronthil",
+   "quest": "DLC1VQ08",
+   "state": "running",
+   "also_quest": "DLC1VQ03Vampire",
+   "also_state": "started",
+   "why": "Kindred Judgment is shared by both paths; these lines are the Volkihar court's"
+  },
+  {
+   "name": "Vignar Gray-Mane",
+   "quest": "CWSiegeObj",
+   "state": "done",
+   "also_quest": "war_side",
+   "also_state": "Stormcloaks",
+   "why": "The siege quest is shared; Vignar is Jarl only after a Stormcloak win at Whiterun"
+  },
+  {
+   "name": "Stormcloak Soldier",
+   "quest": "CWSiegeObj",
+   "state": "done",
+   "also_quest": "war_side",
+   "also_state": "Stormcloaks",
+   "why": "The siege quest is shared; a Stormcloak won the battle only on the Stormcloak side"
+  },
+  {
+   "name": "Tekla",
+   "quest": "CWMission04",
+   "state": "done",
+   "also_quest": "war_side",
+   "also_state": "Stormcloaks",
+   "why": "Dengeir is Jarl again only when the Stormcloaks take Falkreath"
+  },
+  {
+   "name": "Stormcloak Soldier",
+   "quest": "CWMission04",
+   "state": "running",
+   "also_quest": "war_side",
+   "also_state": "Stormcloaks",
+   "why": "Fort Kastav prisoners are freed only on the Stormcloak side"
+  },
+  {
+   "name": "Ralof",
+   "quest": "CWMission04",
+   "state": "running",
+   "also_quest": "war_side",
+   "also_state": "Stormcloaks",
+   "why": "Ralof leads the Fort Neugrad rescue only on the Stormcloak side"
+  },
+  {
+   "name": "Hadvar",
+   "quest": "CWMission04",
+   "state": "running",
+   "also_quest": "war_side",
+   "also_state": "Legion",
+   "why": "Hadvar leads the Fort Kastav rescue only on the Legion side"
+  },
+  {
+   "name": "Galmar Stone-Fist",
+   "quest": "CWObj",
+   "state": "done",
+   "also_quest": "war_side",
+   "also_state": "Stormcloaks",
+   "why": "Solitude falls only when the Stormcloaks win"
+  },
+  {
+   "name": "General Tullius",
+   "quest": "CWObj",
+   "state": "done",
+   "also_quest": "war_side",
+   "also_state": "Legion",
+   "why": "Ulfric dies only when the Legion wins"
+  },
+  {
+   "name": "Legate Rikke",
+   "quest": "CWObj",
+   "state": "done",
+   "also_quest": "war_side",
+   "also_state": "Legion",
+   "why": "Ulfric dies only when the Legion wins"
+  }
+ ],
+ "tie": [
+  {
+   "name": "Serana",
+   "starts": "You slept a very long time",
+   "states": [
+    [
+     "DLC1VQ02",
+     "not_done"
+    ]
+   ],
+   "why": "Once she is home and travelling with the player she learns of Ulfric, Elisif and the Empire"
+  },
+  {
+   "name": "Serana",
+   "starts": "Your father became obsessed with a prophecy",
+   "states": [
+    [
+     "DLC1VQ04",
+     "secret:not_done"
+    ],
+    [
+     "DLC1VQ04",
+     "done"
+    ]
+   ],
+   "why": "She keeps the prophecy to herself until the Moth Priest has read the scroll"
   }
  ]
 }

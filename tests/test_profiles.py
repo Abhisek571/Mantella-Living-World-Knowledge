@@ -102,6 +102,37 @@ class Profiles(unittest.TestCase):
         rated = sum(1 for p in self.profiles.values() if p["rated"])
         self.assertGreater(rated, 0)
 
+    def test_neloth_stays_on_solstheim(self):
+        # SCH-12: he never leaves Tel Mithryn
+        p = self.profiles["Neloth|Dunmer|01773A"]
+        self.assertEqual(p["travel"], "regional")
+        self.assertNotIn("all over Skyrim", p["lines"])
+
+    def test_orc_chiefs_do_not_rule_the_hold(self):
+        for key in ("Chief Burguk|Orsimer|013B79", "Chief Mauhulakh|Orsimer|01B075"):
+            self.assertEqual(self.profiles[key]["standing"], "high", key)
+
+    def test_observation_file_for_world(self):
+        import tempfile
+        profiles = {"a": {"base_id": "01A68E", "observation": 4}, "b": {"base_id": "978AA", "observation": 3},
+                    "c": {"base_id": "013BBD", "observation": 2}, "d": {"base_id": "821", "observation": 4},
+                    "e": {"base_id": "000D62", "observation": 3}, "f": {"base_id": "000D62", "observation": 2},
+                    "g": {"base_id": "", "observation": 3}}
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "observation.json")
+            self.assertEqual(BP.write_observation(profiles, path), 2)
+            with open(path, encoding="utf-8") as f:
+                self.assertEqual(json.load(f), {"int": {"01a68e": 4, "0978aa": 3}})
+
+    def test_shipped_observation_file_matches_profiles(self):
+        path = os.path.join(ROOT, "SKSE", "Plugins", "StorageUtilData", "MantellaLivingWorld", "observation.json")
+        with open(path, encoding="utf-8") as f:
+            obs = json.load(f)["int"]
+        uncanny = {p["base_id"].zfill(6).lower() for p in self.profiles.values() if p["observation"] >= 4 and len(p["base_id"]) >= 4}
+        self.assertTrue(uncanny)
+        self.assertLessEqual(uncanny, {k for k, v in obs.items() if v >= 4})
+        self.assertTrue(all(v != 2 for v in obs.values()))
+
 
 if __name__ == "__main__":
     unittest.main()

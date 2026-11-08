@@ -67,7 +67,7 @@ class Hookup(unittest.TestCase):
         with open(os.path.join(self.tmp.name, "world.json"), "w", encoding="utf-8") as f:
             json.dump({"quest_state": {"MS13": 1}, "quests": {"MS13": 10}}, f)
         seen = {}
-        def fake_block(name, base_id, states, db_path=None):
+        def fake_block(name, base_id, states, db_path=None, speakers=1):
             seen.update(name=name, base_id=base_id, states=states)
             return f"What {name} knows:\n- Thieves took the claw."
         old = H.N.knows_block
@@ -182,6 +182,86 @@ class Hookup(unittest.TestCase):
         parts = {"mantella": "You are someone.", "__breakpoint_after__": "mantella"}
         self.assertEqual(H.system_parts(dict(parts), {}), parts)
         self.assertEqual(H.extra_user_text(user("Tell me about Bleak Falls Barrow.")), "")
+
+    def test_npc_without_profile_still_hears_dragonborn_news(self):
+        # the Hub leaves Dragonborn news to Knowledge when Knowledge is on
+        conversation(self.tmp.name, [("Modded Wanderer Xyz", "ABC123")])
+        self.assertEqual(H.speaker_profiles(), [])
+        parts = {"background": "Bio."}
+        self.assertEqual(H.system_parts(dict(parts), {}), parts)  # before Dragon Rising: nothing to tell
+        with open(os.path.join(self.tmp.name, "world.json"), "w", encoding="utf-8") as f:
+            json.dump({"quest_state": {"MQ104": 2, "MQ105": 1}}, f)
+        out = H.system_parts(dict(parts), {})
+        self.assertEqual(out["background"], "Bio.")
+        self.assertIn("Greybeards' summons", out["identity"])
+        self.assertNotIn("Player", out["identity"])  # far wording: nobody knows who
+
+    def write_world(self, data, day=None, player="Player"):
+        with open(os.path.join(self.tmp.name, "world.json"), "w", encoding="utf-8") as f:
+            json.dump(data, f)
+        path = os.path.join(self.tmp.name, "conversation.json")
+        with open(path, encoding="utf-8") as f:
+            conv = json.load(f)
+        conv["string"]["player"] = player
+        if day is not None:
+            conv["int"] = {"day": day}
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(conv, f)
+
+    def test_stale_world_file_is_ignored(self):
+        # SS-2: right after a load World still holds another character's or a later save's state
+        conversation(self.tmp.name, [("Camilla Valerius", "01347B")])
+        world = {"quest_state": {"MQ104": 2}, "player": "Player", "day": 10.6}
+        self.write_world(world, day=10)
+        self.assertEqual(H.quest_states(), {"MQ104": 2})
+        self.write_world(dict(world, loading=1), day=10)
+        self.assertIsNone(H.quest_states())
+        self.write_world(dict(world, player="Other Hero"), day=10)
+        self.assertIsNone(H.quest_states())
+        self.write_world(world, day=9)
+        self.assertIsNone(H.quest_states())
+        self.assertEqual(H.world(), {})
+
+    def test_war_side_and_war_end_in_common_knowledge(self):
+        # FAC-4: the civil war line follows how the war ended
+        conversation(self.tmp.name, [("Camilla Valerius", "01347B")])
+        self.write_world({"quest_state": {"CWFinale": 1}, "war_side": "Legion", "player": "Player"})
+        self.assertEqual(H.quest_states(), {"CWFinale": 1, "war_side": "Legion"})
+        text = H.common_knowledge(H.quest_states())
+        self.assertIn("fight the Empire's Legion", text)
+        self.assertNotIn("War on:", text)
+        self.assertNotIn("civil war is over", text)
+        legion = H.common_knowledge({"CWFinale": 2, "war_side": "Legion"})
+        self.assertIn("the Legion under General Tullius won", legion)
+        self.assertNotIn("fight the Empire's Legion", legion)
+        self.assertNotIn("rebels won", legion)
+        rebels = H.common_knowledge({"CWFinale": 2, "war_side": "Stormcloaks"})
+        self.assertIn("rebels won", rebels)
+        self.assertNotIn("War over", rebels)
+        self.assertIn("fight the Empire's Legion", H.common_knowledge(None))
+
+    def test_lore_budget_capped(self):
+        # SCH-13: lore is sent again on every reply
+        settings = os.path.join(self.tmp.name, "settings.json")
+        old = H.HUB_SETTINGS
+        H.HUB_SETTINGS = settings
+        try:
+            for value, want in ((5000, H.MAX_LORE_BUDGET), (10, H.MIN_LORE_BUDGET), (200, 200), (0, H.DEFAULT_LORE_BUDGET),
+                                (True, H.DEFAULT_LORE_BUDGET)):
+                with open(settings, "w", encoding="utf-8") as f:
+                    json.dump({"lore_budget": value}, f)
+                self.assertEqual(H.lore_budget(), want, value)
+        finally:
+            H.HUB_SETTINGS = old
+
+    def test_group_talk_marks_secrets(self):
+        # FAC-6: with two NPCs in the talk, the secret says the others must not hear it
+        conversation(self.tmp.name, [("Camilla Valerius", "01347B"), ("Serana", "002B6C")])
+        parts = H.system_parts({"background": "Bio."}, {})
+        self.assertIn("Secret only Serana knows; never said in front of the others here", parts.get("knows", ""))
+        conversation(self.tmp.name, [("Serana", "002B6C")])
+        parts = H.system_parts({"background": "Bio."}, {})
+        self.assertIn("- Secret: ", parts.get("knows", ""))
 
     def test_lore_line_for_a_named_place(self):
         conversation(self.tmp.name, [("Camilla Valerius", "01347B")])

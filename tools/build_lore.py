@@ -74,12 +74,20 @@ INSIDE_KINDS = {"dungeon", "cave", "fort", "mine", "nest", "tower", "shipwreck",
 # The wiki's place type is wrong for these: lived-in, holy or manned places that must not get the rumour about an
 # outlaw fort or a ruined tower (High Hrothgar is typed "Military Fort", Stendarr's Beacon "Imperial Tower").
 PLACE_KIND_FIXES = {"high hrothgar": "monastery", "nightcaller temple": "temple", "western watchtower": "military",
-                    "stendarr's beacon": "temple"}
+                    "stendarr's beacon": "temple",
+                    # typed "Worldspace" or "Settlement": quest dungeons and hideouts that must get the short rumour,
+                    # and private houses, not the room-by-room text of a region or the merchant bonus of a settlement
+                    "skuldafn": "dungeon", "shalidor's maze": "dungeon", "dawnstar sanctuary": "dungeon",
+                    "azura's star interior": "dungeon", "the mind of a madman": "dungeon", "misty grove": "dungeon",
+                    "goldenglow estate": "house", "black-briar lodge": "house"}
 # Lead sentences of an enterable place that describe what is inside it.
 INSIDE_HINT = re.compile(r"\b(word wall|puzzles?|traps?|pillars?|levers?|claw|chests?|treasure|boss|"
                          r"dragon priest|Dragonstone|Elder Scroll|sarcophag\w*|coffin|"
                          r"overlord|inner|interior|deep(er)? inside|depths|sanctum|"
                          r"hidden|secret|mechanism|door)\b", re.I)
+# "X is a location in." where the wiki template that named the hold was stripped; "X is a location in. It is a cave"
+# becomes "X is a cave", anything else after it stands alone
+EMPTY_LOCATION = re.compile(r"([^.]*\bis) an? (?:unmarked )?location in\.\s*It is\b|[^.]*\bis an? (?:unmarked )?location in\.\s*")
 COMMON_KINDS = {"city", "hold", "region"}  # lead line is common knowledge (depth 1)
 ANCIENT_KINDS = {"dungeon"}
 
@@ -90,7 +98,26 @@ TOPIC_IDS = {
     "divines": "divines", "nine divines": "divines", "imperial legion": "civil_war",
     "stormcloaks": "civil_war", "thu'um": "thuum", "dragon shouts": "thuum",
     "alchemy": "alchemy", "smithing": "smithing", "bandits": "bandits", "werewolves": "monsters",
+    # faction and topic pages: without a topic everyone got the default level 2-3, whatever their profession
+    "dwemer": "dwemer", "hermaeus mora": "daedra", "vampirism": "vampires", "volkihar clan": "vampires",
+    "companions": "history", "greybeards": "history", "blades": "history", "bards": "lore",
+    "college of winterhold (faction)": "magic", "psijic order": "magic", "snow elf": "ruins",
+    "dragon mounds": "dragons", "standing stone": "lore", "shrines": "religion", "word wall": "thuum",
+    "vigil of stendarr": "religion", "penitus oculatus": "politics", "battle-born": "politics",
+    "black-briars": "politics", "gray-mane": "politics", "silver-bloods": "politics", "snow-shod": "politics",
+    "clan shatter-shield": "politics", "thieves guild (faction)": "local_crime", "dark brotherhood": "local_crime",
+    "black hand": "local_crime", "shadowscales": "local_crime", "the circle": "monsters", "silver hand": "monsters",
+    "hunters of hircine": "daedra", "coven of namira": "daedra", "darklight tower coven": "magic",
+    "mythic dawn": "daedra", "nightingales": "local_crime", "tribal orcs": "lore",
 }
+# Wiki list, mechanics and editor pages: not lore anyone in the world knows ("Inaccessible Cells" lists test cells,
+# "Unused NPCs" cut characters); a redirect to one of them names nothing then.
+DROP_TITLES = {"inaccessible cells", "unused npcs", "worldspaces", "guard dialogue", "alchemy labs", "arcane enchanters",
+               "atronach forge recipe", "elven horse armor", "steel horse armor", "crossbow", "elder", "other places",
+               "dungeons", "dragon lairs", "barracks", "border gates", "settlements", "temples", "cities",
+               "military forts", "beggars", "weather"}
+DROP_TITLE_RE = re.compile(r"^(factions\b|unmarked places\b|warehouse\b)|\b(test|holding cell|smoke test|voice cell|"
+                           r"cleanup cell)", re.I)
 
 # Facts naming a secret are gated by knows_secret at lookup time.
 SECRET_PATTERNS = {
@@ -383,7 +410,7 @@ def page_facts(kind, info, plain, title=""):
     """[(section, depth, inside, text)] for one article, cheapest/most public first."""
     out = []
     place_kind = info.get("place_kind")
-    desc = info.get("description")
+    desc = EMPTY_LOCATION.sub(r"\1", info.get("description") or "").strip()
     if kind == "place" and desc and title:
         d = desc.rstrip(".")
         d = d[0].lower() + d[1:] if d[:2].istitle() and not d.startswith(title) else d
@@ -393,7 +420,7 @@ def page_facts(kind, info, plain, title=""):
     for head, body in sections(plain):
         if head and DROP_SECTIONS.search(head):
             continue
-        facts = split_facts(body, keep=clean_sentence)
+        facts = split_facts(EMPTY_LOCATION.sub(r"\1", body), keep=clean_sentence)
         if not facts:
             continue
         if not head:
@@ -475,7 +502,7 @@ def collect(pages_by_src):
             if not kind:
                 continue
             key = title_key(d["title"])
-            if not key:
+            if not key or key.lower() in DROP_TITLES or DROP_TITLE_RE.search(key):
                 continue
             lk = key.lower()
             if lk in arts:

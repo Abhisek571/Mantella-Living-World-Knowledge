@@ -64,6 +64,13 @@ class Secrets(unittest.TestCase):
         self.assertTrue(K.knows_secret("B", s, {"quests": {"Q": 10}}))
         self.assertFalse(K.knows_secret("C", s, {"quests": {"Q": 10}}))
 
+    def test_dawnguard_learn_the_prophecy_only_on_their_path(self):
+        # FAC-1: DLC1VQ02 reaches 200 on the vampire path too
+        s = K.secrets()["tyranny_of_the_sun"]
+        self.assertFalse(K.knows_secret("Isran", s, {"quests": {"DLC1VQ02": 200, "DLC1VQ03Hunter": 0}}))
+        self.assertTrue(K.knows_secret("Isran", s, {"quests": {"DLC1VQ02": 200, "DLC1VQ03Hunter": 15}}))
+        self.assertFalse(any(u["quest"] == "DLC1VQ02" for u in s["unlock"]))
+
     def test_known_secrets_list(self):
         ids = K.known_secrets("Karliah", {})
         self.assertIn("mercer_betrayal", ids)
