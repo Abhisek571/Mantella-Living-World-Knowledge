@@ -187,14 +187,11 @@
 "Avoidance Exterior": {
 "kind": "landmark"
 },
-"Azura Voice Cell": {
-"kind": "landmark"
-},
 "Azura's Star": {
 "kind": "landmark"
 },
 "Azura's Star Interior": {
-"kind": "region"
+"kind": "dungeon"
 },
 "Bandit Bridge: Pinewatch": {
 "hold": "Falkreath Hold",
@@ -295,7 +292,7 @@
 },
 "Black-Briar Lodge": {
 "hold": "The Rift",
-"kind": "settlement"
+"kind": "house"
 },
 "Black-Briar Manor": {
 "hold": "The Rift",
@@ -613,15 +610,6 @@
 "hold": "The Rift",
 "kind": "cave"
 },
-"DLC1 Item Holding Cell": {
-"kind": "landmark"
-},
-"DLC1LD Holding Cell": {
-"kind": "landmark"
-},
-"DLC1LD Quest Holding Cell": {
-"kind": "landmark"
-},
 "Daighre's House": {
 "hold": "The Reach",
 "kind": "house",
@@ -693,13 +681,10 @@
 },
 "Dawnstar Sanctuary": {
 "hold": "The Pale",
-"kind": "settlement"
+"kind": "dungeon"
 },
 "Dayspring Canyon": {
 "hold": "The Rift",
-"kind": "landmark"
-},
-"Dead Body Cleanup Cell": {
 "kind": "landmark"
 },
 "Dead Crone Rock": {
@@ -776,9 +761,6 @@
 "Dimhollow Crypt": {
 "hold": "The Pale",
 "kind": "cave"
-},
-"Do Not Delete - Not A Test Cell": {
-"kind": "landmark"
 },
 "Dragon Bridge": {
 "hold": "Haafingar",
@@ -876,9 +858,6 @@
 "hold": "Whiterun Hold",
 "kind": "shack"
 },
-"Dremora Holding Cell": {
-"kind": "landmark"
-},
 "Driftshade Refuge": {
 "hold": "Winterhold",
 "kind": "fort"
@@ -956,9 +935,6 @@
 "Eastmarch Imperial Camp": {
 "hold": "Eastmarch",
 "kind": "camp_military"
-},
-"Editor Smoke Test Cell": {
-"kind": "landmark"
 },
 "Elder's Cairn": {
 "hold": "The Pale",
@@ -1317,7 +1293,7 @@
 },
 "Goldenglow Estate": {
 "hold": "The Rift",
-"kind": "settlement"
+"kind": "house"
 },
 "Goldenrock Mine": {
 "hold": "Eastmarch",
@@ -1614,9 +1590,6 @@
 "hold": "Whiterun Hold",
 "kind": "house",
 "town": "Riverwood"
-},
-"Holding cell": {
-"kind": "landmark"
 },
 "Hollyfrost Farm": {
 "hold": "Eastmarch",
@@ -2056,9 +2029,6 @@
 "hold": "Haafingar",
 "kind": "farm"
 },
-"Magic Visuals Test Hall": {
-"kind": "landmark"
-},
 "Main Hall": {
 "kind": "landmark"
 },
@@ -2126,9 +2096,6 @@
 "hold": "Hjaalmarch",
 "kind": "shack"
 },
-"Mehrunes Dagon Voice Cell": {
-"kind": "landmark"
-},
 "Merryfair Farm": {
 "hold": "The Rift",
 "kind": "farm"
@@ -2155,7 +2122,7 @@
 "kind": "landmark"
 },
 "Misty Grove": {
-"kind": "region"
+"kind": "dungeon"
 },
 "Mixwater Mill": {
 "hold": "Eastmarch",
@@ -2459,9 +2426,6 @@
 "hold": "Whiterun Hold",
 "kind": "landmark"
 },
-"Quick Test Cell": {
-"kind": "landmark"
-},
 "Quicksilver Mine": {
 "hold": "The Pale",
 "kind": "mine",
@@ -2487,9 +2451,6 @@
 "Rannveig's Fast": {
 "hold": "Whiterun Hold",
 "kind": "dungeon"
-},
-"Raven Rock Holding Cell": {
-"kind": "landmark"
 },
 "Raven Rock Mine": {
 "kind": "mine"
@@ -2751,9 +2712,6 @@
 "kind": "store",
 "town": "Windhelm"
 },
-"Salvatore's Test Cell": {
-"kind": "landmark"
-},
 "Salvius Farm": {
 "hold": "The Reach",
 "kind": "farm"
@@ -2813,7 +2771,7 @@
 },
 "Shalidor's Maze": {
 "hold": "Hjaalmarch",
-"kind": "region"
+"kind": "dungeon"
 },
 "Sharpslope Cave": {
 "hold": "The Reach",
@@ -2995,7 +2953,7 @@
 },
 "Skuldafn": {
 "hold": "Eastmarch",
-"kind": "region"
+"kind": "dungeon"
 },
 "Sky Haven Temple": {
 "hold": "The Reach",
@@ -3274,15 +3232,6 @@
 "kind": "temple",
 "town": "Solitude"
 },
-"TestDLC1PlantWorld": {
-"kind": "landmark"
-},
-"TestRSears": {
-"kind": "landmark"
-},
-"Testl": {
-"kind": "landmark"
-},
 "Thalmor Embassy": {
 "hold": "Haafingar",
 "kind": "settlement"
@@ -3430,7 +3379,7 @@
 },
 "The Mind of a Madman": {
 "hold": "Haafingar",
-"kind": "region"
+"kind": "dungeon"
 },
 "The Mortar and Pestle": {
 "hold": "The Pale",
@@ -3763,19 +3712,6 @@
 },
 "War Quarters": {
 "kind": "dungeon"
-},
-"Warehouse": {
-"hold": "Eastmarch",
-"kind": "dock"
-},
-"Warehouse Carry": {
-"kind": "landmark"
-},
-"Warehouse Furniture": {
-"kind": "landmark"
-},
-"Warehouse Traps": {
-"kind": "landmark"
 },
 "Warmaiden's": {
 "hold": "Whiterun Hold",

@@ -17,6 +17,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CHANNEL_DIR = os.path.normpath(os.path.join(os.getcwd(), '..', 'StorageUtilData', 'MantellaLivingWorld'))
 HUB_SETTINGS = os.path.join(os.path.dirname(HERE), 'living_world', 'settings.json')
 DEFAULT_LORE_BUDGET = 150
+MIN_LORE_BUDGET, MAX_LORE_BUDGET = 50, 600  # lore is sent again on every reply, so the setting is capped
 JOB_WORDS = {'court': 'member of the court', 'court_wizard': 'court wizard', 'commoner': 'local', 'creature': 'being', 'caravan': 'caravan trader'}
 TRAVEL = {'home': 'rarely leaves {home}', 'regional': 'travels around {hold}', 'province': 'travels all over Skyrim'}
 
@@ -63,17 +64,29 @@ def speaker_profiles() -> list[dict]:
 
 def lore_budget() -> int:
     value = _read(HUB_SETTINGS).get('lore_budget')
-    return value if isinstance(value, int) and not isinstance(value, bool) and value > 0 else DEFAULT_LORE_BUDGET
+    if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
+        return DEFAULT_LORE_BUDGET
+    return min(MAX_LORE_BUDGET, max(MIN_LORE_BUDGET, value))
 
 
 # Lines of common_knowledge.txt that hold only before or only after the dragon attack on Helgen
 HELGEN_QUESTS = ('MQ101', 'MQ102', 'MQ104')
 _BEFORE, _AFTER = 'Before Helgen: ', 'After Helgen: '
+# Lines that hold only while the civil war goes on, or only after one side won (World's CWFinale done + war_side)
+WAR_END_QUEST = 'CWFinale'
+_WAR = {'on': 'War on: ', 'Legion': 'War over (Legion): ', 'Stormcloaks': 'War over (Stormcloaks): '}
 
 
 def before_helgen(states) -> bool:
     """True only when World says the main quest has not reached Helgen yet. Without World it has: the game opens there."""
     return isinstance(states, dict) and all(states.get(q) == 0 for q in HELGEN_QUESTS)
+
+
+def war_state(states) -> str:
+    # 'Legion' or 'Stormcloaks' once World says that side won the civil war, else 'on'
+    if isinstance(states, dict) and states.get(WAR_END_QUEST) == 2 and states.get('war_side') in ('Legion', 'Stormcloaks'):
+        return states['war_side']
+    return 'on'
 
 
 def common_knowledge(states=None) -> str:
@@ -84,7 +97,14 @@ def common_knowledge(states=None) -> str:
         except OSError:
             _common['text'] = ''
     drop, keep = (_AFTER, _BEFORE) if before_helgen(states) else (_BEFORE, _AFTER)
-    lines = [l[len(keep):] if l.startswith(keep) else l for l in _common['text'].splitlines() if not l.startswith(drop)]
+    war = _WAR[war_state(states)]
+    drop = (drop,) + tuple(p for p in _WAR.values() if p != war)
+    lines = []
+    for l in _common['text'].splitlines():
+        if l.startswith(drop):
+            continue
+        prefix = next((p for p in (keep, war) if l.startswith(p)), '')
+        lines.append(l[len(prefix):])
     return '\n'.join(lines)
 
 
@@ -117,14 +137,34 @@ def identity_lines(profiles: list[dict]) -> str:
 
 
 def world() -> dict:
-    """The World module's world.json (plain JSON), or {} without World."""
-    return _read(os.path.join(CHANNEL_DIR, 'world.json'))
+    """The World module's world.json (plain JSON), or {} without World, or while it still holds another
+    character's or a later save's state: World is rewriting it after a load ("loading" 1), its player is not the one
+    talking, or its day is later than today."""
+    data = _read(os.path.join(CHANNEL_DIR, 'world.json'))
+    if not data or data.get('loading') == 1:
+        return {}
+    conv = _read(os.path.join(CHANNEL_DIR, 'conversation.json'))
+    player, today = (conv.get('string') or {}).get('player'), (conv.get('int') or {}).get('day')
+    if isinstance(player, str) and player and isinstance(data.get('player'), str) and data['player'] \
+            and data['player'] != player:
+        return {}
+    day = data.get('day')
+    if isinstance(today, int) and isinstance(day, (int, float)) and not isinstance(day, bool) and int(day) > today:
+        return {}
+    return data
 
 
 def quest_states():
-    """{quest editor id: 0 not started, 1 running, 2 done} from World, or None without World."""
-    states = world().get('quest_state')
-    return {k: v for k, v in states.items() if isinstance(v, int)} if isinstance(states, dict) else None
+    """{quest editor id: 0 not started, 1 running, 2 done} from World, or None without World. Also holds
+    'war_side' (the side the player joined in the civil war) when World knows it."""
+    data = world()
+    states = data.get('quest_state')
+    if not isinstance(states, dict):
+        return None
+    out = {k: v for k, v in states.items() if isinstance(v, int)}
+    if data.get('war_side') in ('Legion', 'Stormcloaks'):
+        out['war_side'] = data['war_side']
+    return out
 
 
 _resources = {'data': None}
@@ -199,7 +239,14 @@ def system_parts(parts: dict, ctx) -> dict:
         return parts
     profiles = speaker_profiles()
     if not profiles:
-        return parts
+        # the Hub leaves the Dragonborn news to Knowledge, so NPCs without a profile still get the far/rumour wording
+        player = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('string') or {}).get('player') or 'the traveller'
+        line = DB.line(quest_states(), {}, player, _read(HUB_SETTINGS).get('dragonborn_secret') is True)
+        if not line:
+            return parts
+        out = dict(parts)
+        out['identity'] = line
+        return out
     # Only adds parts: the Integration Hub's layout names where they go ('__order__') and the cache points.
     out = dict(parts)
     if isinstance(out.get('background'), str):
@@ -211,7 +258,9 @@ def system_parts(parts: dict, ctx) -> dict:
     lines = [identity_lines(profiles)] + list(dict.fromkeys(l for l in (DB.line(states, p, player, secret) for p in profiles) if l))
     lines += gather_hints(profiles)
     out['identity'] = '\n'.join(l for l in lines if l)
-    knows = [N.knows_block(p.get('name'), p.get('base_id', ''), states) for p in profiles]
+    # the whole talk shares one prompt: with others there, a secret is marked as never said in front of them
+    talkers = len((_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('stringList') or {}).get('speakers') or [])
+    knows = [N.knows_block(p.get('name'), p.get('base_id', ''), states, speakers=max(talkers, len(profiles))) for p in profiles]
     _state['knows'] = '\n'.join(knows)
     if any(knows):
         out['knows'] = '\n\n'.join(k for k in knows if k)

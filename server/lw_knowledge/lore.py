@@ -138,6 +138,14 @@ RUMORS = {
     "tower": "{t} is an old ruined tower {w} that locals keep away from.",
 }
 RUMOR_DEPTH = 2
+# Hidden groups and DLC leads: like a dangerous place, everyone gets at most the one public lead line (depth 1); the
+# rest comes only from a secret the NPC is in on. SECRET_TITLES (inner circles, cults, named dragons, hidden places)
+# give nobody even the lead.
+HIDDEN_TITLES = {"dark brotherhood", "thieves guild (faction)", "thieves guild", "silver hand", "mythic dawn", "snow elf"}
+SECRET_TITLES = {"black hand", "coven of namira", "nightingales", "volkihar clan", "the circle", "hunters of hircine",
+                 "darklight tower coven", "shadowscales", "forgotten vale", "odahviing", "durnehviir", "miraak",
+                 "mirmulnir", "sahloknir", "vulthuryol", "viinturuth", "nahagliiv", "voslaarum", "kruziikrel",
+                 "vuljotnaak", "relonikiv", "sahrotaar", "naaslaarum"}
 _WHERE_RE = re.compile(r"\b((?:north|south|east|west)[a-z-]* of|above|below|near|outside|in) "
                        r"((?:the )?[A-Z][\w']*(?: [A-Z][\w']*)*)")
 
@@ -177,11 +185,25 @@ _GUIDE_RE = re.compile(r"\b(can be found|is found|are found|is located|located (
                        r"owned (?:single |double )?beds?|common books?|loose (?:gold|coins?)|bottles? of|potions? of|dresser|end table|"
                        r"night ?stand|wardrobe|cupboard|satchel|knapsack|leveled|randomly|random (?:items?|loot)|(?:un)?locked chest|"
                        r"(?:novice|apprentice|adept|expert|master)-locked|skill books?|(?:reading|in) (?:his|her|their|the) (?:journal|diary|note)|"
-                       r"research notes|can be (?:picked|looted|taken)|respawn)", re.I)
+                       r"research notes|can be (?:picked|looted|taken)|respawn|"
+                       # wiki and game-file wording: audio links, form ids, add-ons, patches, bonuses
+                       r"\.ogg\b|\(\s*listen\b|FormID|Creation (?:Club|Kit)|installed|DLC|lore (?:page|article)|bonus(?:es)?|"
+                       r"(?:unofficial |official )?patch(?:ed|es)? \d|unofficial patch|patched|add-ons?|"
+                       # word walls, things to buy for a house, quest-timed notes
+                       r"word walls?|purchas\w*|upgrades?)|†|"
+                       # a quest named by its title in quotes ("The Cure for Madness"), and a guide's objectives
+                       r"\"(?-i:[A-Z])[^\"]{3,60}\"|"
+                       r"(?:^|[.!?]\s+)(?:Journey|Retrieve|Find|Speak|Travel|Return|Bring|Go|Follow|Enter|Take) ", re.I | re.M)
 
 
 def is_guide_text(sentence):
     return bool(_GUIDE_RE.search(sentence or ""))
+
+
+def is_fragment(sentence):
+    # a piece cut mid-sentence by the wiki parser, or a stray line of dialogue
+    s = (sentence or "").strip()
+    return not s or s[0].islower() or len(s.split()) < 6
 
 
 # People: one who-and-where line, never the wiki's narration. Who has heard of whom: rulers everywhere, high-standing
@@ -205,12 +227,14 @@ def people_line(title, listener):
     if who.get("profession") in _HIDDEN_JOBS and not tied:
         return None
     standing = who.get("standing")
+    # only a Jarl or the Emperor is known everywhere; Daedra, dragons, Miraak and Harkon are "ruler" too
+    is_ruler = standing == "ruler" and who.get("profession") in ("court", "noble")
     same_town = home and home.lower() == (listener.get("home") or "").lower()
     same_hold = hold and hold.lower() == (listener.get("hold") or "").lower()
-    known = tied or standing == "ruler" or same_town or (standing == "high" and (same_hold or listener.get("travel") == "province"))
+    known = tied or is_ruler or same_town or (standing == "high" and (same_hold or listener.get("travel") == "province"))
     if not known or not home:
         return None
-    if standing == "ruler" and hold:
+    if is_ruler and hold:
         return f"{title} rules {hold} from {home}."
     job = {"": "local", "commoner": "local", "court": "member of the court"}.get(job, job)
     where = home if same_hold else f"{home}, {hold}" if hold else home
@@ -249,6 +273,8 @@ def lookup(text, npc_profile, budget=150, world=None, sent=None, db_path=None):
         ancient = profile.get("era") == "ancient"
         name = profile.get("name")
         dangerous = {a for a in arts if db.articles[a]["kind"] == "place" and db.articles[a]["place_kind"] in DANGEROUS}
+        hidden = {a for a in arts if db.articles[a]["title"].lower() in HIDDEN_TITLES | SECRET_TITLES} - dangerous
+        hidden_lead = {a for a in hidden if db.articles[a]["title"].lower() in SECRET_TITLES}  # no lead at all
         # People and minor places get one generated line instead of their wiki facts.
         generated = {}
         for a in arts:
@@ -267,8 +293,12 @@ def lookup(text, npc_profile, budget=150, world=None, sent=None, db_path=None):
                 continue
             if aid in generated and not secret:
                 continue
-            if not secret and is_guide_text(ftext):
+            if not secret and (is_guide_text(ftext) or is_fragment(ftext)):
                 continue
+            if aid in hidden and not secret:
+                if depth > 1 or aid in hidden_lead:
+                    continue
+                hidden_lead.add(aid)
             if secret:
                 # Secrets ignore levels both ways: only those in on it, and they know it fully.
                 if not K.knows_secret(name, secret, world):

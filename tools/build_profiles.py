@@ -431,7 +431,7 @@ def _same_tie(a, b):
     return False
 
 
-def build(csv_path, uesp_path, out_path, ratings_dir):
+def build(csv_path, uesp_path, out_path, ratings_dir, observation_path=None):
     rows = load_csv(csv_path)
     places = load_places()
     uesp = load_uesp_npcs(uesp_path)
@@ -457,7 +457,25 @@ def build(csv_path, uesp_path, out_path, ratings_dir):
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump({"version": 1, "match": "name|race|base_id", "profiles": out}, f,
                   ensure_ascii=False, indent=0, sort_keys=True)
+    if observation_path:
+        write_observation(out, observation_path)
     return stats, unused
+
+
+def write_observation(profiles, path):
+    """The World module's recognition reads each NPC's observation from here (JsonUtil format, keyed in lowercase (as JsonUtil looks keys up) by the 6-digit
+    base id the game gives). Only values other than the default 2; ids shorter than 4 digits (light plugin NPCs) and
+    ids shared by profiles with different values are left out. Returns the number of NPCs written."""
+    seen = {}
+    for p in profiles.values():
+        bid = p.get("base_id") or ""
+        if 4 <= len(bid) <= 6 and re.fullmatch(r"[0-9A-F]+", bid):
+            seen.setdefault(bid.zfill(6), set()).add(p.get("observation", 2))
+    obs = {bid.lower(): next(iter(vals)) for bid, vals in sorted(seen.items()) if len(vals) == 1 and next(iter(vals)) != 2}
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump({"int": obs}, f, indent=1, sort_keys=True)
+    return len(obs)
 
 
 def main(argv=None):
@@ -466,8 +484,10 @@ def main(argv=None):
     ap.add_argument("--uesp", default=os.path.join(ROOT, "work", "uesp.jsonl.gz"))
     ap.add_argument("--out", default=os.path.join(ROOT, "data", "profiles.json"))
     ap.add_argument("--ratings", default=os.path.join(ROOT, "data", "ratings"))
+    ap.add_argument("--observation", default=os.path.join(ROOT, "SKSE", "Plugins", "StorageUtilData",
+                                                          "MantellaLivingWorld", "observation.json"))
     a = ap.parse_args(argv)
-    stats, unused = build(a.csv, a.uesp, a.out, a.ratings)
+    stats, unused = build(a.csv, a.uesp, a.out, a.ratings, a.observation)
     print(json.dumps(stats))
     if unused:
         print("ratings with no matching row:", unused[:20], file=sys.stderr)

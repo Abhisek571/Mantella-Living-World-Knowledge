@@ -3,6 +3,7 @@ import sys
 import tempfile
 import time
 import unittest
+from unittest import mock
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
@@ -106,6 +107,47 @@ class Lookup(unittest.TestCase):
             self.assertTrue(L.is_guide_text(bad), bad)
         self.assertFalse(L.is_guide_text("Riverwood sits on the bank of the White River below the old barrow."))
 
+    def test_guide_text_quest_titles_upgrades_word_walls(self):
+        for bad in ("Several upgrades can be purchased from the steward for 19,000 in total.",
+                    "† They move here at the end of Hail Sithis!",
+                    'Cicero (if he is spared during "The Cure for Madness")',
+                    "Inside the Sanctuary is a word wall for the Dragon Shout Marked for Death.",
+                    "Journey through the Forgotten Vale and retrieve Auriel's Bow.",
+                    "The valley is cold. Find Helgird inside the Hall of the Dead."):
+            self.assertTrue(L.is_guide_text(bad), bad)
+        for good in ("Dawnstar sits on the northern coast of the Pale.", 'People call him "the butcher" behind his back.',
+                     "Travellers find the road hard in winter."):
+            self.assertFalse(L.is_guide_text(good), good)
+
+    def test_only_jarls_and_emperor_known_everywhere(self):
+        who = {"Miraak": {"profession": "priest", "standing": "ruler", "home": "Apocrypha"},
+               "Chief Burguk": {"profession": "court", "standing": "high", "home": "Dushnikh Yal", "hold": "The Reach"},
+               "Jarl Ulfric Stormcloak": {"profession": "court", "standing": "ruler", "home": "Windhelm", "hold": "Eastmarch"}}
+        listener = dict(STRANGER, home="Whiterun", hold="Whiterun Hold")
+        with mock.patch.object(L.K, "profile_for", lambda title, *a: who.get(title)):
+            self.assertIsNone(L.people_line("Miraak", listener))
+            self.assertIsNone(L.people_line("Chief Burguk", listener))
+            self.assertEqual(L.people_line("Jarl Ulfric Stormcloak", listener),
+                             "Jarl Ulfric Stormcloak rules Eastmarch from Windhelm.")
+            # a ruler-standing priest or Daedric Prince with a hold does not "rule" it
+            who["Miraak"]["hold"] = "Solstheim"
+            self.assertIsNone(L.people_line("Miraak", listener))
+            self.assertNotIn("rules", L.people_line("Chief Burguk", dict(listener, hold="The Reach")))
+
+    def test_wiki_wording_and_fragments(self):
+        # SCH-5: audio links, form ids, add-ons, mid-sentence pieces
+        for bad in ("Khajiit (listen LO-audio-word-Khajiit.ogg ) are a race of cat-folk from Elsweyr.",
+                    "With installed, a word wall and a dragon appear on the mountain.",
+                    "The power has FormID 000e40d5 and lasts a minute.",
+                    "See the lore page for the full history of the clan.",
+                    "Wearing it gives a bonus to archery and sneaking.",
+                    "The Dawnguard add-on adds a castle to the island."):
+            self.assertTrue(L.is_guide_text(bad), bad)
+        self.assertFalse(L.is_guide_text("A small patch of farmland lies to the east of the town."))
+        self.assertTrue(L.is_fragment("expand their property hold on the Reach."))
+        self.assertTrue(L.is_fragment("They cannot be trusted."))
+        self.assertFalse(L.is_fragment("Riverwood sits on the bank of the White River."))
+
     def test_secret_gated(self):
         plain = " ".join(self.look("Who is Alduin?", CAMILLA))
         self.assertNotIn("raising", plain)
@@ -128,6 +170,39 @@ REAL_DB = os.path.join(ROOT, "data", "lore.sqlite")
 
 @unittest.skipUnless(os.path.exists(REAL_DB), "data/lore.sqlite not built")
 class RealDatabase(unittest.TestCase):
+    def setUp(self):
+        if not os.path.exists(L.default_db_path()):
+            self.skipTest("no lore.sqlite")
+
+    def test_beggar_gets_no_hidden_group_lore(self):
+        # SCH-3: hidden groups give at most one public lead, inner circles nothing
+        brenuin = {"name": "Brenuin", "home": "Whiterun", "hold": "Whiterun Hold", "profession": "beggar", "education": 1}
+        self.assertEqual(L.lookup("Tell me about the Black Hand.", brenuin, 400), [])
+        self.assertEqual(L.lookup("What are the Nightingales?", brenuin, 400), [])
+        self.assertLessEqual(len(L.lookup("What is the Dark Brotherhood?", brenuin, 400)), 1)
+        self.assertEqual(L.lookup("Who is Odahviing?", brenuin, 400), [])  # SCH-6: named dragons
+        self.assertEqual(L.lookup("Have you heard of the Forgotten Vale?", brenuin, 400), [])
+
+    def test_topic_articles_have_topics(self):
+        db = L.get_db()
+        titles = {a["title"].lower(): a["topic"] for a in db.articles.values() if a["kind"] == "topic"}
+        for title in ("dwemer", "black hand", "dark brotherhood", "companions", "vampirism", "thalmor"):
+            self.assertTrue(titles.get(title), title)
+
+    def test_editor_list_pages_gone(self):
+        # SCH-4: "Inaccessible Cells" and "Unused NPCs" were reached through names like "riften military camp"
+        db = L.get_db()
+        titles = {a["title"].lower() for a in db.articles.values()}
+        for title in ("inaccessible cells", "unused npcs", "worldspaces", "guard dialogue", "factions",
+                      "unmarked places eastmarch", "editor smoke test cell", "warehouse"):
+            self.assertNotIn(title, titles)
+        self.assertIn("riften warehouse", titles)  # a real place keeps its page
+        self.assertNotIn("riften military camp", db.names)
+        self.assertNotIn("hrothmund", db.names)
+        text = " ".join(L.lookup("riften military camp", STRANGER, 400) + L.lookup("hrothmund", STRANGER, 400))
+        self.assertNotIn("editor ID", text)
+        self.assertNotIn("new heroes", text)
+
     def test_size_and_speed(self):
         import sqlite3
         con = sqlite3.connect(REAL_DB)
