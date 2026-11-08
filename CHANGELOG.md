@@ -2,7 +2,7 @@
 
 Every change to Mantella Living World - Knowledge. The Nexus page lists only the main changes for each version.
 
-## Unreleased
+## 1.1.0 (2026-11-09)
 
 ### New
 - Secrets: NPCs can know things that are not common knowledge, and knowledge tied to quests counts too.
