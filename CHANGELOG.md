@@ -13,6 +13,9 @@ Every change to Mantella Living World - Knowledge. The Nexus page lists only the
 - Shorter description for MarkOnMap.
 - knowledge_checked.json keeps only the faction lists of NPCs in the current talk instead of every NPC ever met.
 
+### Fixed
+- The game's own files (conversation and NPC files) are read without regard to the case of their keys, as the Integration Hub does. A key the game wrote as "Name" or "Player" instead of "name" or "player" no longer leaves an NPC without their knowledge profile.
+
 ## 1.1.0 (2026-11-09)
 
 ### New

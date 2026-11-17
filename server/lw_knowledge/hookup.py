@@ -44,6 +44,30 @@ def _read(path):
         return {}
 
 
+# Papyrus strings are case-insensitive and the game reuses a spelling it already holds, so a key written as "name" can
+# come out as "Name". Keys of the game's JsonUtil files are read without case (the Integration Hub does the same).
+def _section(data, kind: str) -> dict:
+    found = next((v for k, v in data.items() if str(k).lower() == kind.lower()), None) if isinstance(data, dict) else None
+    return found if isinstance(found, dict) else {}
+
+
+def _game(data, kinds=('int', 'float', 'string', 'stringList')) -> dict:
+    """A game file's JsonUtil typed values ({"string": {"Name": ...}, ...}) as one dict with lower-case keys."""
+    out = {}
+    for kind in kinds:
+        for k, v in _section(data, kind).items():
+            out.setdefault(str(k).strip().lower(), v)
+    return out
+
+
+def _conversation() -> dict:
+    return _game(_read(os.path.join(CHANNEL_DIR, 'conversation.json')))
+
+
+def _npc(base: str) -> dict:
+    return _game(_read(os.path.join(CHANNEL_DIR, 'npc', base.upper() + '.json')))
+
+
 def speaker_pairs() -> list[tuple[str, dict]]:
     """(base id, Knowledge profile) of each NPC in the conversation that has a profile."""
     ids = speaker_ids()
@@ -51,7 +75,7 @@ def speaker_pairs() -> list[tuple[str, dict]]:
     for base in ids:
         if not isinstance(base, str) or not re.fullmatch(r'[0-9A-Fa-f]{1,8}', base):
             continue
-        name = (_read(os.path.join(CHANNEL_DIR, 'npc', base.upper() + '.json')).get('string') or {}).get('name')
+        name = _npc(base).get('name')
         profile = K.profile_for(name, '', base) if isinstance(name, str) and name else None
         if profile:
             out.append((base, profile))
@@ -144,8 +168,8 @@ def world() -> dict:
     data = _read(os.path.join(CHANNEL_DIR, 'world.json'))
     if not data or data.get('loading') == 1:
         return {}
-    conv = _read(os.path.join(CHANNEL_DIR, 'conversation.json'))
-    player, today = (conv.get('string') or {}).get('player'), (conv.get('int') or {}).get('day')
+    conv = _conversation()
+    player, today = conv.get('player'), conv.get('day')
     if isinstance(player, str) and player and isinstance(data.get('player'), str) and data['player'] \
             and data['player'] != player:
         return {}
@@ -181,7 +205,7 @@ def gather_hints(profiles) -> list[str]:
     for base, profile in speaker_pairs():  # each job stays with the NPC whose file it is in
         if profile.get('name') not in wanted:
             continue
-        job = (_read(os.path.join(CHANNEL_DIR, 'npc', base.upper() + '.json')).get('string') or {}).get('job')
+        job = _npc(base).get('job')
         job = job if isinstance(job, str) else ''
         for ore, mines in _resources['data'].items():
             if ore.lower() in job.lower():
@@ -250,7 +274,7 @@ def speaker_ids() -> list[str]:
     """The conversation's NPC base ids. The game writes conversation.json only after Mantella sent its greeting
     request, so when the file has no speakers, or not the ones the exe is answering for (left from the last talk),
     the exe's ids are used."""
-    ids = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('stringList') or {}).get('speakers') or []
+    ids = _conversation().get('speakers') or []
     ids = [i for i in ids if isinstance(i, str)] if isinstance(ids, list) else []
     exe = exe_speaker_ids()
     if exe and not set(exe) <= {i.upper() for i in ids}:
@@ -264,10 +288,7 @@ def world_speakers() -> list[dict]:
     for base in speaker_ids():
         if not isinstance(base, str) or not re.fullmatch(r'[0-9A-Fa-f]{1,8}', base):
             continue
-        data = _read(os.path.join(CHANNEL_DIR, 'npc', base.upper() + '.json'))
-        flat = {}
-        for kind in ('int', 'string', 'stringList'):
-            flat.update(data.get(kind) if isinstance(data.get(kind), dict) else {})
+        flat = _game(_read(os.path.join(CHANNEL_DIR, 'npc', base.upper() + '.json')), ('int', 'string', 'stringList'))
         name = flat.get('name')
         profile = K.profile_for(name, '', base) if isinstance(name, str) and name else None
         view = WK.npc_view(base, flat, profile)
@@ -293,7 +314,7 @@ def _world_inputs():
         return [], None, [], None
     state = WK.load_state()
     write_checks(packs, state)
-    player = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('string') or {}).get('player') or ''
+    player = _conversation().get('player') or ''
     game = WK.game_state(_read(os.path.join(CHANNEL_DIR, WK.CHECKED_FILE)), world(), player)
     return packs, state, world_speakers(), game
 
@@ -339,7 +360,7 @@ def system_parts(parts: dict, ctx) -> dict:
     profiles = speaker_profiles()
     if not profiles:
         # the Hub leaves the Dragonborn news to Knowledge, so NPCs without a profile still get the far/rumour wording
-        player = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('string') or {}).get('player') or 'the traveller'
+        player = _conversation().get('player') or 'the traveller'
         line = DB.line(quest_states(), {}, player, _read(HUB_SETTINGS).get('dragonborn_secret') is True)
         block = world_block()
         if not line and not block:
@@ -354,13 +375,14 @@ def system_parts(parts: dict, ctx) -> dict:
         out['background'] = fix_bios(out['background'], {p.get('name') for p in profiles})
     states = quest_states()
     out['common_knowledge'] = common_knowledge(states)
-    player = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('string') or {}).get('player') or 'the traveller'
-    secret = _read(HUB_SETTINGS).get('dragonborn_secret') is True
+    player = _conversation().get('player') or 'the traveller'
+    secret =_read(HUB_SETTINGS).get('dragonborn_secret') is True
     lines = [identity_lines(profiles)] + list(dict.fromkeys(l for l in (DB.line(states, p, player, secret) for p in profiles) if l))
     lines += gather_hints(profiles)
     out['identity'] = '\n'.join(l for l in lines if l)
     # the whole talk shares one prompt: with others there, a secret is marked as never said in front of them
-    talkers = len((_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('stringList') or {}).get('speakers') or [])
+    speakers = _conversation().get('speakers')
+    talkers = len(speakers) if isinstance(speakers, list) else 0
     knows = [N.knows_block(p.get('name'), p.get('base_id', ''), states, speakers=max(talkers, len(profiles))) for p in profiles]
     _state['knows'] = '\n'.join(knows)
     if any(knows):

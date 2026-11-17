@@ -309,6 +309,25 @@ class Hookup(unittest.TestCase):
         conversation(self.tmp.name, [("Camilla Valerius", "01347B")])
         self.assertEqual(H.extra_user_text(user("(Player walked past Bleak Falls Barrow.) Hello.")), "")
 
+    def test_game_keys_read_without_case(self):
+        # Papyrus' string table can hand back "Name", "Player", "Speakers", "Day" (A04): read like the Hub does
+        os.makedirs(os.path.join(self.tmp.name, "npc"), exist_ok=True)
+        with open(os.path.join(self.tmp.name, "npc", "01347B.json"), "w", encoding="utf-8") as f:
+            json.dump({"String": {"Name": "Camilla Valerius", "Job": "iron ore"}, "int": {}}, f)
+        with open(os.path.join(self.tmp.name, "conversation.json"), "w", encoding="utf-8") as f:
+            json.dump({"string": {"Player": "Hero"}, "int": {"Day": 3}, "stringList": {"Speakers": ["01347B"]}}, f)
+        with open(os.path.join(self.tmp.name, "world.json"), "w", encoding="utf-8") as f:
+            json.dump({"player": "Someone Else", "day": 2, "quest_state": {"MQ101": 1}}, f)
+        self.assertEqual(H.speaker_ids(), ["01347B"])
+        self.assertEqual([p.get("name") for p in H.speaker_profiles()], ["Camilla Valerius"])
+        self.assertEqual(H.world(), {}, "another character's world.json must be left out even when the key reads 'Player'")
+        with open(os.path.join(self.tmp.name, "world.json"), "w", encoding="utf-8") as f:
+            json.dump({"player": "Hero", "day": 5, "quest_state": {"MQ101": 1}}, f)
+        self.assertEqual(H.world(), {}, "a world.json from a later day ('Day' 3 today) must be left out")
+        self.assertEqual([v["name"] for v in H.world_speakers()], ["Camilla Valerius"])
+        parts = H.system_parts({"background": ""}, {})
+        self.assertIn("Camilla Valerius", parts.get("identity", ""))
+
 
 if __name__ == "__main__":
     unittest.main()
