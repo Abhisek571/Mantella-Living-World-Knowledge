@@ -43,12 +43,46 @@ class DataFiles(unittest.TestCase):
         with open(os.path.join(ROOT, "SKSE", "Plugins", "StorageUtilData", "MantellaLivingWorld", "markers.json"),
                   encoding="utf-8") as f:
             markers = json.load(f)
-        self.assertEqual(set(markers["int"]), {k for k in markers["string"] if not k.startswith("gate:")})
+        self.assertEqual(set(markers["int"]), {k for k in markers["string"] if not k.startswith(("gate:", "hold:"))})
         cut = [k for k, v in markers["int"].items()
                if markers["string"][k].lower() == "skyrim.esm" and 0x0F5FD2 <= v <= 0x0F5FF5 and v != 0x0F5FEF]
         self.assertEqual(cut, [])
         for name in ("twisted root cave", "riverwatch", "eye of markarth", "kyneswatch"):
             self.assertNotIn(name, markers["int"])
+
+    def test_map_marks_only_near_home(self):
+        # MarkOnMap let any NPC mark any place in Skyrim; now only their own hold or a neighbouring one, cities and
+        # towns for everyone, Solstheim from Solstheim
+        import json
+        import re
+        with open(os.path.join(ROOT, "SKSE", "Plugins", "StorageUtilData", "MantellaLivingWorld", "markers.json"),
+                  encoding="utf-8") as f:
+            markers = json.load(f)
+        holds = {k[5:]: v for k, v in markers["string"].items() if k.startswith("hold:")}
+        names = {"Whiterun", "Haafingar", "Eastmarch", "Rift", "Reach", "Pale", "Falkreath", "Hjaalmarch", "Winterhold"}
+        self.assertEqual(set(holds) - set(markers["int"]), set())
+        self.assertLessEqual(set(holds.values()), names | {"any", "solstheim"})
+        self.assertEqual(sorted(set(markers["int"]) - set(holds)), ["lower steepfall burrow"])  # hold not known: open
+        for place, hold in (("bleak falls barrow", "Falkreath"), ("whiterun", "any"), ("raven rock", "solstheim"),
+                            ("labyrinthian", "Hjaalmarch")):
+            if place in markers["int"]:
+                self.assertEqual(holds[place], hold, place)
+        places = {k.lower(): v for k, v in json.load(open(os.path.join(ROOT, "data", "places.json"), encoding="utf-8")).items()}
+        short = {"The Rift": "Rift", "The Reach": "Reach", "The Pale": "Pale", "Whiterun Hold": "Whiterun",
+                 "Falkreath Hold": "Falkreath"}
+        for place, hold in holds.items():
+            p = places.get(place) or {}
+            if hold in names and p.get("hold"):
+                self.assertEqual(short.get(p["hold"], p["hold"]), hold, place)
+        with open(os.path.join(ROOT, "Source", "Scripts", "MLWK_Map.psc"), encoding="utf-8") as f:
+            text = f.read()
+        self.assertIn('KnowsRegion(speaker, JsonUtil.GetStringValue(MARKERS, "hold:" + placeName, ""))', text)
+        borders = dict(re.findall(r'asHold == "(\w+)"\s+Return ",([\w,]+),"', text))
+        self.assertEqual(set(borders), names)
+        for a, others in borders.items():
+            for b in others.split(","):
+                self.assertIn(b, names)
+                self.assertIn(a, borders[b].split(","), f"{a} borders {b} but not back")
 
     def test_secret_map_places_gated(self):
         # SCH-10: secret places are marked only once their quest has started
