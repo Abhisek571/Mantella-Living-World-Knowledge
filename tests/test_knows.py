@@ -71,8 +71,13 @@ class Knows(unittest.TestCase):
         self.assertTrue(B.good_line("You are a lute player at the inn."))
         self.assertFalse(B.good_line("The player saved the College."))
 
-    def test_match_by_name_when_base_id_differs(self):
-        self.assertTrue(self.lines("Lucan Valerius", "FFFFFF", {"MS13": 1}))
+    def test_namesake_with_another_base_id_gets_nothing(self):
+        # a mod's own "Lucan Valerius" (another base record) never gets his knowledge or secret
+        self.assertEqual(self.lines("Lucan Valerius", "FFFFFF", {"MS13": 1}), [])
+        self.assertNotIn("Sleeping Giant", N.knows_block("Delphine", "FFFFFF", {}, db_path=self.db))
+
+    def test_match_by_name_without_base_id(self):
+        self.assertTrue(self.lines("Lucan Valerius", "", {"MS13": 1}))
 
     def test_unknown_npc_empty(self):
         self.assertEqual(N.knows_block("Nobody", "000002", {}, db_path=self.db), "")

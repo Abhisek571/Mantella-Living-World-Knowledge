@@ -87,6 +87,25 @@ class Hookup(unittest.TestCase):
         self.assertIn("Camilla Valerius", parts["identity"])
         self.assertIn("never been inside Bleak Falls Barrow", parts["identity"])
 
+    def test_secret_counts_the_live_speakers_and_first_reply_keeps_the_block(self):
+        # conversation.json still names the last one-on-one talk; the exe already answers for two
+        conversation(self.tmp.name, [("Camilla Valerius", "01347B"), ("Modded Stranger", "FE0811")])  # one profile only
+        with open(os.path.join(self.tmp.name, "conversation.json"), "w", encoding="utf-8") as f:
+            json.dump({"string": {"player": "Player"}, "stringList": {"speakers": ["01347B"]}}, f)
+        seen = []
+        def fake_block(name, base_id, states, db_path=None, speakers=1):
+            seen.append(speakers)
+            return f"What {name} knows:\n- Thieves took the claw."
+        old_block, old_exe = H.N.knows_block, H.exe_speaker_ids
+        H.N.knows_block, H.exe_speaker_ids = fake_block, lambda: ["01347B", "FE0811"]
+        try:
+            H.system_parts({"background": "Bio."}, {})
+            H.extra_user_text(user("Hello."))  # the talk's first reply
+        finally:
+            H.N.knows_block, H.exe_speaker_ids = old_block, old_exe
+        self.assertEqual(seen, [2])
+        self.assertIn("Thieves took the claw", H._state["knows"])
+
     def test_knows_part_uses_quest_state_from_world(self):
         conversation(self.tmp.name, [("Camilla Valerius", "01347B")])
         with open(os.path.join(self.tmp.name, "world.json"), "w", encoding="utf-8") as f:

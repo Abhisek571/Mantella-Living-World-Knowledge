@@ -580,22 +580,28 @@ def _norm_hold(name):
 
 
 def passes(cond, npc: dict, game: dict, groups: dict, pack_id: str = '') -> bool:
-    """True when this NPC meets the condition. Missing game data: not met. Never raises."""
+    """True when this NPC meets the condition. Missing game data: not met, also under a "not" (a leaf the game has not
+    written yet is unknown, and "not unknown" is unknown too), so a fact meant to be hidden from someone never reaches
+    them before the game has checked them. Never raises."""
     try:
-        return _passes(cond, npc, game, groups, pack_id)
+        return _passes(cond, npc, game, groups, pack_id) is True
     except Exception:  # noqa: BLE001 - a bad condition never breaks a reply
         return False
 
 
 def _passes(cond, npc, game, groups, pack_id):
+    """True, False, or None when the game data the condition needs is missing."""
     if not cond:
         return True
     if 'all' in cond:
-        return all(_passes(c, npc, game, groups, pack_id) for c in cond['all'])
+        results = [_passes(c, npc, game, groups, pack_id) for c in cond['all']]
+        return False if False in results else None if None in results else True
     if 'any' in cond:
-        return any(_passes(c, npc, game, groups, pack_id) for c in cond['any'])
+        results = [_passes(c, npc, game, groups, pack_id) for c in cond['any']]
+        return True if True in results else None if None in results else False
     if 'not' in cond:
-        return not _passes(cond['not'], npc, game, groups, pack_id)
+        result = _passes(cond['not'], npc, game, groups, pack_id)
+        return None if result is None else not result
     if 'location' in cond:
         want = cond['location'].lower()
         here = [npc['location'], npc['home']]
@@ -608,7 +614,8 @@ def _passes(cond, npc, game, groups, pack_id):
     if 'faction' in cond:
         key = form_key(cond['faction'])
         if key:
-            return key in game['factions'].get(npc['base'], set())
+            checked = game['factions'].get(npc['base'])
+            return None if checked is None else key in checked
         want = cond['faction'].strip().lower()
         return want in npc['groups'] or want == npc['work'] or (want == 'guard' and npc['guard']) \
             or (want == 'follower' and npc['follower'])
@@ -619,17 +626,21 @@ def _passes(cond, npc, game, groups, pack_id):
         return any(npc['name'].lower() in names or (npc['base'] is not None and npc['base'] in ids) for names, ids in sets)
     if 'quest' in cond:
         quest = cond['quest'].lower()
-        if 'completed' in cond and game['done'].get(quest, None if quest not in game['stages'] else False) != cond['completed']:
-            return False
+        if 'completed' in cond:
+            done = game['done'].get(quest, None if quest not in game['stages'] else False)
+            if done is None:
+                return None
+            if done != cond['completed']:
+                return False
         if 'stage_min' in cond or 'stage_max' in cond:
             stage = game['stages'].get(quest)
             if stage is None:
-                return False
+                return None
             return cond.get('stage_min', stage) <= stage <= cond.get('stage_max', stage)
         return 'completed' in cond
     if 'global' in cond:
         value = game['globals'].get(form_key(cond['global']))
-        return value is not None and OPS[cond['op']](value, cond['value'])
+        return None if value is None else OPS[cond['op']](value, cond['value'])
     return False
 
 

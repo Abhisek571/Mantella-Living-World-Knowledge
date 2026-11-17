@@ -22,12 +22,12 @@ MIN_LORE_BUDGET, MAX_LORE_BUDGET = 50, 600  # lore is sent again on every reply,
 JOB_WORDS = {'court': 'member of the court', 'court_wizard': 'court wizard', 'commoner': 'local', 'creature': 'being', 'caravan': 'caravan trader'}
 TRAVEL = {'home': 'rarely leaves {home}', 'regional': 'travels around {hold}', 'province': 'travels all over Skyrim'}
 
-_state = {'speakers': None, 'sent': set(), 'messages': 0, 'knows': ''}
+_state = {'speakers': None, 'sent': set(), 'messages': 0, 'knows': '', 'knows_for': None}
 _common = {'text': None}
 
 
 def reset():
-    _state.update(speakers=None, sent=set(), messages=0, knows='')
+    _state.update(speakers=None, sent=set(), messages=0, knows='', knows_for=None)
 
 
 def _read(path):
@@ -381,10 +381,11 @@ def system_parts(parts: dict, ctx) -> dict:
     lines += gather_hints(profiles)
     out['identity'] = '\n'.join(l for l in lines if l)
     # the whole talk shares one prompt: with others there, a secret is marked as never said in front of them
-    speakers = _conversation().get('speakers')
-    talkers = len(speakers) if isinstance(speakers, list) else 0
+    # speaker_ids, not the raw file: at a talk's first request conversation.json still names the last talk's speakers
+    talkers = len(speaker_ids())
     knows = [N.knows_block(p.get('name'), p.get('base_id', ''), states, speakers=max(talkers, len(profiles))) for p in profiles]
     _state['knows'] = '\n'.join(knows)
+    _state['knows_for'] = tuple(p.get('name') for p in profiles)  # the talk's first reply keeps it (extra_user_text)
     if any(knows):
         out['knows'] = '\n\n'.join(k for k in knows if k)
         if isinstance(out.get('background'), str):
@@ -410,7 +411,9 @@ def extra_user_text(ctx) -> str:
     count = len(ctx.get('messages') or [])
     # a new talk (other people, or a shorter thread than last time): lore may be told again
     if names != _state['speakers'] or count < _state['messages']:
-        _state.update(speakers=names, sent=set(), knows='' if names != _state['speakers'] else _state['knows'])
+        # the knows block system_parts just built for these same speakers stays: it is this talk's prompt
+        keep = names == _state['speakers'] or names == _state.get('knows_for')
+        _state.update(speakers=names, sent=set(), knows=_state['knows'] if keep else '')
     _state['messages'] = count
     text = _player_line(ctx)
     if not text or mode() == 'off':

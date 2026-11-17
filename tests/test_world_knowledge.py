@@ -67,6 +67,18 @@ class Conditions(unittest.TestCase):
         self.assertEqual(WK.form_key("My Mod.esp | FE000801"), "my mod.esp|000801")
         self.assertIsNone(WK.form_key("Companions"))
 
+    def test_missing_game_data_never_passes_under_not(self):
+        # not checked yet by the game: an excluded NPC must not get the fact (and nobody else gets it on a guess either)
+        thalmor = WK.parse_conditions("not faction: Skyrim.esm|0x039F26")
+        self.assertFalse(WK.passes(thalmor, npc(), NO_GAME, {}))
+        self.assertTrue(WK.passes(thalmor, npc(), dict(NO_GAME, factions={0x013BA3: set()}), {}))
+        self.assertFalse(WK.passes(thalmor, npc(), dict(NO_GAME, factions={0x013BA3: {"skyrim.esm|039f26"}}), {}))
+        never_done = {'not': {'quest': 'mq106', 'completed': True}}
+        self.assertFalse(WK.passes(never_done, npc(), NO_GAME, {}))
+        self.assertTrue(WK.passes(never_done, npc(), dict(NO_GAME, done={'mq106': False}), {}))
+        # "any" with a known true branch still passes
+        self.assertTrue(WK.passes({'any': [{'hold': 'Whiterun'}, never_done]}, npc(hold="Whiterun"), NO_GAME, {}))
+
     def test_location_and_hold(self):
         here = npc(location="Riverwood", hold="Whiterun", here_hold="Whiterun")
         self.assertTrue(WK.passes({'location': 'riverwood'}, here, NO_GAME, {}))

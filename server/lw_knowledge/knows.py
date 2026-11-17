@@ -47,10 +47,11 @@ def _rows(name, base_id, db_path):
         also = "ifnull(also_quest, ''), ifnull(also_state, '')" if _con['also'] else "'', ''"
         rows = con.execute(f"SELECT base_id, quest, state, seq, text, {also} FROM npc_knows WHERE npc = ? ORDER BY seq",
                            (name.lower(),)).fetchall()
-    # Several NPCs can share a name: prefer this base id's rows, else the first one's
+    # Several NPCs can share a name: this base id's rows only (a namesake with another base record never gets someone
+    # else's knowledge or secret); the first one's only when no base id is given
     ids = {r[0] for r in rows}
     want = (base_id or '').upper()
-    pick = want if want in ids else (sorted(ids)[0] if ids else '')
+    pick = want if want in ids else ('' if want else (sorted(ids)[0] if ids else ''))
     return [r[1:] for r in rows if r[0] == pick]
 
 

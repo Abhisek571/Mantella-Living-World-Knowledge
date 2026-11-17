@@ -14,6 +14,10 @@ Every change to Mantella Living World - Knowledge. The Nexus page lists only the
 - knowledge_checked.json keeps only the faction lists of NPCs in the current talk instead of every NPC ever met.
 
 ### Fixed
+- A world knowledge fact under a "not" condition is no longer given to everyone before the game has checked them.
+- An NPC who shares a name with another NPC but has a different base record no longer gets that NPC's knowledge or secret.
+- A secret is marked as never said in front of others whenever the talk has more than one speaker, also at a group talk's first request.
+- Lore lines that repeat an NPC's own knowledge are no longer sent on the first reply of a talk.
 - MarkOnMap: an NPC only marks places in their own hold or a neighbouring one (where they live or where they are), plus the cities and towns everyone knows; Solstheim places only from Solstheim. Before, anyone could mark any place in Skyrim.
 - The game's own files (conversation and NPC files) are read without regard to the case of their keys, as the Integration Hub does. A key the game wrote as "Name" or "Player" instead of "name" or "player" no longer leaves an NPC without their knowledge profile.
 
