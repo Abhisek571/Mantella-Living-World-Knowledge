@@ -376,7 +376,7 @@ def system_parts(parts: dict, ctx) -> dict:
     states = quest_states()
     out['common_knowledge'] = common_knowledge(states)
     player = _conversation().get('player') or 'the traveller'
-    secret =_read(HUB_SETTINGS).get('dragonborn_secret') is True
+    secret = _read(HUB_SETTINGS).get('dragonborn_secret') is True
     lines = [identity_lines(profiles)] + list(dict.fromkeys(l for l in (DB.line(states, p, player, secret) for p in profiles) if l))
     lines += gather_hints(profiles)
     out['identity'] = '\n'.join(l for l in lines if l)
