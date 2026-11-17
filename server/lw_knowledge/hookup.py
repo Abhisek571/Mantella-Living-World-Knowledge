@@ -11,6 +11,7 @@ from . import knowledge as K
 from . import dragonborn as DB
 from . import knows as N
 from . import lore as L
+from . import world_knowledge as WK
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 # Mantella runs with SKSE/Plugins/MantellaSoftware as its working folder
@@ -44,8 +45,8 @@ def _read(path):
 
 
 def speaker_pairs() -> list[tuple[str, dict]]:
-    """(base id, Knowledge profile) of each NPC the game says is in the conversation and that has a profile."""
-    ids = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('stringList') or {}).get('speakers') or []
+    """(base id, Knowledge profile) of each NPC in the conversation that has a profile."""
+    ids = speaker_ids()
     out = []
     for base in ids:
         if not isinstance(base, str) or not re.fullmatch(r'[0-9A-Fa-f]{1,8}', base):
@@ -234,6 +235,104 @@ def fix_bios(text: str, names) -> str:
     return text
 
 
+def exe_speaker_ids() -> list[str]:
+    """Base ids of the NPCs Direct AI Connect is answering for (6 hex digits, upper case), set before each request;
+    [] outside Mantella or with an exe that does not expose them."""
+    try:
+        from src import extensions as src_extensions
+        ids = getattr(src_extensions.registry(), 'speaking_ids', None)
+    except Exception:  # noqa: BLE001 - not inside Mantella, or an older exe
+        return []
+    return [i.upper() for i in ids if isinstance(i, str) and re.fullmatch(r'[0-9A-Fa-f]{1,8}', i)] if isinstance(ids, list) else []
+
+
+def speaker_ids() -> list[str]:
+    """The conversation's NPC base ids. The game writes conversation.json only after Mantella sent its greeting
+    request, so when the file has no speakers, or not the ones the exe is answering for (left from the last talk),
+    the exe's ids are used."""
+    ids = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('stringList') or {}).get('speakers') or []
+    ids = [i for i in ids if isinstance(i, str)] if isinstance(ids, list) else []
+    exe = exe_speaker_ids()
+    if exe and not set(exe) <= {i.upper() for i in ids}:
+        return exe
+    return ids
+
+
+def world_speakers() -> list[dict]:
+    """Every NPC in the conversation (a profile or not), as world knowledge conditions read them."""
+    out = []
+    for base in speaker_ids():
+        if not isinstance(base, str) or not re.fullmatch(r'[0-9A-Fa-f]{1,8}', base):
+            continue
+        data = _read(os.path.join(CHANNEL_DIR, 'npc', base.upper() + '.json'))
+        flat = {}
+        for kind in ('int', 'string', 'stringList'):
+            flat.update(data.get(kind) if isinstance(data.get(kind), dict) else {})
+        name = flat.get('name')
+        profile = K.profile_for(name, '', base) if isinstance(name, str) and name else None
+        view = WK.npc_view(base, flat, profile)
+        if view['name']:
+            out.append(view)
+    return out
+
+
+def write_checks(packs=None, state=None) -> bool:
+    """Writes knowledge_checks.json (what the game reads when an NPC joins) for the packs in use; never raises."""
+    try:
+        packs = WK.load_packs() if packs is None else packs
+        return WK.write_checks(CHANNEL_DIR, packs, WK.load_state() if state is None else state)
+    except Exception as e:  # noqa: BLE001 - a broken pack never stops Mantella
+        logging.getLogger('Mantella').warning(f"Knowledge: game checks not written ({e})")
+        return False
+
+
+def _world_inputs():
+    """(packs, state, speakers, game data) for world knowledge; the game side's check list is refreshed on the way."""
+    packs = WK.load_packs()
+    if not packs:
+        return [], None, [], None
+    state = WK.load_state()
+    write_checks(packs, state)
+    player = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('string') or {}).get('player') or ''
+    game = WK.game_state(_read(os.path.join(CHANNEL_DIR, WK.CHECKED_FILE)), world(), player)
+    return packs, state, world_speakers(), game
+
+
+def world_block() -> str:
+    """The "always" world knowledge entries for the speakers, within the World Knowledge budget."""
+    try:
+        packs, state, speakers, game = _world_inputs()
+        if not packs or not speakers:
+            return ''
+        chosen = WK.select(packs, state, speakers, game, 'always', state['budget'])
+        if chosen:
+            logging.getLogger('Mantella').log(23, f"Knowledge: {len(chosen)} world knowledge line(s) in the system prompt")
+        return WK.system_block(chosen, speakers)
+    except Exception as e:  # noqa: BLE001 - optional, never break the reply
+        logging.getLogger('Mantella').warning(f"Knowledge: world knowledge left out ({e})")
+        return ''
+
+
+def world_reply_lines(text: str, budget: int) -> tuple[list[str], int]:
+    """The "relevant" entries the player's line touches, each told once per talk: (lines, tokens used)."""
+    try:
+        packs, state, speakers, game = _world_inputs()
+        if not packs or not speakers:
+            return [], 0
+        chosen = WK.select(packs, state, speakers, game, 'relevant', budget, text, sent=_state['sent'])
+        return WK.reply_lines(chosen), sum(WK.tokens(e['text']) + 4 for e, _ in chosen)
+    except Exception as e:  # noqa: BLE001
+        logging.getLogger('Mantella').warning(f"Knowledge: world knowledge left out ({e})")
+        return [], 0
+
+
+def _with_world(out: dict, block: str) -> dict:
+    # in the 'knows' part, which the Hub's layout already places with the fixed text before the cache point
+    if block:
+        out['knows'] = f"{out['knows']}\n\n{block}" if out.get('knows') else block
+    return out
+
+
 def system_parts(parts: dict, ctx) -> dict:
     if mode() == 'off':
         return parts
@@ -242,11 +341,13 @@ def system_parts(parts: dict, ctx) -> dict:
         # the Hub leaves the Dragonborn news to Knowledge, so NPCs without a profile still get the far/rumour wording
         player = (_read(os.path.join(CHANNEL_DIR, 'conversation.json')).get('string') or {}).get('player') or 'the traveller'
         line = DB.line(quest_states(), {}, player, _read(HUB_SETTINGS).get('dragonborn_secret') is True)
-        if not line:
+        block = world_block()
+        if not line and not block:
             return parts
         out = dict(parts)
-        out['identity'] = line
-        return out
+        if line:
+            out['identity'] = line
+        return _with_world(out, block)
     # Only adds parts: the Integration Hub's layout names where they go ('__order__') and the cache points.
     out = dict(parts)
     if isinstance(out.get('background'), str):
@@ -266,7 +367,7 @@ def system_parts(parts: dict, ctx) -> dict:
         out['knows'] = '\n\n'.join(k for k in knows if k)
         if isinstance(out.get('background'), str):
             out['background'] = strip_stage_lines(out['background'])
-    return out
+    return _with_world(out, world_block())
 
 
 def _player_line(ctx) -> str:
@@ -282,17 +383,21 @@ def _player_line(ctx) -> str:
 
 def extra_user_text(ctx) -> str:
     profiles = speaker_profiles()
-    names = tuple(p.get('name') for p in profiles)
+    # NPCs without a profile only matter to world knowledge, so they tell a new talk only when nobody has a profile
+    names = tuple(p.get('name') for p in profiles) or tuple(s['name'] for s in world_speakers())
     count = len(ctx.get('messages') or [])
     # a new talk (other people, or a shorter thread than last time): lore may be told again
     if names != _state['speakers'] or count < _state['messages']:
         _state.update(speakers=names, sent=set(), knows='' if names != _state['speakers'] else _state['knows'])
     _state['messages'] = count
     text = _player_line(ctx)
-    if not profiles or not text or mode() != 'full':
+    if not text or mode() == 'off':
         return ''
-    budget = lore_budget() // len(profiles)
-    lines = []
+    # world knowledge the player's line touches comes first; lore gets what is left of the same budget
+    lines, used = world_reply_lines(text, lore_budget())
+    if not profiles or mode() != 'full':
+        return '\n'.join(lines)
+    budget = max(0, lore_budget() - used) // len(profiles)
     for p in profiles:
         facts = L.lookup(text, p, budget, world={'quests': world().get('quests') or {}}, sent=_state['sent'])
         # what the NPC's own block already says needs no lore line (rule: never send what the prompt has)

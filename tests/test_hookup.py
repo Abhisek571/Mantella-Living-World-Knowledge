@@ -46,7 +46,32 @@ class Hookup(unittest.TestCase):
     def test_register_adds_both_hooks(self):
         api = FakeApi()
         lw_knowledge.register(api)
-        self.assertEqual(sorted(api.hooks), ["extra_user_text", "system_parts"])
+        self.assertEqual(sorted(api.hooks), ["extra_user_text", "system_parts", "ui_page"])
+
+    def test_with_the_hub_world_knowledge_is_a_page_of_its_living_world_tab(self):
+        import types
+        pages = []
+        hub_tab = types.ModuleType("living_world.ui_tab")
+        hub_tab.add_page = lambda name, build: pages.append((name, build))
+        sys.modules["living_world.ui_tab"] = hub_tab
+        try:
+            api = FakeApi()
+            lw_knowledge.register(api)
+        finally:
+            del sys.modules["living_world.ui_tab"]
+        self.assertEqual([n for n, _ in pages], ["World Knowledge"])
+        self.assertNotIn("ui_page", api.hooks)
+        self.assertNotIn("ui_tab", api.hooks)
+
+    def test_an_older_hub_without_pages_keeps_the_own_tab(self):
+        import types
+        sys.modules["living_world.ui_tab"] = types.ModuleType("living_world.ui_tab")
+        try:
+            api = FakeApi()
+            lw_knowledge.register(api)
+        finally:
+            del sys.modules["living_world.ui_tab"]
+        self.assertIn("ui_page", api.hooks)
 
     def test_system_parts_add_common_knowledge_and_identity(self):
         conversation(self.tmp.name, [("Camilla Valerius", "01347B")])

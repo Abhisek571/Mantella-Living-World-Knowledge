@@ -2,6 +2,17 @@
 
 Every change to Mantella Living World - Knowledge. The Nexus page lists only the main changes for each version.
 
+## Unreleased
+
+### New
+- World knowledge: facts bigger than one NPC that only some NPCs know, in knowledge packs (JSON files that mods can ship). Conditions: location, hold, faction, named group, quest stage, global, joined with and/or/not. Mode "always" or "relevant" (only when the talk touches it).
+- World Knowledge page: turn packs and single facts on and off, write your own packs, edit named groups, import and export packs, set the budget. With the Integration Hub 1.2.3 or newer it is a page inside the Living World tab; with an older Hub it is a tab of its own.
+- The plugin reads factions by form id, quest stages and globals for world knowledge when an NPC joins a talk.
+
+### Changed
+- Shorter description for MarkOnMap.
+- knowledge_checked.json keeps only the faction lists of NPCs in the current talk instead of every NPC ever met.
+
 ## 1.1.0 (2026-11-09)
 
 ### New

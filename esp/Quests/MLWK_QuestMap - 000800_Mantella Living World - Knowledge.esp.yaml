@@ -3,6 +3,7 @@ EditorID: MLWK_QuestMap
 VirtualMachineAdapter:
   Scripts:
   - Name: MLWK_Map
+  - Name: MLWK_Checks
   FileName: ''
   Aliases:
   - Property:
