@@ -2,7 +2,7 @@
 
 Every change to Mantella Living World - Knowledge. The Nexus page lists only the main changes for each version.
 
-## Unreleased
+## 1.1.1 (2026-11-18)
 
 ### New
 - World knowledge: facts bigger than one NPC that only some NPCs know, in knowledge packs (JSON files that mods can ship). Conditions: location, hold, faction, named group, quest stage, global, joined with and/or/not. Mode "always" or "relevant" (only when the talk touches it).
