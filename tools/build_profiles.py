@@ -193,8 +193,13 @@ def been_inside(place, info, own_hold, home):
     return bool(home) and place.lower().startswith(home.lower())  # "Raven Rock Mine" for Raven Rock
 
 
+def clean_bid(base_id):
+    """The base id's hex digits, upper case (one Mantella row has a stray backtick: "00F29F`")."""
+    return re.sub(r"[^0-9A-F]", "", (base_id or "").upper())
+
+
 def row_key(name, race, base_id):
-    return f"{name.strip()}|{race.strip()}|{base_id.strip().upper()}"
+    return f"{name.strip()}|{race.strip()}|{clean_bid(base_id)}"
 
 
 def load_csv(path):
@@ -243,7 +248,7 @@ def load_uesp_npcs(path):
 
 
 def match_uesp(row, uesp):
-    cands = uesp.get(row["base_id"].strip().upper()[-6:]) if row["base_id"].strip() else None
+    cands = uesp.get(clean_bid(row["base_id"])[-6:]) if clean_bid(row["base_id"]) else None
     if not cands:
         return None
     name = row["name"].strip().lower()
@@ -451,7 +456,7 @@ def build(csv_path, uesp_path, out_path, ratings_dir, observation_path=None):
             stats["rated"] += 1
         prof["ties"] = [home_tie(t, prof.get("home")) for t in prof.get("ties", [])]
         out[key] = {"name": row["name"].strip(), "race": row["race"].strip(),
-                    "base_id": row["base_id"].strip().upper(), "rated": rated, **prof}
+                    "base_id": clean_bid(row["base_id"]), "rated": rated, **prof}
     stats["keys"] = len(out)
     unused = sorted(set(ratings) - set(out))
     with open(out_path, "w", encoding="utf-8") as f:

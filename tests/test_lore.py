@@ -164,6 +164,19 @@ class Lookup(unittest.TestCase):
     def test_missing_db_is_empty(self):
         self.assertEqual(L.lookup("Riverwood", CAMILLA, 100, db_path="nope.sqlite"), [])
 
+    def test_path_with_hash_opens_the_real_file(self):
+        # KNOW-7: '#' in a plain file: URI cut the path there and opened an empty database
+        import shutil
+        folder = os.path.join(self.tmp.name, "Mods #2")
+        os.makedirs(folder, exist_ok=True)
+        path = shutil.copy(self.db, os.path.join(folder, "lore.sqlite"))
+        db = L.LoreDB(path)
+        try:
+            self.assertTrue(db.names)
+        finally:
+            db.con.close()
+        self.assertEqual(os.listdir(folder), ["lore.sqlite"])
+
 
 REAL_DB = os.path.join(ROOT, "data", "lore.sqlite")
 
@@ -182,6 +195,31 @@ class RealDatabase(unittest.TestCase):
         self.assertLessEqual(len(L.lookup("What is the Dark Brotherhood?", brenuin, 400)), 1)
         self.assertEqual(L.lookup("Who is Odahviing?", brenuin, 400), [])  # SCH-6: named dragons
         self.assertEqual(L.lookup("Have you heard of the Forgotten Vale?", brenuin, 400), [])
+
+    def test_possessive_names_match(self):
+        # KNOW-3: "Ulfric's" and "Ulfric Stormcloak\u2019s" name the same article as the plain name
+        db = L.get_db()
+        plain = db.find_articles("Ulfric Stormcloak")
+        self.assertTrue(plain)
+        self.assertEqual(db.find_articles("What is Ulfric Stormcloak's plan?"), plain)
+        self.assertEqual(db.find_articles("What is Ulfric Stormcloak\u2019s plan?"), plain)
+        self.assertEqual(db.find_articles("Whiterun's walls"), db.find_articles("Whiterun"))
+
+    def test_names_with_apostrophe_or_hyphen_match(self):
+        # KNOW-2: one-word names with ' or - were dropped from the names table
+        db = L.get_db()
+        titles = lambda text: [db.articles[i]["title"] for i in db.find_articles(text)]
+        self.assertEqual(titles("Have you met Ri'saad?"), ["Ri'saad"])
+        self.assertEqual(titles("What about Brand-Shei?"), ["Brand-Shei"])
+        self.assertEqual(titles("The Gray-Mane family"), ["Gray-Mane"])
+        self.assertEqual(titles("Risaad and the Gray Mane family"), ["Ri'saad", "Gray-Mane"])
+
+    def test_everyday_words_find_no_article(self):
+        # KNOW-8: one-word titles that are everyday words ("Goat", "First Mate", "Master Conjurer") no longer trigger
+        db = L.get_db()
+        for text in ("Can I buy a goat?", "first", "master", "You look like a soldier, stranger."):
+            self.assertEqual(db.find_articles(text), [], text)
+        self.assertTrue(db.find_articles("Agent Lorcalin"))  # a full name with such a word still matches
 
     def test_topic_articles_have_topics(self):
         db = L.get_db()

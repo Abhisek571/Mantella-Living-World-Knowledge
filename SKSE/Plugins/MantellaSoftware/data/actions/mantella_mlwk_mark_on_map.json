@@ -1,14 +1,14 @@
 {
     "identifier": "mantella_mlwk_mark_on_map",
     "name": "MarkOnMap",
-    "description": "Mark a place on the player's map when they ask the way to it and you know where it is.",
+    "description": "Mark a place on the player's map when they ask the way and you know where it is.",
     "note": "Marks a place on your map when you ask the way and the NPC knows it. No fast travel. Needs Mantella's Advanced Actions on. Dawnguard and Dragonborn places need those DLCs.",
     "key": "MarkOnMap",
     "enabled": true,
     "parameters": {
         "place": {
             "type": "string",
-            "description": "The place's name, as people call it (for example Bleak Falls Barrow)."
+            "description": "The place, as people call it (e.g. Bleak Falls Barrow)."
         }
     },
     "required": [

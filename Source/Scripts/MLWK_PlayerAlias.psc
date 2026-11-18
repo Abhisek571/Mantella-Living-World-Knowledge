@@ -6,4 +6,8 @@ Event OnPlayerLoadGame()
 	If map
 		map.Register()
 	EndIf
+	MLWK_Checks checks = GetOwningQuest() as MLWK_Checks
+	If checks
+		checks.Register()
+	EndIf
 EndEvent
