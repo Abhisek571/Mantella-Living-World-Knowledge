@@ -133,8 +133,8 @@ class Hookup(unittest.TestCase):
                          "Regarding the bandits: \"Mad, hiding out there.\"")
 
     def test_ore_job_names_a_mine(self):
-        conversation(self.tmp.name, [("Alvor", "013482")])
-        path = os.path.join(self.tmp.name, "npc", "013482.json")
+        conversation(self.tmp.name, [("Alvor", "013475")])
+        path = os.path.join(self.tmp.name, "npc", "013475.json")
         data = json.load(open(path, encoding="utf-8"))
         data["string"]["job"] = "You need Iron Ore brought to you; you posted a notice on the job board for it."
         with open(path, "w", encoding="utf-8") as f:
@@ -149,8 +149,8 @@ class Hookup(unittest.TestCase):
 
     def test_job_goes_to_its_own_speaker(self):
         # a mod NPC without a profile first in the group must not shift Alvor's job onto someone else
-        conversation(self.tmp.name, [("Modded Stranger", "FE0811"), ("Alvor", "013482")])
-        path = os.path.join(self.tmp.name, "npc", "013482.json")
+        conversation(self.tmp.name, [("Modded Stranger", "FE0811"), ("Alvor", "013475")])
+        path = os.path.join(self.tmp.name, "npc", "013475.json")
         data = json.load(open(path, encoding="utf-8"))
         data["string"]["job"] = "You need Iron Ore brought to you."
         with open(path, "w", encoding="utf-8") as f:
@@ -327,6 +327,38 @@ class Hookup(unittest.TestCase):
     def test_events_in_parentheses_ignored(self):
         conversation(self.tmp.name, [("Camilla Valerius", "01347B")])
         self.assertEqual(H.extra_user_text(user("(Player walked past Bleak Falls Barrow.) Hello.")), "")
+
+    # production call shape: the Hub's 6-digit base id with the npc file's name, no race
+    def test_namesake_mod_npc_gets_no_profile_or_secret(self):
+        # KNOW-1: a mod's "Astrid" (another base record) never gets vanilla Astrid's profile, knowledge or secret
+        conversation(self.tmp.name, [("Astrid", "80F123")])
+        self.assertEqual(H.speaker_profiles(), [])
+        parts = H.system_parts({"background": "Bio."}, {})
+        self.assertNotIn("knows", parts)
+        self.assertNotIn("Astrid", parts.get("identity", ""))
+        H.reset()
+        conversation(self.tmp.name, [("Astrid", "01BDB4")])
+        self.assertIn("Secret", H.system_parts({"background": "Bio."}, {}).get("knows", ""))
+
+    def test_light_plugin_profile_matches_the_hub_id(self):
+        # KNOW-6: Mantella keeps 3 digits of a light plugin's id ("806"); the Hub sends 6 ("0AB806")
+        conversation(self.tmp.name, [("Abigail", "0AB806")])
+        self.assertEqual([p.get("base_id") for p in H.speaker_profiles()], ["806"])
+
+    def test_leading_zero_id_matches(self):
+        conversation(self.tmp.name, [("Agent Sanyon", "0978AA")])
+        self.assertEqual([p.get("base_id") for p in H.speaker_profiles()], ["978AA"])
+        self.assertTrue(H.K.same_base("1BDB4", "01BDB4"))
+        self.assertTrue(H.K.same_base("806", "FE0AB806"))
+        self.assertFalse(H.K.same_base("01BDB4", "80F123"))
+        self.assertFalse(H.K.same_base("", "01BDB4"))
+
+    def test_each_speaker_gets_their_own_lore(self):
+        # KNOW-4: the second NPC is not left with the first one's leftovers
+        conversation(self.tmp.name, [("Camilla Valerius", "01347B"), ("Alvor", "013475")])
+        text = H.extra_user_text(user("What do you know about Bleak Falls Barrow?"))
+        self.assertIn("What Camilla Valerius knows about this: Bleak Falls Barrow", text)
+        self.assertIn("What Alvor knows about this: Bleak Falls Barrow", text)
 
     def test_game_keys_read_without_case(self):
         # Papyrus' string table can hand back "Name", "Player", "Speakers", "Day" (A04): read like the Hub does

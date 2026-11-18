@@ -161,6 +161,8 @@ horse horses giant giants troll trolls spider spiders skeever skeevers draugr va
 werewolf ghost ghosts spirit shade daedra prince sword axe bow shield armor arrow arrows
 circle moon sun star stars night day dawn dusk old new hope fear peace honor glory light dark
 red white black blue green gray grey brown yellow golden silent frozen broken lost hidden
+first self master stranger soldier prisoner hero high dead load lucky blood nervous wounded keeper seeker butcher
+agent anger poor wary chill goat
 """.split())
 
 HEADING_RE = re.compile(r"^(={2,6})\s*(.*?)\s*\1\s*$", re.M)
@@ -606,13 +608,19 @@ def build_db(arts, redirects, db_path, places_path=None):
         cap = len(re.findall(r"\b" + re.escape(word.capitalize()) + r"\b", text))
         return low * 3 <= cap
 
-    def add_name(n, aid):
+    def add_name(n, aid, variant=False):
         n = re.sub(r"\s+", " ", n.strip().lower())
         if len(n) < 4 or n in COMMON_WORDS:
             return
-        if " " not in n and (not n.isalpha() or not proper_noun(n, aid)):
+        # one-word names may hold an apostrophe or hyphen (Ri'saad, Brand-Shei, Gray-Mane)
+        if " " not in n and (not re.sub(r"['-]", "", n).isalpha() or not proper_noun(n, aid)):
             return
         names.setdefault(n, aid)
+        if not variant:
+            # how a player may type them: "Risaad", "Gray Mane"
+            for v in (n.replace("'", ""), n.replace("-", " ")):
+                if v != n:
+                    add_name(v, aid, True)
 
     for lk, aid in aid_by_key.items():
         add_name(lk, aid)
@@ -627,7 +635,8 @@ def build_db(arts, redirects, db_path, places_path=None):
         if a["kind"] == "npc" and lk in aid_by_key and " " in lk:
             firsts.setdefault(lk.split()[0], []).append(aid_by_key[lk])
     for first, ids in firsts.items():
-        if len(ids) == 1:
+        # letters only: "Shor's Stone Guard" or "Black-Briar Mercenary" do not start with a first name
+        if len(ids) == 1 and first.isalpha():
             add_name(first, ids[0])
     con.executemany("INSERT INTO names(name,article) VALUES(?,?)", sorted(names.items()))
     con.execute("INSERT INTO facts_fts(facts_fts) VALUES('rebuild')")

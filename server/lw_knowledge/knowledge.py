@@ -410,6 +410,19 @@ def profiles():
     return _PROFILES
 
 
+def same_base(a, b):
+    """True when two base ids name the same record: compared as numbers on their last 6 hex digits, and on the last
+    3 only when either has 3 or fewer (Mantella masks light-plugin ids to those). False when either is empty or bad."""
+    try:
+        a, b = (a or "").strip(), (b or "").strip()
+        if not a or not b:
+            return False
+        mask = 0xFFF if min(len(a), len(b)) <= 3 else 0xFFFFFF
+        return int(a, 16) & mask == int(b, 16) & mask
+    except (TypeError, ValueError):
+        return False
+
+
 def profile_key(name, race, base_id):
     return f"{(name or '').strip()}|{(race or '').strip()}|{(base_id or '').strip().upper()}"
 
@@ -427,8 +440,10 @@ def profile_for(name, race="", base_id=""):
             # Mantella names some rulers with their title ("Jarl Ulfric Stormcloak"); people ask without it
             same = [v for v in table.values() if v.get("name", "").lower() == lname] or \
                 [v for v in table.values() if v.get("name", "").lower() == "jarl " + lname]
-            exact = [v for v in same if bid and v.get("base_id") == bid]
-            p = (exact or same or [None])[0] if len(exact or same) == 1 or exact else None
+            exact = [v for v in same if same_base(v.get("base_id"), bid)]
+            # a namesake with another base record (a mod's "Astrid") never gets this one's profile
+            other = len(same) == 1 and bid and same[0].get("base_id") and not exact
+            p = exact[0] if exact else (same[0] if len(same) == 1 and not other else None)
         return dict(p) if p else None
     except Exception:  # noqa: BLE001
         return None

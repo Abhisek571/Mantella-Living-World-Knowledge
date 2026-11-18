@@ -64,8 +64,41 @@ def _conversation() -> dict:
     return _game(_read(os.path.join(CHANNEL_DIR, 'conversation.json')))
 
 
-def _npc(base: str) -> dict:
-    return _game(_read(os.path.join(CHANNEL_DIR, 'npc', base.upper() + '.json')))
+_NUMBERED_NAME = re.compile(r'^(.*\S)\s+\d+\Z')  # Mantella numbers two people of one name in a talk: "Guard 2"
+
+
+def _same_name(a, b) -> bool:
+    return ' '.join(str(a or '').split()).lower() == ' '.join(str(b or '').split()).lower()
+
+
+def _name_fits(file_name, speaker_name) -> bool:
+    if _same_name(file_name, speaker_name):
+        return True
+    m = _NUMBERED_NAME.match(str(speaker_name or '').strip())
+    return bool(m) and _same_name(file_name, m.group(1))
+
+
+def _npc(base: str, kinds=('int', 'float', 'string', 'stringList')) -> dict:
+    """The game's npc/<6 hex>.json, or {} when it holds another NPC: the file is shared by NPCs of different plugins
+    whose base ids end in the same digits (a light plugin's FExxx id and a vanilla one). Its name must fit the name
+    Direct AI Connect gives for this id, or, when the exe's names do not line up with its ids, one of those names."""
+    data = _game(_read(os.path.join(CHANNEL_DIR, 'npc', base.upper() + '.json')), kinds)
+    found = data.get('name')
+    if isinstance(found, str) and found.strip():
+        by_id, names = exe_speaker_names()
+        want = by_id.get(_id_number(base))
+        if (want and not _name_fits(found, want)) or (not want and names and not any(_name_fits(found, n) for n in names)):
+            logging.getLogger('Mantella').log(23, f"Knowledge: npc/{base.upper()}.json holds {found!r}, not this "
+                                                  f"speaker (another plugin's NPC with the same last digits); left out")
+            return {}
+    return data
+
+
+def speaker_name(base: str):
+    """The speaker's name: Direct AI Connect's for this id, else the npc file's (when it is not another NPC's)."""
+    by_id, _ = exe_speaker_names()
+    name = by_id.get(_id_number(base)) or _npc(base).get('name')
+    return name.strip() if isinstance(name, str) and name.strip() else None
 
 
 def speaker_pairs() -> list[tuple[str, dict]]:
@@ -75,8 +108,8 @@ def speaker_pairs() -> list[tuple[str, dict]]:
     for base in ids:
         if not isinstance(base, str) or not re.fullmatch(r'[0-9A-Fa-f]{1,8}', base):
             continue
-        name = _npc(base).get('name')
-        profile = K.profile_for(name, '', base) if isinstance(name, str) and name else None
+        name = speaker_name(base)
+        profile = K.profile_for(name, '', base) if name else None
         if profile:
             out.append((base, profile))
     return out
@@ -270,14 +303,40 @@ def exe_speaker_ids() -> list[str]:
     return [i.upper() for i in ids if isinstance(i, str) and re.fullmatch(r'[0-9A-Fa-f]{1,8}', i)] if isinstance(ids, list) else []
 
 
+def _id_number(base_id):
+    try:
+        return int(str(base_id).strip(), 16)
+    except ValueError:
+        return None
+
+
+def exe_speaker_names():
+    """({base id number: name}, [names]) of the NPCs Direct AI Connect is answering for: its "speaking" names line up
+    with speaking_ids one to one, else the dict is empty and only the names are known. ({}, []) without them."""
+    try:
+        from src import extensions as src_extensions
+        registry = src_extensions.registry()
+        ids, text = getattr(registry, 'speaking_ids', None), getattr(registry, 'speaking', None)
+    except Exception:  # noqa: BLE001 - not inside Mantella, or an older exe
+        return {}, []
+    if not isinstance(text, str) or not text.strip():
+        return {}, []
+    names = [n.strip() for n in text.split(', ')]
+    numbers = [_id_number(i) if isinstance(i, str) and re.fullmatch(r'[0-9A-Fa-f]{1,8}', i.strip()) else None
+               for i in ids] if isinstance(ids, list) else []
+    if numbers and len(names) == len(numbers) and None not in numbers and all(names):
+        return dict(zip(numbers, names)), names
+    return {}, [n for n in names if n]
+
+
 def speaker_ids() -> list[str]:
-    """The conversation's NPC base ids. The game writes conversation.json only after Mantella sent its greeting
-    request, so when the file has no speakers, or not the ones the exe is answering for (left from the last talk),
-    the exe's ids are used."""
+    """The conversation's NPC base ids. The exe's ids win whenever it gives them: the game writes conversation.json
+    only after Mantella sent its greeting request, so the file can still name the last talk's speakers (even more of
+    them than this talk has). Without the exe's ids, the file's are used."""
     ids = _conversation().get('speakers') or []
     ids = [i for i in ids if isinstance(i, str)] if isinstance(ids, list) else []
     exe = exe_speaker_ids()
-    if exe and not set(exe) <= {i.upper() for i in ids}:
+    if exe:
         return exe
     return ids
 
@@ -288,9 +347,11 @@ def world_speakers() -> list[dict]:
     for base in speaker_ids():
         if not isinstance(base, str) or not re.fullmatch(r'[0-9A-Fa-f]{1,8}', base):
             continue
-        flat = _game(_read(os.path.join(CHANNEL_DIR, 'npc', base.upper() + '.json')), ('int', 'string', 'stringList'))
-        name = flat.get('name')
-        profile = K.profile_for(name, '', base) if isinstance(name, str) and name else None
+        flat = _npc(base, ('int', 'string', 'stringList'))
+        name = speaker_name(base)
+        if name:
+            flat = dict(flat, name=name)
+        profile = K.profile_for(name, '', base) if name else None
         view = WK.npc_view(base, flat, profile)
         if view['name']:
             out.append(view)
@@ -357,7 +418,8 @@ def _with_world(out: dict, block: str) -> dict:
 def system_parts(parts: dict, ctx) -> dict:
     if mode() == 'off':
         return parts
-    profiles = speaker_profiles()
+    pairs = speaker_pairs()
+    profiles = [profile for _, profile in pairs]
     if not profiles:
         # the Hub leaves the Dragonborn news to Knowledge, so NPCs without a profile still get the far/rumour wording
         player = _conversation().get('player') or 'the traveller'
@@ -383,7 +445,8 @@ def system_parts(parts: dict, ctx) -> dict:
     # the whole talk shares one prompt: with others there, a secret is marked as never said in front of them
     # speaker_ids, not the raw file: at a talk's first request conversation.json still names the last talk's speakers
     talkers = len(speaker_ids())
-    knows = [N.knows_block(p.get('name'), p.get('base_id', ''), states, speakers=max(talkers, len(profiles))) for p in profiles]
+    # the game's base id, not the profile's: a namesake from another plugin never gets this NPC's knowledge or secret
+    knows = [N.knows_block(p.get('name'), base, states, speakers=max(talkers, len(profiles))) for base, p in pairs]
     _state['knows'] = '\n'.join(knows)
     _state['knows_for'] = tuple(p.get('name') for p in profiles)  # the talk's first reply keeps it (extra_user_text)
     if any(knows):
@@ -402,6 +465,19 @@ def _player_line(ctx) -> str:
             content = ' '.join(p.get('text', '') for p in content if isinstance(p, dict) and p.get('type') == 'text')
         return re.sub(r'\([^)]*\)', ' ', content or '').strip()
     return ''
+
+
+class _NpcSent:
+    """One NPC's view of the talk's shared `sent` set: the same keys, prefixed with who was told."""
+
+    def __init__(self, shared, prefix):
+        self.shared, self.prefix = shared, prefix
+
+    def __contains__(self, key):
+        return f"{self.prefix}{key}" in self.shared
+
+    def add(self, key):
+        self.shared.add(f"{self.prefix}{key}")
 
 
 def extra_user_text(ctx) -> str:
@@ -424,7 +500,9 @@ def extra_user_text(ctx) -> str:
         return '\n'.join(lines)
     budget = max(0, lore_budget() - used) // len(profiles)
     for p in profiles:
-        facts = L.lookup(text, p, budget, world={'quests': world().get('quests') or {}}, sent=_state['sent'])
+        # each NPC has their own told-facts: one speaker's lore never leaves the next only the leftovers
+        sent = _NpcSent(_state['sent'], f"{p.get('name')}:{p.get('base_id', '')}:")
+        facts = L.lookup(text, p, budget, world={'quests': world().get('quests') or {}}, sent=sent)
         # what the NPC's own block already says needs no lore line (rule: never send what the prompt has)
         facts = [f for f in facts if f.split(' is ')[0] not in _state.get('knows', '')]
         if facts:

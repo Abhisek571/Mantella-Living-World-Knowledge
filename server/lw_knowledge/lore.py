@@ -9,6 +9,7 @@ knows_secret, recent (4E) facts never for ancient NPCs.
 Uses only sqlite3 features available in SQLite 3.38 (FTS5, no JSON functions).
 """
 import os
+import pathlib
 import re
 import sqlite3
 import threading
@@ -30,7 +31,7 @@ class LoreDB:
     def __init__(self, path):
         self.path = path
         self.queries = 0
-        uri = "file:" + path.replace("\\", "/") + "?mode=ro"
+        uri = pathlib.Path(os.path.abspath(path)).as_uri() + "?mode=ro"  # as_uri escapes '#', '?', '%' and spaces
         self.con = sqlite3.connect(uri, uri=True, check_same_thread=False)
         self.lock = threading.Lock()
         self.names = dict(self.con.execute("SELECT name, article FROM names"))
@@ -42,13 +43,17 @@ class LoreDB:
                                      "hold": row[4], "town": row[5], "topic": row[6]}
 
     def find_articles(self, text):
-        """Article ids named in text, in order of first mention, longest match first."""
-        words = _WORD_RE.findall((text or "").lower())
+        """Article ids named in text, in order of first mention, longest match first. A possessive ("Ulfric's")
+        also matches the name without its 's."""
+        words = _WORD_RE.findall((text or "").lower().replace("\u2019", "'"))
         found, i = [], 0
         while i < len(words):
             hit = None
             for n in range(min(self.max_words, len(words) - i), 0, -1):
-                aid = self.names.get(" ".join(words[i:i + n]))
+                key = " ".join(words[i:i + n])
+                aid = self.names.get(key)
+                if aid is None and key.endswith("'s"):
+                    aid = self.names.get(key[:-2])
                 if aid is not None:
                     hit = (aid, n)
                     break

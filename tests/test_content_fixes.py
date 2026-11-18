@@ -37,10 +37,10 @@ class CommonKnowledge(unittest.TestCase):
         H.CHANNEL_DIR = self.tmp.name
         H.reset()
         os.makedirs(os.path.join(self.tmp.name, "npc"))
-        with open(os.path.join(self.tmp.name, "npc", "013482.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(self.tmp.name, "npc", "013475.json"), "w", encoding="utf-8") as f:
             json.dump({"string": {"name": "Alvor"}}, f)
         with open(os.path.join(self.tmp.name, "conversation.json"), "w", encoding="utf-8") as f:
-            json.dump({"string": {"player": "Player"}, "stringList": {"speakers": ["013482"]}}, f)
+            json.dump({"string": {"player": "Player"}, "stringList": {"speakers": ["013475"]}}, f)
 
     def tearDown(self):
         self.tmp.cleanup()

@@ -345,10 +345,13 @@ class Hooks(unittest.TestCase):
         self.assertIn("mill", H.system_parts({"background": "Bio."}, {}).get("knows", ""))
 
 
-    def fake_exe(self, ids):
-        """A stand-in for Direct AI Connect's src.extensions with registry().speaking_ids = ids (None: no attribute)."""
+    def fake_exe(self, ids, speaking=None):
+        """A stand-in for Direct AI Connect's src.extensions with registry().speaking_ids = ids (None: no attribute)
+        and registry().speaking = speaking (the names, ", " joined; None: no attribute)."""
         import types
         reg = types.SimpleNamespace() if ids is None else types.SimpleNamespace(speaking_ids=ids)
+        if speaking is not None:
+            reg.speaking = speaking
         ext = types.ModuleType("src.extensions")
         ext.registry = lambda: reg
         src = types.ModuleType("src")
@@ -364,6 +367,26 @@ class Hooks(unittest.TestCase):
                     sys.modules[k] = v
         self.addCleanup(undo)
 
+    def test_colliding_npc_file_gives_no_foreign_profile_or_secret(self):
+        # HUB-1c: npc/01BDB4.json still holds vanilla Astrid; the speaker is a light plugin's NPC whose id ends the same
+        conversation(H.CHANNEL_DIR, [("Astrid", "01BDB4", {"location": "Falkreath"})])
+        self.fake_exe(["01BDB4"], "Lia Moddedname")
+        self.assertEqual(H.speaker_profiles(), [])
+        parts = H.system_parts({"background": "Bio."}, {})
+        self.assertNotIn("Secret", parts.get("knows", ""))
+        self.assertNotIn("Astrid", parts.get("identity", ""))
+        self.assertEqual([(s["name"], s["location"]) for s in H.world_speakers()], [("Lia Moddedname", "")])
+        self.fake_exe(["01BDB4"], "Astrid")  # the real Astrid: her file and profile are hers
+        self.assertEqual([p["name"] for p in H.speaker_profiles()], ["Astrid"])
+
+    def test_mismatching_file_skipped_when_exe_names_do_not_line_up(self):
+        conversation(H.CHANNEL_DIR, [("Astrid", "01BDB4", {})])
+        self.fake_exe(["01BDB4"], "Lia Moddedname, Hulda")  # two names for one id: no name per id
+        self.assertEqual(H.speaker_profiles(), [])
+        self.assertEqual(H.world_speakers(), [])
+        self.fake_exe(["01BDB4"], "Astrid 2, Hulda")  # Mantella numbers a second Astrid in the talk
+        self.assertEqual([p["name"] for p in H.speaker_profiles()], ["Astrid"])
+
     def test_greeting_uses_exe_speakers_before_the_game_writes_them(self):
         conversation(H.CHANNEL_DIR, [("Modded Miller", "FE0801", {"location": "Riverwood"})])
         write(os.path.join(H.CHANNEL_DIR, "conversation.json"), {"string": {"player": "Player"}, "stringList": {"speakers": []}})
@@ -377,10 +400,11 @@ class Hooks(unittest.TestCase):
         self.fake_exe(["FE0801"])
         self.assertEqual([s['name'] for s in H.world_speakers()], ["Modded Miller"])
 
-    def test_speaker_file_kept_when_it_has_the_exe_speakers(self):
+    def test_exe_speakers_win_over_a_stale_larger_file(self):
+        # the file still names last talk's group; this talk is only the miller, so Hulda's identity stays out
         conversation(H.CHANNEL_DIR, [("Modded Miller", "FE0801", {}), ("Hulda", "013BA3", {})])
         self.fake_exe(["fe0801"])
-        self.assertEqual(H.speaker_ids(), ["FE0801", "013BA3"])
+        self.assertEqual(H.speaker_ids(), ["FE0801"])
 
     def test_exe_without_speaking_ids_tolerated(self):
         conversation(H.CHANNEL_DIR, [("Modded Miller", "FE0801", {})])

@@ -6,9 +6,11 @@ second condition (also_quest, also_state): another quest's state, or 'war_side' 
 ('Legion' or 'Stormcloaks', World's war_side, passed in quest_states['war_side']).
 Never raises: any problem gives no lines."""
 import os
+import pathlib
 import sqlite3
 import threading
 
+from . import knowledge as K
 from . import lore as L
 
 STATE_OK = {'not_started': {0}, 'running': {1}, 'done': {2}, 'not_done': {0, 1}, 'started': {1, 2}}
@@ -30,7 +32,8 @@ def _db(path):
                 _con['con'].close()
             _con.update(path=path, con=None)
             if os.path.exists(path):
-                con = sqlite3.connect("file:" + path.replace("\\", "/") + "?mode=ro", uri=True, check_same_thread=False)
+                con = sqlite3.connect(pathlib.Path(os.path.abspath(path)).as_uri() + "?mode=ro", uri=True,
+                                      check_same_thread=False)
                 if con.execute("SELECT name FROM sqlite_master WHERE name='npc_knows'").fetchone():
                     _con['con'] = con
                     _con['also'] = any(r[1] == 'also_quest' for r in con.execute("PRAGMA table_info(npc_knows)"))
@@ -49,9 +52,9 @@ def _rows(name, base_id, db_path):
                            (name.lower(),)).fetchall()
     # Several NPCs can share a name: this base id's rows only (a namesake with another base record never gets someone
     # else's knowledge or secret); the first one's only when no base id is given
-    ids = {r[0] for r in rows}
-    want = (base_id or '').upper()
-    pick = want if want in ids else ('' if want else (sorted(ids)[0] if ids else ''))
+    ids = sorted({r[0] for r in rows})
+    want = (base_id or '').strip()
+    pick = next((i for i in ids if K.same_base(i, want)), '') if want else (ids[0] if ids else '')
     return [r[1:] for r in rows if r[0] == pick]
 
 
