@@ -5,8 +5,10 @@ hints: a smith who posted an ore job on the Missives board knows a mine for it. 
 usage: python tools/build_resources.py        Only stdlib."""
 import json
 import os
+import pathlib
 import re
 import sqlite3
+from contextlib import closing
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORES = ['Iron Ore', 'Corundum Ore', 'Ebony Ore', 'Gold Ore', 'Malachite Ore', 'Moonstone Ore', 'Orichalcum Ore',
@@ -14,18 +16,19 @@ ORES = ['Iron Ore', 'Corundum Ore', 'Ebony Ore', 'Gold Ore', 'Malachite Ore', 'M
 
 
 def build(db_path):
-    con = sqlite3.connect(db_path)
     out = {o: [] for o in ORES}
-    rows = con.execute("SELECT id, title, hold, place_kind FROM articles WHERE kind='place' AND place_kind IN ('mine', 'camp')")
-    for aid, title, hold, kind in rows.fetchall():
-        text = ' '.join(t for (t,) in con.execute("SELECT text FROM facts WHERE article=? AND inside=0 OR article=? AND depth<=3", (aid, aid)))
-        if kind == 'camp' and not re.search(r'\bmin(e|es|ing)\b', text, re.I):
-            continue  # a camp counts only when its own text says people mine there
-        for ore in ORES:
-            word = ore.split()[0]
-            if re.search(rf'\b{word}\b[^.]*\b(ore|veins?)\b', text, re.I):
-                out[ore].append({'mine': title, 'hold': hold or ''})
-    con.close()
+    # read-only: a missing database is an error, never a new empty file
+    uri = pathlib.Path(os.path.abspath(db_path)).as_uri() + '?mode=ro'
+    with closing(sqlite3.connect(uri, uri=True)) as con:
+        rows = con.execute("SELECT id, title, hold, place_kind FROM articles WHERE kind='place' AND place_kind IN ('mine', 'camp')")
+        for aid, title, hold, kind in rows.fetchall():
+            text = ' '.join(t for (t,) in con.execute("SELECT text FROM facts WHERE article=? AND inside=0 OR article=? AND depth<=3", (aid, aid)))
+            if kind == 'camp' and not re.search(r'\bmin(e|es|ing)\b', text, re.I):
+                continue  # a camp counts only when its own text says people mine there
+            for ore in ORES:
+                word = ore.split()[0]
+                if re.search(rf'\b{word}\b[^.]*\b(ore|veins?)\b', text, re.I):
+                    out[ore].append({'mine': title, 'hold': hold or ''})
     return {o: sorted(v, key=lambda m: m['mine']) for o, v in out.items() if v}
 
 

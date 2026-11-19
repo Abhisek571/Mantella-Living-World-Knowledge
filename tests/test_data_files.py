@@ -67,7 +67,8 @@ class DataFiles(unittest.TestCase):
                             ("labyrinthian", "Hjaalmarch")):
             if place in markers["int"]:
                 self.assertEqual(holds[place], hold, place)
-        places = {k.lower(): v for k, v in json.load(open(os.path.join(ROOT, "data", "places.json"), encoding="utf-8")).items()}
+        with open(os.path.join(ROOT, "data", "places.json"), encoding="utf-8") as f:
+            places = {k.lower(): v for k, v in json.load(f).items()}
         short = {"The Rift": "Rift", "The Reach": "Reach", "The Pale": "Pale", "Whiterun Hold": "Whiterun",
                  "Falkreath Hold": "Falkreath"}
         for place, hold in holds.items():

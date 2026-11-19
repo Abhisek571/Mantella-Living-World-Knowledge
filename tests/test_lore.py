@@ -11,6 +11,7 @@ sys.path.insert(0, os.path.join(ROOT, "server"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from lw_knowledge import lore as L  # noqa: E402
+from lw_knowledge import knows as N  # noqa: E402
 from test_lore_build import build_fixture_db  # noqa: E402
 
 CAMILLA = {"name": "Camilla Valerius", "home": "Riverwood", "hold": "Whiterun Hold",
@@ -30,13 +31,22 @@ class Lookup(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        if L._DB is not None:
-            L._DB.con.close()
-        L._DB = None
+        L.reset()
         cls.tmp.cleanup()
 
     def look(self, text, profile, budget=300, **kw):
         return L.lookup(text, profile, budget, db_path=self.db, **kw)
+
+    def test_reset_closes_the_cached_connection(self):
+        import sqlite3
+        L.reset()
+        L.reset()  # nothing cached: no error
+        db = L.get_db(self.db)
+        L.reset()
+        self.assertIsNone(L._DB)
+        with self.assertRaises(sqlite3.ProgrammingError):
+            db.con.execute("SELECT 1")
+        self.assertIsNot(L.get_db(self.db), db)  # the next use opens it again
 
     def test_camilla_gets_no_inside_facts(self):
         lines = self.look("What is inside Bleak Falls Barrow? How do the doors open?", CAMILLA)
@@ -164,6 +174,15 @@ class Lookup(unittest.TestCase):
     def test_missing_db_is_empty(self):
         self.assertEqual(L.lookup("Riverwood", CAMILLA, 100, db_path="nope.sqlite"), [])
 
+    def test_broken_db_is_empty_and_closed(self):
+        broken = os.path.join(self.tmp.name, "broken.sqlite")
+        with open(broken, "wb") as f:
+            f.write(b"")  # an empty file: sqlite opens it, but it has no lore tables
+        self.assertEqual(L.lookup("Riverwood", CAMILLA, 100, db_path=broken), [])
+        self.assertIsNone(L._DB)  # nothing half-open is cached
+        os.remove(broken)  # the file was closed again (Windows refuses to delete an open file)
+        self.assertTrue(self.look("Riverwood", STRANGER))  # the good database opens again afterwards
+
     def test_path_with_hash_opens_the_real_file(self):
         # KNOW-7: '#' in a plain file: URI cut the path there and opened an empty database
         import shutil
@@ -262,6 +281,12 @@ class RealDatabase(unittest.TestCase):
         for leak in ("pillar", "claw", "puzzle", "word wall", "Snake"):
             self.assertNotIn(leak, joined)
         self.assertEqual(lines_all[3], [])
+
+
+def tearDownModule():
+    # the hooks cache read-only connections to data/lore.sqlite for the whole server run; close them here
+    L.reset()
+    N.reset()
 
 
 if __name__ == "__main__":

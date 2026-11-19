@@ -3,6 +3,7 @@ import sqlite3
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
@@ -118,6 +119,24 @@ class LoreBuild(unittest.TestCase):
         self.assertEqual(B.page_facts("place", {"place_kind": "landmark"}, "Castle Volkihar is a location in.\n",
                                       "Castle Volkihar"), [])
 
+
+    def test_failed_build_leaves_no_database(self):
+        db = os.path.join(self.tmp.name, "failed.sqlite")
+        with mock.patch.object(B, "name_index", side_effect=RuntimeError("stop")):
+            with self.assertRaises(RuntimeError):
+                B.build_db(B.collect(F.PAGES), F.REDIRECTS, db)
+        self.assertFalse(os.path.exists(db))  # the server never finds a half-built database
+
+    def test_capped_facts_keep_depth_order_and_cap(self):
+        facts = [("a", 3, 0, "x" * 400), ("b", 1, 0, "y" * 40), ("c", 1, 0, "z" * 2000), ("d", 2, 0, "w" * 40)]
+        kept = B.capped_facts(facts, "creature")  # cap 150 tokens
+        self.assertEqual([f[0] for f in kept], ["b", "d", "a"])  # the 500-token fact never fits
+        self.assertEqual(B.capped_facts([], "npc"), [])
+
+    def test_repeats_dropped(self):
+        self.assertTrue(B._is_repeat({"old", "nord", "tomb", "above"}, [{"old", "nord", "tomb", "below"}]))
+        self.assertFalse(B._is_repeat({"old", "nord", "tomb"}, [{"dwarven", "ruin", "old"}]))
+        self.assertFalse(B._is_repeat(set(), []))
 
 if __name__ == "__main__":
     unittest.main()

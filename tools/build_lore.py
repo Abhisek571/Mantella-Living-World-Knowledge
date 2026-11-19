@@ -21,6 +21,7 @@ import os
 import re
 import sqlite3
 import sys
+from contextlib import closing
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -469,7 +470,10 @@ def tag_era(text, info):
 
 
 _EXCEPTIONS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "secret_exceptions.json")
-SECRET_EXCEPTIONS = tuple(json.load(open(_EXCEPTIONS, encoding="utf-8"))["starts"]) if os.path.isfile(_EXCEPTIONS) else ()
+SECRET_EXCEPTIONS = ()
+if os.path.isfile(_EXCEPTIONS):
+    with open(_EXCEPTIONS, encoding="utf-8") as _f:
+        SECRET_EXCEPTIONS = tuple(json.load(_f)["starts"])
 
 
 def tag_secret(text):
@@ -523,11 +527,8 @@ def collect(pages_by_src):
     return arts
 
 
-def build_db(arts, redirects, db_path, places_path=None):
-    if os.path.exists(db_path):
-        os.remove(db_path)
-    con = sqlite3.connect(db_path)
-    con.executescript("""
+# indented as it always was: SQLite keeps this text in the file's schema
+SCHEMA = """
         CREATE TABLE articles(id INTEGER PRIMARY KEY, title TEXT NOT NULL, key TEXT UNIQUE,
             src TEXT, kind TEXT, place_kind TEXT, hold TEXT, town TEXT, topic TEXT);
         CREATE TABLE facts(id INTEGER PRIMARY KEY, article INTEGER NOT NULL, seq INTEGER,
@@ -537,67 +538,130 @@ def build_db(arts, redirects, db_path, places_path=None):
         CREATE TABLE meta(k TEXT PRIMARY KEY, v TEXT);
         CREATE VIRTUAL TABLE facts_fts USING fts5(text, content='facts', content_rowid='id',
             tokenize='porter unicode61');
-    """)
+    """
+REPEAT_SHARE = 0.6  # a fact sharing this share of its words with an earlier one says the same thing
+MAX_SECOND_SOURCE_DEPTH = 3  # the second wiki only adds public facts
+
+
+def _is_repeat(words, seen):
+    return any(len(words & earlier) >= REPEAT_SHARE * max(1, len(words)) for earlier in seen)
+
+
+def unique_facts(a):
+    """The article's facts (section, depth, inside, text) without repeats: its own page first, then public facts of
+    its second source."""
+    info = a["info"]
+    seen, facts = [], []
+    for f in page_facts(a["kind"], info, strip_markup(a["text"]), a["title"]):
+        w = _words(f[3])
+        if _is_repeat(w, seen):
+            continue
+        seen.append(w)
+        facts.append(f)
+    for extra in a.get("extra", []):
+        for f in page_facts(a["kind"], {k: v for k, v in info.items() if k != "description"},
+                            strip_markup(extra)):
+            if f[1] > MAX_SECOND_SOURCE_DEPTH:
+                continue
+            w = _words(f[3])
+            if _is_repeat(w, seen):
+                continue
+            seen.append(w)
+            facts.append(f)
+    return facts
+
+
+def capped_facts(facts, kind):
+    """The facts that fit the article's token cap, shallowest first (page order within a depth)."""
+    facts = sorted(facts, key=lambda f: f[1])  # stable
+    cap = ARTICLE_CAPS.get(kind, 300)
+    kept, used = [], 0
+    for f in facts:
+        t = tokens(f[3])
+        if used + t > cap:
+            continue
+        kept.append(f)
+        used += t
+    return kept
+
+
+def _insert_article(con, lk, a, kept):
+    """Writes one article and its facts; (article id, tokens of its facts)."""
+    info = a["info"]
+    topic = TOPIC_IDS.get(lk) if a["kind"] == "topic" else None
+    cur = con.execute(
+        "INSERT INTO articles(title,key,src,kind,place_kind,hold,town,topic) "
+        "VALUES(?,?,?,?,?,?,?,?)",
+        (a["title"], lk, a["src"], a["kind"], info.get("place_kind"), info.get("hold"),
+         info.get("town"), topic))
+    aid = cur.lastrowid
+    total = 0
+    for seq, (sec, depth, inside, text) in enumerate(kept):
+        con.execute(
+            "INSERT INTO facts(article,seq,section,place,npc,topic,era,depth,inside,secret,"
+            "tokens,text) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+            (aid, seq, sec, a["title"] if a["kind"] == "place" else None,
+             a["title"] if a["kind"] == "npc" else None,
+             topic or (a["title"] if a["kind"] in ("topic", "creature") else None),
+             tag_era(text, info), depth, inside, ARTICLE_SECRETS.get(lk) or tag_secret(text), tokens(text),
+             text))
+        total += tokens(text)
+    return aid, total
+
+
+def _place_entry(info):
+    return {k: v for k, v in (("hold", info.get("hold")), ("kind", info.get("place_kind")),
+                              ("town", info.get("town"))) if v}
+
+
+def build_db(arts, redirects, db_path, places_path=None):
+    """Writes the lore database (and places.json). On any failure the half-built database is removed, so the
+    server never loads it."""
+    if os.path.exists(db_path):
+        os.remove(db_path)
+    try:
+        with closing(sqlite3.connect(db_path)) as con:
+            total, aid_by_key, places = _fill_db(con, arts, redirects)
+            con.commit()
+            con.execute("VACUUM")
+    except BaseException:
+        if os.path.exists(db_path):
+            os.remove(db_path)
+        raise
+    if places_path:
+        with open(places_path, "w", encoding="utf-8") as f:
+            json.dump(dict(sorted(places.items())), f, ensure_ascii=False, indent=0,
+                      sort_keys=True)
+    return total, len(aid_by_key)
+
+
+def _fill_db(con, arts, redirects):
+    """Tables, articles, facts, names and meta; (total tokens, {article key: id}, places.json data)."""
+    con.executescript(SCHEMA)
     places = {}
     total = 0
     aid_by_key = {}
     for lk in sorted(arts):
         a = arts[lk]
-        info = a["info"]
-        plain = strip_markup(a["text"])
-        facts = page_facts(a["kind"], info, plain, a["title"])
-        seen, uniq = [], []
-        for f in facts:
-            w = _words(f[3])
-            if any(len(w & s2) >= 0.6 * max(1, len(w)) for s2 in seen):
-                continue
-            seen.append(w)
-            uniq.append(f)
-        facts = uniq
-        for extra in a.get("extra", []):
-            for f in page_facts(a["kind"], {k: v for k, v in info.items() if k != "description"},
-                                strip_markup(extra)):
-                if f[1] > 3:
-                    continue  # second source only adds public facts
-                w = _words(f[3])
-                if any(len(w & s2) >= 0.6 * max(1, len(w)) for s2 in seen):
-                    continue
-                seen.append(w)
-                facts.append(f)
+        facts = unique_facts(a)
         if not facts:
             continue
-        facts.sort(key=lambda f: f[1])  # stable: depth first, page order within depth
-        cap = ARTICLE_CAPS.get(a["kind"], 300)
-        kept, used = [], 0
-        for f in facts:
-            t = tokens(f[3])
-            if used + t > cap:
-                continue
-            kept.append(f)
-            used += t
-        topic = TOPIC_IDS.get(lk) if a["kind"] == "topic" else None
-        cur = con.execute(
-            "INSERT INTO articles(title,key,src,kind,place_kind,hold,town,topic) "
-            "VALUES(?,?,?,?,?,?,?,?)",
-            (a["title"], lk, a["src"], a["kind"], info.get("place_kind"), info.get("hold"),
-             info.get("town"), topic))
-        aid = cur.lastrowid
-        aid_by_key[lk] = aid
-        for seq, (sec, depth, inside, text) in enumerate(kept):
-            con.execute(
-                "INSERT INTO facts(article,seq,section,place,npc,topic,era,depth,inside,secret,"
-                "tokens,text) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
-                (aid, seq, sec, a["title"] if a["kind"] == "place" else None,
-                 a["title"] if a["kind"] == "npc" else None,
-                 topic or (a["title"] if a["kind"] in ("topic", "creature") else None),
-                 tag_era(text, info), depth, inside, ARTICLE_SECRETS.get(lk) or tag_secret(text), tokens(text),
-                 text))
-            total += tokens(text)
+        aid_by_key[lk], article_tokens = _insert_article(con, lk, a, capped_facts(facts, a["kind"]))
+        total += article_tokens
         if a["kind"] == "place":
-            places[a["title"]] = {k: v for k, v in (("hold", info.get("hold")),
-                                                    ("kind", info.get("place_kind")),
-                                                    ("town", info.get("town"))) if v}
-    # names: titles, redirects and unique NPC first names
+            places[a["title"]] = _place_entry(a["info"])
+    names = name_index(arts, aid_by_key, redirects)
+    con.executemany("INSERT INTO names(name,article) VALUES(?,?)", sorted(names.items()))
+    con.execute("INSERT INTO facts_fts(facts_fts) VALUES('rebuild')")
+    con.execute("CREATE INDEX facts_article ON facts(article, depth, seq)")
+    con.executemany("INSERT INTO meta(k,v) VALUES(?,?)", [
+        ("tokens", str(total)), ("articles", str(len(aid_by_key))),
+        ("version", "1")])
+    return total, aid_by_key, places
+
+
+def name_index(arts, aid_by_key, redirects):
+    """{name a player may type: article id}: titles, redirects and unique NPC first names."""
     names = {}
     text_by_aid = {aid_by_key[lk]: arts[lk]["text"] for lk in aid_by_key}
 
@@ -638,20 +702,7 @@ def build_db(arts, redirects, db_path, places_path=None):
         # letters only: "Shor's Stone Guard" or "Black-Briar Mercenary" do not start with a first name
         if len(ids) == 1 and first.isalpha():
             add_name(first, ids[0])
-    con.executemany("INSERT INTO names(name,article) VALUES(?,?)", sorted(names.items()))
-    con.execute("INSERT INTO facts_fts(facts_fts) VALUES('rebuild')")
-    con.execute("CREATE INDEX facts_article ON facts(article, depth, seq)")
-    con.executemany("INSERT INTO meta(k,v) VALUES(?,?)", [
-        ("tokens", str(total)), ("articles", str(len(aid_by_key))),
-        ("version", "1")])
-    con.commit()
-    con.execute("VACUUM")
-    con.close()
-    if places_path:
-        with open(places_path, "w", encoding="utf-8") as f:
-            json.dump(dict(sorted(places.items())), f, ensure_ascii=False, indent=0,
-                      sort_keys=True)
-    return total, len(aid_by_key)
+    return names
 
 
 def main(argv=None):

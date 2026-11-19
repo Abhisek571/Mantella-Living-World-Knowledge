@@ -58,7 +58,8 @@ def article_key(title):
 
 
 def main():
-    profiles = json.load(open(os.path.join(ROOT, 'data', 'profiles.json'), encoding='utf-8'))['profiles']
+    with open(os.path.join(ROOT, 'data', 'profiles.json'), encoding='utf-8') as f:
+        profiles = json.load(f)['profiles']
     by_name = {}
     for key, p in profiles.items():
         if isinstance(p, dict) and p.get('name'):

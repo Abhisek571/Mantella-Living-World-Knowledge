@@ -11,6 +11,8 @@ sys.path.insert(0, os.path.join(ROOT, "server"))
 
 import lw_knowledge  # noqa: E402
 from lw_knowledge import hookup as H  # noqa: E402
+from lw_knowledge import knows as N  # noqa: E402
+from lw_knowledge import lore as L  # noqa: E402
 from lw_knowledge import world_knowledge as WK  # noqa: E402
 from lw_knowledge import world_knowledge_ui as UI  # noqa: E402
 
@@ -46,6 +48,20 @@ class Conditions(unittest.TestCase):
         self.assertEqual(WK.parse_conditions("quest: MQ104 > 90"), {'quest': 'MQ104', 'stage_min': 91})
         self.assertEqual(WK.parse_conditions("quest: MQ104 = 90"), {'quest': 'MQ104', 'stage_min': 90, 'stage_max': 90})
         self.assertEqual(WK.parse_conditions("quest: MQ104 not done"), {'quest': 'MQ104', 'completed': False})
+
+    def test_every_quest_operator(self):
+        expected = {'>=': {'stage_min': 90}, '<=': {'stage_max': 90}, '>': {'stage_min': 91}, '<': {'stage_max': 89},
+                    '==': {'stage_min': 90, 'stage_max': 90}, '=': {'stage_min': 90, 'stage_max': 90}}
+        for op, bounds in expected.items():
+            cond = WK.parse_conditions(f"quest: MQ104 {op} 90")
+            self.assertEqual(cond, dict(quest='MQ104', **bounds), op)
+            self.assertEqual(WK.parse_conditions(WK.conditions_text(cond)), cond, op)
+        self.assertEqual(WK.parse_conditions("quest: MQ104 < -1"), {'quest': 'MQ104', 'stage_max': -2})
+        self.assertEqual(WK.parse_conditions("quest: MQ104"), {'quest': 'MQ104'})
+
+    def test_unknown_leaf_never_passes(self):
+        self.assertFalse(WK.passes({'weather': 'rain'}, npc(), NO_GAME, {}))
+        self.assertTrue(WK.passes({'not': {'weather': 'rain'}}, npc(), NO_GAME, {}))
 
     def test_bad_text_says_why(self):
         for text in ("hold Whiterun", "weather: rain", "hold: Whiterun faction: Thalmor", "(hold: Rift",
@@ -196,6 +212,8 @@ class Packs(unittest.TestCase):
         self.assertEqual(imported['id'], "mod_2")  # the id was taken
         self.assertIn("Imported", message)
         self.assertEqual(len(WK.load_packs(self.packs)), 2)
+        self.assertEqual(WK.import_pack(path, self.packs)[0]['id'], "mod_3")  # mod and mod_2 are both taken now
+        self.assertEqual(WK.new_pack("Mod", self.packs)['id'], "mod_4")  # one rule for imported and new packs
         bad = os.path.join(self.tmp.name, "bad.json")
         write(bad, {"no": "entries"})
         self.assertIsNone(WK.import_pack(bad, self.packs)[0])
@@ -545,6 +563,12 @@ class Page(unittest.TestCase):
             self.assertEqual(checks()['global_keys'], ["skyrim.esm|000039"])
         finally:
             H.CHANNEL_DIR = old
+
+
+def tearDownModule():
+    # the hooks cache read-only connections to data/lore.sqlite for the whole server run; close them here
+    L.reset()
+    N.reset()
 
 
 if __name__ == "__main__":

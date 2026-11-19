@@ -25,20 +25,30 @@ def reset():
         _con.update(path=None, con=None, also=False)
 
 
+def _open(path):
+    """(read-only connection, has also_quest column) for a database holding npc_knows, else (None, False). A file
+    without the table, or a broken one, is closed again at once."""
+    if not os.path.exists(path):
+        return None, False
+    con = sqlite3.connect(pathlib.Path(os.path.abspath(path)).as_uri() + "?mode=ro", uri=True, check_same_thread=False)
+    try:
+        if con.execute("SELECT name FROM sqlite_master WHERE name='npc_knows'").fetchone():
+            return con, any(r[1] == 'also_quest' for r in con.execute("PRAGMA table_info(npc_knows)"))
+    except sqlite3.Error:
+        pass
+    con.close()
+    return None, False
+
+
 def _db(path):
     with _lock:
         if _con['path'] != path:
             if _con['con'] is not None:
                 _con['con'].close()
             _con.update(path=path, con=None)
-            if os.path.exists(path):
-                con = sqlite3.connect(pathlib.Path(os.path.abspath(path)).as_uri() + "?mode=ro", uri=True,
-                                      check_same_thread=False)
-                if con.execute("SELECT name FROM sqlite_master WHERE name='npc_knows'").fetchone():
-                    _con['con'] = con
-                    _con['also'] = any(r[1] == 'also_quest' for r in con.execute("PRAGMA table_info(npc_knows)"))
-                else:
-                    con.close()
+            con, also = _open(path)
+            if con is not None:
+                _con.update(con=con, also=also)
         return _con['con']
 
 
@@ -70,18 +80,27 @@ def _also_ok(also_quest, also_state, quest_states):
     return _stage_ok(also_quest, also_state, quest_states)
 
 
+def _plain_lines(rows, quest_states):
+    """The texts of the rows that hold now: untied lines, and lines whose quest is in the matching state. No secret."""
+    out = []
+    for quest, state, _, text, also_quest, also_state in rows:
+        if state.startswith('secret') or not _also_ok(also_quest, also_state, quest_states):
+            continue
+        if not quest or _stage_ok(quest, state, quest_states):
+            out.append(text)
+    return out
+
+
+def _secret_lines(rows, quest_states):
+    """The texts of the secret rows that hold now: 'secret' always, 'secret:<state>' only in that quest state."""
+    return [text for quest, state, _, text, _, _ in rows
+            if state == 'secret' or (state.startswith('secret:') and _stage_ok(quest, state[7:], quest_states))]
+
+
 def knows_lines(name, base_id, quest_states, db_path=None):
     """The NPC's lines for the current quest states ({quest: 0|1|2}, or None without World). No secret line."""
     try:
-        out = []
-        for quest, state, _, text, also_quest, also_state in _rows(name, base_id, db_path):
-            if state.startswith('secret') or not _also_ok(also_quest, also_state, quest_states):
-                continue
-            if not quest:
-                out.append(text)
-            elif _stage_ok(quest, state, quest_states):
-                out.append(text)
-        return out
+        return _plain_lines(_rows(name, base_id, db_path), quest_states)
     except Exception:  # noqa: BLE001 - knowledge is optional, never break the reply
         return []
 
@@ -90,9 +109,8 @@ def knows_block(name, base_id, quest_states, db_path=None, speakers=1):
     """The block for the system prompt: what the NPC knows, and their secret, or '' when there is nothing.
     speakers: how many NPCs share this talk; with others there, the secret is marked as never said in front of them."""
     try:
-        lines = knows_lines(name, base_id, quest_states, db_path)
-        secret = [t for q, s, _, t, _, _ in _rows(name, base_id, db_path) if s == 'secret'
-                  or (s.startswith('secret:') and _stage_ok(q, s[7:], quest_states))]
+        rows = _rows(name, base_id, db_path)  # one query for both the lines and the secret
+        lines, secret = _plain_lines(rows, quest_states), _secret_lines(rows, quest_states)
         if not lines and not secret:
             return ''
         text = f"What {name} knows (and nothing beyond it about these matters):\n" + '\n'.join(f"- {l}" for l in lines)
