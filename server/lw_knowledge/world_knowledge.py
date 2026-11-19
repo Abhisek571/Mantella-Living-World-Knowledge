@@ -88,6 +88,10 @@ class ConditionError(ValueError):
 
 _TOKEN = re.compile(r'\s*(?:(\()|(\))|"([^"]*)"|([^\s()"]+))')
 _QUEST = re.compile(r'^(\S+)\s*(?:(==|=|>=|<=|>|<)\s*(-?\d+)|(not\s+done|done))?$', re.I)
+# "quest: X <op> n" as stage bounds: (bound, shift from n)
+_STAGE_BOUNDS = {'>=': (('stage_min', 0),), '<=': (('stage_max', 0),), '>': (('stage_min', 1),),
+                 '<': (('stage_max', -1),), '==': (('stage_min', 0), ('stage_max', 0)),
+                 '=': (('stage_min', 0), ('stage_max', 0))}
 _GLOBAL = re.compile(r'^(.+?)\s*(==|!=|>=|<=|=|>|<)\s*(-?\d+(?:\.\d+)?)$')
 
 
@@ -125,15 +129,8 @@ def _leaf(key: str, value: str) -> dict:
             raise ConditionError(f'"quest: {value}": write e.g. "quest: MQ104 >= 90" or "quest: MQ104 done"')
         out = {'quest': m.group(1)}
         if m.group(2):
-            n, op = int(m.group(3)), m.group(2)
-            if op in ('>=', '==', '='):
-                out['stage_min'] = n
-            if op in ('<=', '==', '='):
-                out['stage_max'] = n
-            if op == '>':
-                out['stage_min'] = n + 1
-            if op == '<':
-                out['stage_max'] = n - 1
+            stage = int(m.group(3))
+            out.update({bound: stage + shift for bound, shift in _STAGE_BOUNDS[m.group(2)]})
         elif m.group(4):
             out['completed'] = not m.group(4).lower().startswith('not')
         return out
@@ -418,8 +415,8 @@ def load_packs(folder=None) -> list[dict]:
     folder = folder or PACKS_DIR
     try:
         names = sorted(f for f in os.listdir(folder) if f.lower().endswith('.json'))
-        sig = (folder, tuple((n, os.stat(os.path.join(folder, n)).st_mtime_ns, os.stat(os.path.join(folder, n)).st_size)
-                             for n in names))
+        stats = [os.stat(os.path.join(folder, n)) for n in names]
+        sig = (folder, tuple((n, st.st_mtime_ns, st.st_size) for n, st in zip(names, stats)))
     except OSError:
         return []
     with _lock:
@@ -602,46 +599,64 @@ def _passes(cond, npc, game, groups, pack_id):
     if 'not' in cond:
         result = _passes(cond['not'], npc, game, groups, pack_id)
         return None if result is None else not result
-    if 'location' in cond:
-        want = cond['location'].lower()
-        here = [npc['location'], npc['home']]
-        towns = [K.resolve_place(p).get('town') for p in here if p]
-        return any(isinstance(p, str) and p.lower() == want for p in here + towns)
-    if 'hold' in cond:
-        want = _norm_hold(cond['hold'])
-        mine = list(npc['holds']) + [K.resolve_place(p).get('hold') for p in (npc['location'], npc['home']) if p]
-        return bool(want) and any(_norm_hold(h) == want for h in mine if h)
-    if 'faction' in cond:
-        key = form_key(cond['faction'])
-        if key:
-            checked = game['factions'].get(npc['base'])
-            return None if checked is None else key in checked
-        want = cond['faction'].strip().lower()
-        return want in npc['groups'] or want == npc['work'] or (want == 'guard' and npc['guard']) \
-            or (want == 'follower' and npc['follower'])
-    if 'group' in cond:
-        found = groups.get(cond['group'].strip().lower(), {})
-        # the pack's own group first; a group of that name in another pack in use also counts
-        sets = [found[pack_id]] if pack_id in found else list(found.values())
-        return any(npc['name'].lower() in names or (npc['base'] is not None and npc['base'] in ids) for names, ids in sets)
-    if 'quest' in cond:
-        quest = cond['quest'].lower()
-        if 'completed' in cond:
-            done = game['done'].get(quest, None if quest not in game['stages'] else False)
-            if done is None:
-                return None
-            if done != cond['completed']:
-                return False
-        if 'stage_min' in cond or 'stage_max' in cond:
-            stage = game['stages'].get(quest)
-            if stage is None:
-                return None
-            return cond.get('stage_min', stage) <= stage <= cond.get('stage_max', stage)
-        return 'completed' in cond
-    if 'global' in cond:
-        value = game['globals'].get(form_key(cond['global']))
-        return None if value is None else OPS[cond['op']](value, cond['value'])
-    return False
+    key = next((k for k in LEAVES if k in cond), None)
+    return _LEAF_CHECKS[key](cond, npc, game, groups, pack_id) if key else False
+
+
+def _location_ok(cond, npc, game, groups, pack_id):
+    want = cond['location'].lower()
+    here = [npc['location'], npc['home']]
+    towns = [K.resolve_place(p).get('town') for p in here if p]
+    return any(isinstance(p, str) and p.lower() == want for p in here + towns)
+
+
+def _hold_ok(cond, npc, game, groups, pack_id):
+    want = _norm_hold(cond['hold'])
+    mine = list(npc['holds']) + [K.resolve_place(p).get('hold') for p in (npc['location'], npc['home']) if p]
+    return bool(want) and any(_norm_hold(h) == want for h in mine if h)
+
+
+def _faction_ok(cond, npc, game, groups, pack_id):
+    key = form_key(cond['faction'])
+    if key:
+        checked = game['factions'].get(npc['base'])
+        return None if checked is None else key in checked
+    want = cond['faction'].strip().lower()
+    return want in npc['groups'] or want == npc['work'] or (want == 'guard' and npc['guard']) \
+        or (want == 'follower' and npc['follower'])
+
+
+def _group_ok(cond, npc, game, groups, pack_id):
+    found = groups.get(cond['group'].strip().lower(), {})
+    # the pack's own group first; a group of that name in another pack in use also counts
+    sets = [found[pack_id]] if pack_id in found else list(found.values())
+    return any(npc['name'].lower() in names or (npc['base'] is not None and npc['base'] in ids) for names, ids in sets)
+
+
+def _quest_ok(cond, npc, game, groups, pack_id):
+    quest = cond['quest'].lower()
+    if 'completed' in cond:
+        done = game['done'].get(quest, None if quest not in game['stages'] else False)
+        if done is None:
+            return None
+        if done != cond['completed']:
+            return False
+    if 'stage_min' in cond or 'stage_max' in cond:
+        stage = game['stages'].get(quest)
+        if stage is None:
+            return None
+        return cond.get('stage_min', stage) <= stage <= cond.get('stage_max', stage)
+    return 'completed' in cond
+
+
+def _global_ok(cond, npc, game, groups, pack_id):
+    value = game['globals'].get(form_key(cond['global']))
+    return None if value is None else OPS[cond['op']](value, cond['value'])
+
+
+# one check per leaf kind; a leaf holding two keys is read by the first in LEAVES order, as the if chain did
+_LEAF_CHECKS = {'location': _location_ok, 'hold': _hold_ok, 'faction': _faction_ok, 'group': _group_ok,
+                'quest': _quest_ok, 'global': _global_ok}
 
 
 # ---------------------------------------------------------------- choosing what goes into a prompt
@@ -749,14 +764,19 @@ def save_pack(pack: dict, folder=None) -> str:
     return path
 
 
-def new_pack(name: str, folder=None) -> dict:
-    """An empty pack of the player's, with an id from its name that no pack has yet."""
-    folder = folder or PACKS_DIR
+def _free_pack_id(base: str, folder: str) -> str:
+    """base, or base_2, base_3, ...: the first id that no pack in the folder has and no file there is named after."""
     taken = {p['id'] for p in load_packs(folder)}
-    base = clean_id(name, 'my_knowledge')
     pid, n = base, 2
     while pid in taken or os.path.exists(os.path.join(folder, pid + '.json')):
         pid, n = f'{base}_{n}', n + 1
+    return pid
+
+
+def new_pack(name: str, folder=None) -> dict:
+    """An empty pack of the player's, with an id from its name that no pack has yet."""
+    folder = folder or PACKS_DIR
+    pid = _free_pack_id(clean_id(name, 'my_knowledge'), folder)
     pack = parse_pack({'id': pid, 'name': str(name or '').strip() or 'My knowledge', 'source': PLAYER_SOURCE,
                        'entries': []}, pid)
     pack['file'] = pid + '.json'
@@ -855,10 +875,7 @@ def import_pack(path: str, folder=None) -> tuple[dict | None, str]:
     if not isinstance(data, dict) or not isinstance(data.get('entries'), list):
         return None, 'Not a knowledge pack: a JSON file with an "entries" list.'
     pack = parse_pack(data, os.path.splitext(os.path.basename(path))[0])
-    taken = {p['id'] for p in load_packs(folder)}
-    base, n = pack['id'], 2
-    while pack['id'] in taken or os.path.exists(os.path.join(folder, pack['id'] + '.json')):
-        pack['id'], n = f'{base}_{n}', n + 1
+    pack['id'] = _free_pack_id(pack['id'], folder)
     pack['file'] = pack['id'] + '.json'
     os.makedirs(folder, exist_ok=True)
     out = dict(data, id=pack['id'])

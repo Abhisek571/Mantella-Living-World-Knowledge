@@ -4,6 +4,7 @@ import sqlite3
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
@@ -83,7 +84,8 @@ class Knows(unittest.TestCase):
         self.assertEqual(N.knows_block("Nobody", "000002", {}, db_path=self.db), "")
 
     def test_quest_list_for_world(self):
-        data = json.load(open(self.quests_file, encoding="utf-8"))
+        with open(self.quests_file, encoding="utf-8") as f:
+            data = json.load(f)
         self.assertEqual(data, {"stringList": {"quests": sorted(set(B.ALWAYS_TRACKED) | {"MS13"})}})
         # the Dragonborn line and the end of the war need their quests tracked too
         from lw_knowledge import dragonborn as D
@@ -210,6 +212,35 @@ class Knows(unittest.TestCase):
 
     def test_missing_db_is_empty(self):
         self.assertEqual(N.knows_block("Lucan Valerius", "01347A", {}, db_path=os.path.join(self.tmp.name, "nope.sqlite")), "")
+
+    def test_broken_or_foreign_db_is_empty_and_closed(self):
+        for name, content in (("junk.sqlite", b"this is not a database file at all" * 4), ("empty.sqlite", b"")):
+            db = os.path.join(self.tmp.name, name)
+            with open(db, "wb") as f:
+                f.write(content)
+            self.assertEqual(N.knows_block("Lucan Valerius", "01347A", {}, db_path=db), "")
+            self.assertEqual(N.knows_lines("Lucan Valerius", "01347A", {}, db_path=db), [])
+            N.reset()
+            os.remove(db)  # closed again: Windows refuses to delete an open file
+
+    def test_failed_load_keeps_the_old_table(self):
+        db = os.path.join(self.tmp.name, "rollback.sqlite")
+        B.load_blocks([DELPHINE], db, set())
+        broken = [("lucan valerius", "01347A", "", "", 0, None, 1, "", "")]  # text is NOT NULL: the insert fails
+        with mock.patch.object(B, "table_rows", return_value=(broken, {})):
+            with self.assertRaises(sqlite3.IntegrityError):
+                B.load_blocks([LUCAN], db, set())
+        N.reset()
+        self.assertEqual(N.knows_lines("Delphine", "013478", None, db_path=db), ["You run the Sleeping Giant Inn with Orgnar."])
+        N.reset()
+        os.remove(db)  # and the connection was closed
+
+    def test_block_reads_the_database_once(self):
+        N.reset()
+        with mock.patch.object(N, "_rows", wraps=N._rows) as rows:
+            block = N.knows_block("Delphine", "013478", {}, db_path=self.db)
+        self.assertIn("Secret", block)
+        self.assertEqual(rows.call_count, 1)
 
 
 if __name__ == "__main__":

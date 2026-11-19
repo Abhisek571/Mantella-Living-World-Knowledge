@@ -1,6 +1,7 @@
 import os
 import sys
 import unittest
+from unittest import mock
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "server"))
@@ -134,6 +135,45 @@ class TopicLevels(unittest.TestCase):
         for p in (CAMILLA, GUARD, FARENGAR, COURIER, SERANA, {}):
             for t in ("roads", "trade", "magic", "civil_war", "dragonstone", "x"):
                 self.assertIn(K.topic_level(p, t), range(1, 6))
+
+
+class ProfileMatching(unittest.TestCase):
+    TABLE = {
+        "Camilla Valerius|Imperial|01347B": {"name": "Camilla Valerius", "base_id": "01347B"},
+        "Jarl Ulfric Stormcloak|Nord|01414D": {"name": "Jarl Ulfric Stormcloak", "base_id": "01414D"},
+        "Astrid|Nord|01BDB4": {"name": "Astrid", "base_id": "01BDB4"},
+        "Guard|Nord|0A1B2C": {"name": "Guard", "base_id": "0A1B2C"},
+        "Guard|Nord|0A1B2D": {"name": "Guard", "base_id": "0A1B2D"},
+    }
+
+    def find(self, *args):
+        with mock.patch.object(K, "profiles", return_value=self.TABLE):
+            found = K.profile_for(*args)
+        return found and found["base_id"]
+
+    def test_exact_key_name_and_base_id(self):
+        self.assertEqual(self.find("Camilla Valerius", "Imperial", "0001347B"), "01347B")
+        self.assertEqual(self.find("camilla valerius"), "01347B")
+        self.assertEqual(self.find("Camilla Valerius", "", "47B"), "01347B")  # a masked light-plugin id: last 3 digits
+
+    def test_title_and_namesakes(self):
+        self.assertEqual(self.find("Ulfric Stormcloak"), "01414D")  # asked for without the title
+        self.assertIsNone(self.find("Astrid", "", "FE001234"))  # another plugin's Astrid
+        self.assertIsNone(self.find("Guard"))  # two guards and no base id: neither
+        self.assertEqual(self.find("Guard", "", "0A1B2D"), "0A1B2D")
+        self.assertIsNone(self.find("Nobody"))
+        self.assertIsNone(self.find(None))
+
+    def test_a_new_table_is_indexed_again(self):
+        self.assertEqual(self.find("Astrid"), "01BDB4")
+        other = {"Astrid|Nord|0ABCDE": {"name": "Astrid", "base_id": "0ABCDE"}}
+        with mock.patch.object(K, "profiles", return_value=other):
+            self.assertEqual(K.profile_for("Astrid")["base_id"], "0ABCDE")
+
+    def test_returns_a_copy(self):
+        with mock.patch.object(K, "profiles", return_value=self.TABLE):
+            K.profile_for("Astrid")["home"] = "changed"
+        self.assertNotIn("home", self.TABLE["Astrid|Nord|01BDB4"])
 
 
 if __name__ == "__main__":

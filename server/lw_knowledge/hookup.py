@@ -22,6 +22,7 @@ MIN_LORE_BUDGET, MAX_LORE_BUDGET = 50, 600  # lore is sent again on every reply,
 JOB_WORDS = {'court': 'member of the court', 'court_wizard': 'court wizard', 'commoner': 'local', 'creature': 'being', 'caravan': 'caravan trader'}
 TRAVEL = {'home': 'rarely leaves {home}', 'regional': 'travels around {hold}', 'province': 'travels all over Skyrim'}
 
+_log = logging.getLogger('Mantella')
 _state = {'speakers': None, 'sent': set(), 'messages': 0, 'knows': '', 'knows_for': None}
 _common = {'text': None}
 
@@ -31,17 +32,17 @@ def reset():
 
 
 def _read(path):
-    try:
-        with open(path, 'rb') as f:
-            raw = f.read()
-        try:
-            text = raw.decode('utf-8-sig')
-        except UnicodeDecodeError:  # PapyrusUtil may write names in the game's codepage
-            text = raw.decode('cp1252', errors='replace')
-        data = json.loads(text)
-        return data if isinstance(data, dict) else {}
-    except (OSError, ValueError):
-        return {}
+    """A JSON object file as a dict ({} when missing, broken or not an object); see WK._read_json for the decoding."""
+    data = WK._read_json(path)
+    return data if isinstance(data, dict) else {}
+
+
+_BASE_ID = re.compile(r'[0-9A-Fa-f]{1,8}')
+
+
+def _is_base_id(value) -> bool:
+    """A base or form id as the game and the exe write it: 1 to 8 hex digits."""
+    return isinstance(value, str) and bool(_BASE_ID.fullmatch(value))
 
 
 # Papyrus strings are case-insensitive and the game reuses a spelling it already holds, so a key written as "name" can
@@ -88,8 +89,8 @@ def _npc(base: str, kinds=('int', 'float', 'string', 'stringList')) -> dict:
         by_id, names = exe_speaker_names()
         want = by_id.get(_id_number(base))
         if (want and not _name_fits(found, want)) or (not want and names and not any(_name_fits(found, n) for n in names)):
-            logging.getLogger('Mantella').log(23, f"Knowledge: npc/{base.upper()}.json holds {found!r}, not this "
-                                                  f"speaker (another plugin's NPC with the same last digits); left out")
+            _log.log(23, f"Knowledge: npc/{base.upper()}.json holds {found!r}, not this "
+                         f"speaker (another plugin's NPC with the same last digits); left out")
             return {}
     return data
 
@@ -106,7 +107,7 @@ def speaker_pairs() -> list[tuple[str, dict]]:
     ids = speaker_ids()
     out = []
     for base in ids:
-        if not isinstance(base, str) or not re.fullmatch(r'[0-9A-Fa-f]{1,8}', base):
+        if not _is_base_id(base):
             continue
         name = speaker_name(base)
         profile = K.profile_for(name, '', base) if name else None
@@ -300,7 +301,7 @@ def exe_speaker_ids() -> list[str]:
         ids = getattr(src_extensions.registry(), 'speaking_ids', None)
     except Exception:  # noqa: BLE001 - not inside Mantella, or an older exe
         return []
-    return [i.upper() for i in ids if isinstance(i, str) and re.fullmatch(r'[0-9A-Fa-f]{1,8}', i)] if isinstance(ids, list) else []
+    return [i.upper() for i in ids if _is_base_id(i)] if isinstance(ids, list) else []
 
 
 def _id_number(base_id):
@@ -322,7 +323,7 @@ def exe_speaker_names():
     if not isinstance(text, str) or not text.strip():
         return {}, []
     names = [n.strip() for n in text.split(', ')]
-    numbers = [_id_number(i) if isinstance(i, str) and re.fullmatch(r'[0-9A-Fa-f]{1,8}', i.strip()) else None
+    numbers = [_id_number(i) if isinstance(i, str) and _is_base_id(i.strip()) else None
                for i in ids] if isinstance(ids, list) else []
     if numbers and len(names) == len(numbers) and None not in numbers and all(names):
         return dict(zip(numbers, names)), names
@@ -345,7 +346,7 @@ def world_speakers() -> list[dict]:
     """Every NPC in the conversation (a profile or not), as world knowledge conditions read them."""
     out = []
     for base in speaker_ids():
-        if not isinstance(base, str) or not re.fullmatch(r'[0-9A-Fa-f]{1,8}', base):
+        if not _is_base_id(base):
             continue
         flat = _npc(base, ('int', 'string', 'stringList'))
         name = speaker_name(base)
@@ -364,7 +365,7 @@ def write_checks(packs=None, state=None) -> bool:
         packs = WK.load_packs() if packs is None else packs
         return WK.write_checks(CHANNEL_DIR, packs, WK.load_state() if state is None else state)
     except Exception as e:  # noqa: BLE001 - a broken pack never stops Mantella
-        logging.getLogger('Mantella').warning(f"Knowledge: game checks not written ({e})")
+        _log.warning(f"Knowledge: game checks not written ({e})")
         return False
 
 
@@ -388,10 +389,10 @@ def world_block() -> str:
             return ''
         chosen = WK.select(packs, state, speakers, game, 'always', state['budget'])
         if chosen:
-            logging.getLogger('Mantella').log(23, f"Knowledge: {len(chosen)} world knowledge line(s) in the system prompt")
+            _log.log(23, f"Knowledge: {len(chosen)} world knowledge line(s) in the system prompt")
         return WK.system_block(chosen, speakers)
     except Exception as e:  # noqa: BLE001 - optional, never break the reply
-        logging.getLogger('Mantella').warning(f"Knowledge: world knowledge left out ({e})")
+        _log.warning(f"Knowledge: world knowledge left out ({e})")
         return ''
 
 
@@ -404,7 +405,7 @@ def world_reply_lines(text: str, budget: int) -> tuple[list[str], int]:
         chosen = WK.select(packs, state, speakers, game, 'relevant', budget, text, sent=_state['sent'])
         return WK.reply_lines(chosen), sum(WK.tokens(e['text']) + 4 for e, _ in chosen)
     except Exception as e:  # noqa: BLE001
-        logging.getLogger('Mantella').warning(f"Knowledge: world knowledge left out ({e})")
+        _log.warning(f"Knowledge: world knowledge left out ({e})")
         return [], 0
 
 
@@ -480,32 +481,44 @@ class _NpcSent:
         self.shared.add(f"{self.prefix}{key}")
 
 
-def extra_user_text(ctx) -> str:
-    profiles = speaker_profiles()
+def _track_talk(ctx, profiles) -> None:
+    """Notices a new talk (other people, or a shorter thread than last time): lore may be told again."""
     # NPCs without a profile only matter to world knowledge, so they tell a new talk only when nobody has a profile
     names = tuple(p.get('name') for p in profiles) or tuple(s['name'] for s in world_speakers())
     count = len(ctx.get('messages') or [])
-    # a new talk (other people, or a shorter thread than last time): lore may be told again
     if names != _state['speakers'] or count < _state['messages']:
         # the knows block system_parts just built for these same speakers stays: it is this talk's prompt
         keep = names == _state['speakers'] or names == _state.get('knows_for')
         _state.update(speakers=names, sent=set(), knows=_state['knows'] if keep else '')
     _state['messages'] = count
-    text = _player_line(ctx)
-    if not text or mode() == 'off':
-        return ''
-    # world knowledge the player's line touches comes first; lore gets what is left of the same budget
-    lines, used = world_reply_lines(text, lore_budget())
-    if not profiles or mode() != 'full':
-        return '\n'.join(lines)
-    budget = max(0, lore_budget() - used) // len(profiles)
+
+
+def _lore_lines(text, profiles, budget) -> list[str]:
+    """One "(What X knows about this: ...)" line per speaker with lore facts, budget tokens each."""
+    lines = []
+    quests = {'quests': world().get('quests') or {}}
     for p in profiles:
         # each NPC has their own told-facts: one speaker's lore never leaves the next only the leftovers
         sent = _NpcSent(_state['sent'], f"{p.get('name')}:{p.get('base_id', '')}:")
-        facts = L.lookup(text, p, budget, world={'quests': world().get('quests') or {}}, sent=sent)
+        facts = L.lookup(text, p, budget, world=quests, sent=sent)
         # what the NPC's own block already says needs no lore line (rule: never send what the prompt has)
         facts = [f for f in facts if f.split(' is ')[0] not in _state.get('knows', '')]
         if facts:
             lines.append(f"(What {p.get('name')} knows about this: {' '.join(facts)})")
-            logging.getLogger('Mantella').log(23, f"Knowledge: {len(facts)} lore line(s) for {p.get('name')}")
-    return '\n'.join(lines)
+            _log.log(23, f"Knowledge: {len(facts)} lore line(s) for {p.get('name')}")
+    return lines
+
+
+def extra_user_text(ctx) -> str:
+    profiles = speaker_profiles()
+    _track_talk(ctx, profiles)
+    text = _player_line(ctx)
+    knowledge_mode = mode()
+    if not text or knowledge_mode == 'off':
+        return ''
+    # world knowledge the player's line touches comes first; lore gets what is left of the same budget
+    budget = lore_budget()
+    lines, used = world_reply_lines(text, budget)
+    if not profiles or knowledge_mode != 'full':
+        return '\n'.join(lines)
+    return '\n'.join(lines + _lore_lines(text, profiles, max(0, budget - used) // len(profiles)))

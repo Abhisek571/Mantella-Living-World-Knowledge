@@ -8,6 +8,7 @@ import json
 import os
 import re
 import sqlite3
+from contextlib import closing
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATES = {'not_started', 'running', 'done', 'not_done', 'started'}
@@ -144,43 +145,58 @@ def apply_fixes(blocks, fixes):
     return moved
 
 
-def load_blocks(blocks, db_path, quest_ids):
-    con = sqlite3.connect(db_path)
-    con.execute("DROP TABLE IF EXISTS npc_knows")
-    con.execute("CREATE TABLE npc_knows (npc TEXT NOT NULL, base_id TEXT, quest TEXT, state TEXT, seq INTEGER, "
-                "text TEXT NOT NULL, tokens INTEGER, also_quest TEXT, also_state TEXT)")
-    report = {'npcs': 0, 'rows': 0, 'rejected': 0}
+def table_rows(blocks, quest_ids):
+    """(npc_knows rows with their token counts, report) for all blocks, in block order."""
+    out, report = [], {'npcs': 0, 'rows': 0, 'rejected': 0}
     for block in blocks:
         rows, rejected = rows_for(block, quest_ids)
         report['rejected'] += rejected
         if rows:
             report['npcs'] += 1
             report['rows'] += len(rows)
-            con.executemany("INSERT INTO npc_knows VALUES (?,?,?,?,?,?,?,?,?)",
-                            [r[:6] + (tokens(r[5]),) + r[6:] for r in rows])
-    con.execute("CREATE INDEX IF NOT EXISTS npc_knows_npc ON npc_knows(npc)")
-    con.commit()
-    con.close()
+            out += [r[:6] + (tokens(r[5]),) + r[6:] for r in rows]
+    return out, report
+
+
+def load_blocks(blocks, db_path, quest_ids):
+    """Replaces table npc_knows with the blocks' rows in one transaction: on any failure the old table stays."""
+    rows, report = table_rows(blocks, quest_ids)
+    with closing(sqlite3.connect(db_path, isolation_level=None)) as con:  # isolation_level None: BEGIN is ours
+        con.execute("BEGIN")
+        try:
+            con.execute("DROP TABLE IF EXISTS npc_knows")
+            con.execute("CREATE TABLE npc_knows (npc TEXT NOT NULL, base_id TEXT, quest TEXT, state TEXT, seq INTEGER, "
+                        "text TEXT NOT NULL, tokens INTEGER, also_quest TEXT, also_state TEXT)")
+            con.executemany("INSERT INTO npc_knows VALUES (?,?,?,?,?,?,?,?,?)", rows)
+            con.execute("CREATE INDEX IF NOT EXISTS npc_knows_npc ON npc_knows(npc)")
+            con.execute("COMMIT")
+        except BaseException:
+            con.execute("ROLLBACK")
+            raise
     return report
 
 
 def write_quest_list(db_path, out_path):
-    con = sqlite3.connect(db_path)
-    quests = {q for (q,) in con.execute("SELECT DISTINCT quest FROM npc_knows WHERE quest != ''")}
-    quests |= {q for (q,) in con.execute("SELECT DISTINCT also_quest FROM npc_knows WHERE also_quest NOT IN ('', 'war_side')")}
+    with closing(sqlite3.connect(db_path)) as con:
+        quests = {q for (q,) in con.execute("SELECT DISTINCT quest FROM npc_knows WHERE quest != ''")}
+        quests |= {q for (q,) in con.execute("SELECT DISTINCT also_quest FROM npc_knows WHERE also_quest NOT IN ('', 'war_side')")}
     quests = sorted(quests | set(ALWAYS_TRACKED))
-    con.close()
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, 'w', encoding='utf-8', newline='\n') as f:
         json.dump({'stringList': {'quests': quests}}, f, indent=1)
     return quests
 
 
+def read_json(path):
+    with open(path, encoding='utf-8') as f:
+        return json.load(f)
+
+
 def main():
-    quest_ids = set(json.load(open(os.path.join(ROOT, 'data', 'quest_ids.json'), encoding='utf-8')).values())
+    quest_ids = set(read_json(os.path.join(ROOT, 'data', 'quest_ids.json')).values())
     paths = sorted(glob.glob(os.path.join(ROOT, 'work', 'knows_out', '*.json')), key=lambda p: os.path.basename(p).startswith('long_'))
-    blocks = merge_blocks(json.load(open(path, encoding='utf-8')) for path in paths)
-    apply_fixes(blocks, json.load(open(os.path.join(ROOT, 'tools', 'knows_fixes.json'), encoding='utf-8')))
+    blocks = merge_blocks(read_json(path) for path in paths)
+    apply_fixes(blocks, read_json(os.path.join(ROOT, 'tools', 'knows_fixes.json')))
     report =load_blocks(blocks, os.path.join(ROOT, 'data', 'lore.sqlite'), quest_ids)
     quests = write_quest_list(os.path.join(ROOT, 'data', 'lore.sqlite'),
                               os.path.join(ROOT, 'SKSE', 'Plugins', 'StorageUtilData', 'MantellaLivingWorld', 'knowledge_quests.json'))

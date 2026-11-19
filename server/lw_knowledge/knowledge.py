@@ -410,6 +410,20 @@ def profiles():
     return _PROFILES
 
 
+_BY_NAME = {"table": None, "index": {}}
+
+
+def _profiles_by_name(table):
+    """{name lower: [profiles in file order]} for the profile table, built once per table (a scan of ~3,100
+    profiles on every lookup otherwise)."""
+    if _BY_NAME["table"] is not table:
+        index = {}
+        for profile in table.values():
+            index.setdefault(profile.get("name", "").lower(), []).append(profile)
+        _BY_NAME.update(table=table, index=index)
+    return _BY_NAME["index"]
+
+
 def same_base(a, b):
     """True when two base ids name the same record: compared as numbers on their last 6 hex digits, and on the last
     3 only when either has 3 or fewer (Mantella masks light-plugin ids to those). False when either is empty or bad."""
@@ -438,8 +452,8 @@ def profile_for(name, race="", base_id=""):
         if p is None:
             lname = (name or "").strip().lower()
             # Mantella names some rulers with their title ("Jarl Ulfric Stormcloak"); people ask without it
-            same = [v for v in table.values() if v.get("name", "").lower() == lname] or \
-                [v for v in table.values() if v.get("name", "").lower() == "jarl " + lname]
+            by_name = _profiles_by_name(table)
+            same = by_name.get(lname) or by_name.get("jarl " + lname) or []
             exact = [v for v in same if same_base(v.get("base_id"), bid)]
             # a namesake with another base record (a mod's "Astrid") never gets this one's profile
             other = len(same) == 1 and bid and same[0].get("base_id") and not exact

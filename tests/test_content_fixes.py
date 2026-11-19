@@ -175,5 +175,11 @@ class Leaders(unittest.TestCase):
                          "Ulfric Stormcloak rules Eastmarch from Windhelm.")
 
 
+def tearDownModule():
+    # the hooks cache read-only connections to data/lore.sqlite for the whole server run; close them here
+    L.reset()
+    N.reset()
+
+
 if __name__ == "__main__":
     unittest.main()

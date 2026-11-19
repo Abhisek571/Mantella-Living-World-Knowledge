@@ -2,6 +2,11 @@
 
 Every change to Mantella Living World - Knowledge. The Nexus page lists only the main changes for each version.
 
+## Unreleased
+
+### Changed
+- Code cleanup: long functions split into smaller steps, condition checks in a lookup table, files closed after reading, more tests. No change in game behaviour.
+
 ## 1.1.1 (2026-11-18)
 
 ### New

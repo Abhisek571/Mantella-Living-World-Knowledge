@@ -23,6 +23,11 @@ _STOP = {"the", "a", "an", "of", "and", "or", "to", "in", "on", "at", "is", "are
          "about", "know", "tell", "there", "that", "this", "with", "for", "have", "has"}
 
 
+def _marks(count):
+    """The '?,?,?' placeholders for an IN list of count values (the values always go in as parameters)."""
+    return ",".join("?" * count)
+
+
 def default_db_path():
     return os.path.join(K.data_dir(), "lore.sqlite")
 
@@ -34,13 +39,17 @@ class LoreDB:
         uri = pathlib.Path(os.path.abspath(path)).as_uri() + "?mode=ro"  # as_uri escapes '#', '?', '%' and spaces
         self.con = sqlite3.connect(uri, uri=True, check_same_thread=False)
         self.lock = threading.Lock()
-        self.names = dict(self.con.execute("SELECT name, article FROM names"))
+        try:
+            self.names = dict(self.con.execute("SELECT name, article FROM names"))
+            self.articles = {}
+            for row in self.con.execute(
+                    "SELECT id, title, kind, place_kind, hold, town, topic FROM articles"):
+                self.articles[row[0]] = {"title": row[1], "kind": row[2], "place_kind": row[3],
+                                         "hold": row[4], "town": row[5], "topic": row[6]}
+        except Exception:
+            self.con.close()  # not a lore database, or a broken one: never leave the file open
+            raise
         self.max_words = max((n.count(" ") + 1 for n in self.names), default=1)
-        self.articles = {}
-        for row in self.con.execute(
-                "SELECT id, title, kind, place_kind, hold, town, topic FROM articles"):
-            self.articles[row[0]] = {"title": row[1], "kind": row[2], "place_kind": row[3],
-                                     "hold": row[4], "town": row[5], "topic": row[6]}
 
     def find_articles(self, text):
         """Article ids named in text, in order of first mention, longest match first. A possessive ("Ulfric's")
@@ -68,11 +77,10 @@ class LoreDB:
     def facts(self, article_ids, query_words):
         """Rows (id, article, depth, inside, secret, era, tokens, text, rank)."""
         self.queries += 1
-        marks = ",".join("?" * len(article_ids))
         with self.lock:
             rows = self.con.execute(
                 "SELECT id, article, depth, inside, secret, era, tokens, text, seq FROM facts "
-                f"WHERE article IN ({marks}) ORDER BY article, depth, seq",
+                f"WHERE article IN ({_marks(len(article_ids))}) ORDER BY article, depth, seq",
                 list(article_ids)).fetchall()
             ranks = {}
             if query_words and rows:
@@ -81,7 +89,7 @@ class LoreDB:
                     ids = [r[0] for r in rows]
                     for rid, score in self.con.execute(
                             "SELECT rowid, bm25(facts_fts) FROM facts_fts WHERE facts_fts "
-                            f"MATCH ? AND rowid IN ({','.join('?' * len(ids))})", [q] + ids):
+                            f"MATCH ? AND rowid IN ({_marks(len(ids))})", [q] + ids):
                         ranks[rid] = score
                 except sqlite3.Error:
                     ranks = {}
@@ -99,8 +107,18 @@ def get_db(path=None):
         if _DB is None or _DB.path != path:
             if _DB is not None:
                 _DB.con.close()
+                _DB = None  # a failed open below must not leave the closed one cached
             _DB = LoreDB(path) if os.path.exists(path) else None
     return _DB
+
+
+def reset():
+    """Close and forget the cached lore connection (the next get_db opens it again)."""
+    global _DB
+    with _DB_LOCK:
+        if _DB is not None:
+            _DB.con.close()
+        _DB = None
 
 
 def _article_level(profile, art):

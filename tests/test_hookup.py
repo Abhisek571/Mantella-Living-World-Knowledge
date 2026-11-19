@@ -11,6 +11,8 @@ sys.path.insert(0, os.path.join(ROOT, "server"))
 
 import lw_knowledge  # noqa: E402
 from lw_knowledge import hookup as H  # noqa: E402
+from lw_knowledge import knows as N  # noqa: E402
+from lw_knowledge import lore as L  # noqa: E402
 
 
 class FakeApi:
@@ -135,7 +137,8 @@ class Hookup(unittest.TestCase):
     def test_ore_job_names_a_mine(self):
         conversation(self.tmp.name, [("Alvor", "013475")])
         path = os.path.join(self.tmp.name, "npc", "013475.json")
-        data = json.load(open(path, encoding="utf-8"))
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
         data["string"]["job"] = "You need Iron Ore brought to you; you posted a notice on the job board for it."
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f)
@@ -151,7 +154,8 @@ class Hookup(unittest.TestCase):
         # a mod NPC without a profile first in the group must not shift Alvor's job onto someone else
         conversation(self.tmp.name, [("Modded Stranger", "FE0811"), ("Alvor", "013475")])
         path = os.path.join(self.tmp.name, "npc", "013475.json")
-        data = json.load(open(path, encoding="utf-8"))
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
         data["string"]["job"] = "You need Iron Ore brought to you."
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f)
@@ -378,6 +382,35 @@ class Hookup(unittest.TestCase):
         self.assertEqual([v["name"] for v in H.world_speakers()], ["Camilla Valerius"])
         parts = H.system_parts({"background": ""}, {})
         self.assertIn("Camilla Valerius", parts.get("identity", ""))
+
+
+class Helpers(unittest.TestCase):
+    def test_base_ids(self):
+        for good in ("01347B", "806", "FE000801", "abcdef"):
+            self.assertTrue(H._is_base_id(good), good)
+        for bad in ("", "01347G", "123456789", " 01347B", None, 1347, ["01347B"]):
+            self.assertFalse(H._is_base_id(bad), bad)
+
+    def test_read_gives_only_objects(self):
+        with tempfile.TemporaryDirectory() as folder:
+            def read(content):
+                path = os.path.join(folder, "f.json")
+                with open(path, "wb") as f:
+                    f.write(content)
+                return H._read(path)
+            self.assertEqual(read(b'{"a": 1}'), {"a": 1})
+            self.assertEqual(read(b'\xef\xbb\xbf{"a": 1}'), {"a": 1})  # a byte order mark
+            self.assertEqual(read('{"n": "café"}'.encode("cp1252")), {"n": "café"})  # the game's codepage
+            self.assertEqual(read(b"[1, 2]"), {})
+            self.assertEqual(read(b"{broken"), {})
+            self.assertEqual(read(b"[" * 100000), {})  # too deep to parse
+            self.assertEqual(H._read(os.path.join(folder, "missing.json")), {})
+
+
+def tearDownModule():
+    # the hooks cache read-only connections to data/lore.sqlite for the whole server run; close them here
+    L.reset()
+    N.reset()
 
 
 if __name__ == "__main__":
